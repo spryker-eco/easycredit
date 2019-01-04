@@ -30,4 +30,17 @@ class EasycreditFactory extends AbstractFactory
     {
         return new EasycreditDataProvider();
     }
+
+    /**
+     * @return \SprykerEco\Yves\Easycredit\Handler\EasycreditPrePostPaymentHandlerInterface
+     */
+    public function createEasycreditPaymentHandler()
+    {
+        return new EasycreditPaymentHandler(
+            $this->createInitEasyCreditConverter(),
+            $this->getComputopClient(),
+            $this->getCalculationClient()
+        );
+    }
+
 }
