@@ -13,8 +13,13 @@ use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingSer
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
+use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
+use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
+/**
+ * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
+ */
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
     /**
@@ -28,7 +33,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     /**
      * @return AdapterInterface
      */
-    public function createInitiaizePaymentAdapter(): AdapterInterface
+    public function createInitializePaymentAdapter(): AdapterInterface
     {
         return new InitializePaymentAdapter($this->createEasycreditClient(), $this->getUtilEncodingService());
     }
@@ -39,5 +44,10 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function getUtilEncodingService(): EasycreditToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::UTIL_ENCODING_SERVICE);
+    }
+
+    public function createInitializePaymentMapper(): MapperInterface
+    {
+        return new InitializePaymentMapper($this->getConfig());
     }
 }
