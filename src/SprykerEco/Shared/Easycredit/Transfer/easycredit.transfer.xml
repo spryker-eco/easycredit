@@ -7,5 +7,9 @@
         <property name="installments" type="string"/>
     </transfer>
 
+    <transfer name="EasycreditRequest">
+        <property name="payload" type="array" />
+    </transfer>
+
     <!--Response container replacement related transfers end-->
 </transfers>
