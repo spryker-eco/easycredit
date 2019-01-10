@@ -17,6 +17,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\StreamInterface;
 use SprykerEco\Zed\Easycredit\Business\Exception\EasycreditApiHttpRequestException;
+use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
@@ -25,6 +26,9 @@ abstract class AbstractAdapter implements AdapterInterface
     protected const API_KEY_EVENT = 'event';
     protected const API_KEY_PAYLOAD = 'payload';
     protected const API_KEY_TRANSACTION_ID = 'transactionId';
+
+    protected const HEADER_TBK_RK_SHOP = 'tbk-rk-shop';
+    protected const HEADER_TBK_RK_TOKEN = 'tbk-rk-token';
 
     /**
      * @var Client
@@ -37,16 +41,23 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $utilEncodingService;
 
     /**
+     * @var EasycreditConfig
+     */
+    protected $config;
+
+    /**
      * @return string
      */
     abstract protected function getUrl(): string;
 
     public function __construct(
         ClientInterface $client,
-        EasycreditToUtilEncodingServiceInterface $utilEncodingService
+        EasycreditToUtilEncodingServiceInterface $utilEncodingService,
+        EasycreditConfig $config
     ) {
         $this->client = $client;
         $this->utilEncodingService = $utilEncodingService;
+        $this->config = $config;
     }
 
     /**
@@ -94,7 +105,9 @@ abstract class AbstractAdapter implements AdapterInterface
     protected function getHeaders(): array
     {
         return [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
+            static::HEADER_TBK_RK_SHOP => $this->config->getShopIdentifier(),
+            static::HEADER_TBK_RK_TOKEN => $this->config->getShopToken(),
         ];
     }
 }

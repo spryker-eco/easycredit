@@ -12,4 +12,7 @@ interface EasycreditConstants
     public const SUCCESS_URL = 'EASYCREDIT:SUCCESS_URL';
     public const DENIED_URL = 'EASYCREDIT:DENIED_URL';
     public const CANCELLED_URL = 'EASYCREDIT:CANCELLED_URL';
+
+    public const SHOP_IDENTIFIER = 'EASYCREDIT:SHOP_IDENTIFIER';
+    public const SHOP_TOKEN = 'EASYCREDIT:SHOP_TOKEN';
 }

@@ -10,6 +10,9 @@ namespace SprykerEco\Zed\Easycredit;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Easycredit\EasycreditConstants;
 
+/**
+ * @method \SprykerEco\Shared\Easycredit\EasycreditConfig getSharedConfig()
+ */
 class EasycreditConfig extends AbstractBundleConfig
 {
     /**
@@ -34,5 +37,29 @@ class EasycreditConfig extends AbstractBundleConfig
     public function getDeniedUrl(): string
     {
         return $this->get(EasycreditConstants::DENIED_URL);
+    }
+
+    /**
+     * @return string
+     */
+    public function getShopIdentifier(): string
+    {
+        return $this->get(EasycreditConstants::SHOP_IDENTIFIER);
+    }
+
+    /**
+     * @return string
+     */
+    public function getShopToken(): string
+    {
+        return $this->get(EasycreditConstants::SHOP_TOKEN);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentPageIntegrationType(): string
+    {
+        return $this->getSharedConfig()->getPaymentPageIntegrationType();
     }
 }
