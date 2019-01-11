@@ -15,6 +15,10 @@ use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
+use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
+use SprykerEco\Zed\Easycredit\Business\PaymentProcessor\EasycreditPaymentProcessor;
+use SprykerEco\Zed\Easycredit\Business\PaymentProcessor\EasycreditPaymentProcessorInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
@@ -35,7 +39,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createInitializePaymentAdapter(): AdapterInterface
     {
-        return new InitializePaymentAdapter($this->createEasycreditClient(), $this->getUtilEncodingService());
+        return new InitializePaymentAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
     }
 
     /**
@@ -46,8 +50,28 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(EasycreditDependencyProvider::UTIL_ENCODING_SERVICE);
     }
 
-    public function createInitializePaymentMapper(): MapperInterface
+    public function createEasycreditInitializePaymentMapper(): MapperInterface
     {
         return new InitializePaymentMapper($this->getConfig());
+    }
+
+    /**
+     * @return ParserInterface
+     */
+    public function createEasycreditInitializePaymentResponseParser(): ParserInterface
+    {
+        return new InitializePaymentResponseParser($this->getUtilEncodingService());
+    }
+
+    /**
+     * @return EasycreditPaymentProcessorInterface
+     */
+    public function createEasycreditPaymentInitializeProcessor(): EasycreditPaymentProcessorInterface
+    {
+        return new EasycreditPaymentProcessor(
+            $this->createEasycreditInitializePaymentMapper(),
+            $this->createEasycreditInitializePaymentResponseParser(),
+            $this->createInitializePaymentAdapter()
+        );
     }
 }

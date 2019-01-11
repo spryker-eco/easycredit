@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Client\Easycredit;
 
+use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -9,6 +10,19 @@ use Spryker\Client\Kernel\AbstractClient;
  */
 class EasycreditClient extends AbstractClient implements EasycreditClientInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
+     */
+    public function sendEasycreditPaymentInitialize(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
+    {
+        return $this->getFactory()->createZedStub()->sendEasycreditPaymentInitialize($quoteTransfer);
+    }
 
     /**
      * @return \SprykerEco\Client\Easycredit\Zed\EasycreditStubInterface
