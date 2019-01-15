@@ -7,67 +7,25 @@
 
 namespace SprykerEco\Yves\Easycredit\Handler;
 
-class EasycreditPaymentHandler extends AbstractPostPlacePaymentHandler
+use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use SprykerEco\Shared\Easycredit\EasycreditConfig;
+
+class EasycreditPaymentHandler implements EasycreditPaymentHandlerInterface
 {
-    /**
-     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface
-     */
-    protected $calculationClient;
-    /**
-     * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
-     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface $calculationClient
-     */
-    public function __construct(
-        ConverterInterface $converter,
-        ComputopClientInterface $computopClient,
-        ComputopToCalculationClientInterface $calculationClient
-    ) {
-        parent::__construct($converter, $computopClient);
-        $this->calculationClient = $calculationClient;
-    }
+    public const PAYMENT_PROVIDER = EasycreditConfig::PROVIDER_NAME;
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param array $responseArray
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
+    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $this->converter->getResponseTransfer($responseArray);
-        $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
-        $this->computopClient->logResponse($responseTransfer->getHeader());
-        $quoteTransfer->getPayment()->getComputopEasyCredit()->fromArray(
-            $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse()->getHeader()->toArray(),
-            true
-        );
-        $quoteTransfer = $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
-        return $this->calculationClient->recalculate($quoteTransfer);
-    }
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
-    {
-        if ($quoteTransfer->getPayment()->getComputopEasyCredit() === null) {
-            $computopTransfer = new ComputopEasyCreditPaymentTransfer();
-            $quoteTransfer->getPayment()->setComputopEasyCredit($computopTransfer);
-        }
-        $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
-            $responseTransfer
-        );
+        $quoteTransfer->getPayment()
+            ->setPaymentProvider(static::PAYMENT_PROVIDER)
+            ->setPaymentMethod(static::PAYMENT_PROVIDER);
+
         return $quoteTransfer;
-    }
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
-    {
-        return $this->computopClient->saveEasyCreditInitResponse($quoteTransfer);
     }
 }

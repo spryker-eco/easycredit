@@ -12,6 +12,8 @@ use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Easycredit\Form\DataProvider\EasycreditDataProvider;
 use SprykerEco\Yves\Easycredit\Form\EasycreditSubForm;
+use SprykerEco\Yves\Easycredit\Handler\EasycreditPaymentHandler;
+use SprykerEco\Yves\Easycredit\Handler\EasycreditPaymentHandlerInterface;
 
 class EasycreditFactory extends AbstractFactory
 {
@@ -32,15 +34,11 @@ class EasycreditFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Easycredit\Handler\EasycreditPrePostPaymentHandlerInterface
+     * @return EasycreditPaymentHandlerInterface
      */
-    public function createEasycreditPaymentHandler()
+    public function createEasycreditPaymentHandler(): EasycreditPaymentHandlerInterface
     {
-        return new EasycreditPaymentHandler(
-            $this->createInitEasyCreditConverter(),
-            $this->getComputopClient(),
-            $this->getCalculationClient()
-        );
+        return new EasycreditPaymentHandler();
     }
 
 }

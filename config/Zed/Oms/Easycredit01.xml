@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<statemachine
+        xmlns="spryker:oms-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="Easycredit01" main="true">
+        <states>
+            <state name="new"/>
+            <state name="query_credit_assessment" />
+            <state name="confirmed" />
+            <state name="invalid" />
+        </states>
+
+        <events>
+            <event name="invalidation" timeout="20min" />
+            <event name="assess" manual="true" />
+            <event name="confirm" manual="true" />
+        </events>
+
+        <transitions>
+
+            <transition condition="Easycredit/IsInitialized" happy="true">
+                <source>new</source>
+                <target>query_credit_assessment</target>
+            </transition>
+
+            <transition>
+                <source>query_credit_assessment</source>
+                <target>confirmed</target>
+            </transition>
+
+            <transition>
+                <source>query_credit_assessment</source>
+                <target>invalid</target>
+            </transition>
+
+            <!--<transition>-->
+                <!--<source>confirmed</source>-->
+                <!--<target>invalid</target>-->
+            <!--</transition>-->
+        </transitions>
+    </process>
+</statemachine>

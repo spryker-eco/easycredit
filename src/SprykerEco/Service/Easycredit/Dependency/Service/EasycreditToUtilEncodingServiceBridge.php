@@ -31,7 +31,7 @@ class EasycreditToUtilEncodingServiceBridge implements EasycreditToUtilEncodingS
      *
      * @return mixed|null
      */
-    public function decodeJson($jsonValue, $assoc = false, $depth = null, $options = null): ?mixed
+    public function decodeJson($jsonValue, $assoc = false, $depth = null, $options = null)
     {
         return $this->utilEncodingService->decodeJson($jsonValue, $assoc, $depth, $options);
     }

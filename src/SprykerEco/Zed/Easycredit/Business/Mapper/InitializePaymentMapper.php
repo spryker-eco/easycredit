@@ -67,19 +67,21 @@ class InitializePaymentMapper implements MapperInterface
     {
         return [
             static::KEY_SHOP_KENNUNG => $this->config->getShopIdentifier(),
-            static::KEY_BESTELL_WERT => $transfer->getTotals()->getGrandTotal(),
+            static::KEY_BESTELL_WERT => $transfer->getTotals()->getGrandTotal() / 100,
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
-                static::KEY_ANREDE => $transfer->getCustomer()->getSalutation(),
-                static::KEY_VORNAME => $transfer->getCustomer()->getFirstName(),
-                static::KEY_NACHNAME => $transfer->getCustomer()->getLastName(),
+//                static::KEY_ANREDE => $transfer->getCustomer()->getSalutation(),
+                static::KEY_ANREDE => "HERR",
+                static::KEY_VORNAME => $transfer->getShippingAddress()->getFirstName(),
+                static::KEY_NACHNAME => $transfer->getShippingAddress()->getLastName(),
                 static::KEY_GEBURTS_DATUM => '',
             ],
             static::KEY_RECHNUNGS_ADRESSE => [
                 static::KEY_STRASSE_HAUS_NR => $transfer->getBillingAddress()->getAddress1() . $transfer->getBillingAddress()->getAddress2(),
                 static::KEY_PLZ => $transfer->getBillingAddress()->getZipCode(),
                 static::KEY_ORT => $transfer->getBillingAddress()->getCity(),
-                static::KEY_LAND => $transfer->getBillingAddress()->getCountry()->getIso2Code(),
+//                static::KEY_LAND => $transfer->getBillingAddress()->getCountry()->getIso2Code(),
+                static::KEY_LAND => 'DE',
             ],
             static::KEY_LIEFER_ADRESSE => [
                 static::KEY_VORNAME => $transfer->getShippingAddress()->getFirstName(),
@@ -87,13 +89,12 @@ class InitializePaymentMapper implements MapperInterface
                 static::KEY_STRASSE_HAUS_NR => $transfer->getShippingAddress()->getAddress1() . $transfer->getShippingAddress()->getAddress2(),
                 static::KEY_PLZ => $transfer->getShippingAddress()->getZipCode(),
                 static::KEY_ORT => $transfer->getShippingAddress()->getCity(),
-                static::KEY_LAND => $transfer->getShippingAddress()->getCountry()->getIso2Code(),
+//                static::KEY_LAND => $transfer->getShippingAddress()->getCountry()->getIso2Code(),
+                static::KEY_LAND => 'DE',
             ],
             static::KEY_WEITERE_KAEUFER_ANGABEN => [
                 static::KEY_TELEFON_NUMMER => $transfer->getCustomer()->getPhone(),
-                static::KEY_TITEL => 'DR', //TODO: ask alex
                 static::KEY_GEBURTSNAME => $transfer->getCustomer()->getFirstName(),
-                static::KEY_GEBURTSORT => '' //TODO: ask alex,
             ],
             static::KEY_RUECK_SPRUNG_ADRESSEN => [
                 static::KEY_URL_ERFOLG => $this->config->getSuccessUrl(),
@@ -106,6 +107,13 @@ class InitializePaymentMapper implements MapperInterface
             static::KEY_RISIKORELEVANTE_ANGABEN => [
                 static::KEY_BESTELLUNG_ERFOLGT_UEBER_LOGIN => false,
                 static::KEY_LOGISTIK_DIENSTLEISTER => $transfer->getShipment()->getShipmentSelection()
+            ],
+            static::KEY_WARENKORBINFOS => [
+                [
+                    static::KEY_MENGE => 1,
+                    static::KEY_PREIS => $transfer->getTotals()->getGrandTotal() / 100,
+                    static::KEY_PRODUKTBEZEICHNUNG => 'Test',
+                ]
             ]
         ];
     }

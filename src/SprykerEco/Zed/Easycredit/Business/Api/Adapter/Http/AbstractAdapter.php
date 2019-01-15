@@ -67,10 +67,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function sendRequest(EasycreditRequestTransfer $transfer): StreamInterface
     {
-        $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson([
-            static::API_KEY_PAYLOAD => $transfer->getPayload(),
-        ]);
-
+        $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($transfer->getPayload());
         $options[RequestOptions::HEADERS] = $this->getHeaders();
 
         return $this->send($options);

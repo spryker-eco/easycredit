@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Yves\Easycredit\Form;
 
+use Generated\Shared\Transfer\PaymentTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
@@ -14,7 +15,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface
      */
     public function getPropertyPath()
     {
-        return EasycreditConfig::PAYMENT_METHOD;
+        return PaymentTransfer::EASYCREDIT;
     }
 
     /**

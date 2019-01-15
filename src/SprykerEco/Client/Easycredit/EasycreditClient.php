@@ -3,6 +3,7 @@
 namespace SprykerEco\Client\Easycredit;
 
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
