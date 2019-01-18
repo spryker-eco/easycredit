@@ -23,7 +23,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface
      */
     public function getName(): string
     {
-        return EasycreditConfig::PAYMENT_METHOD;
+        return PaymentTransfer::EASYCREDIT;
     }
 
     /**

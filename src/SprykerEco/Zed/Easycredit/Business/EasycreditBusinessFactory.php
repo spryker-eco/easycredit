@@ -12,13 +12,14 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderCompletionAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
-use SprykerEco\Zed\Easycredit\Business\PaymentProcessor\EasycreditPaymentProcessor;
-use SprykerEco\Zed\Easycredit\Business\PaymentProcessor\EasycreditPaymentProcessorInterface;
+use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessorInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
@@ -38,6 +39,22 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      * @return AdapterInterface
      */
     public function createInitializePaymentAdapter(): AdapterInterface
+    {
+        return new InitializePaymentAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+    }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function createOrderCompletionAdapter(): AdapterInterface
+    {
+        return new OrderCompletionAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+    }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function createQueryCreditAssessmentAdapter(): AdapterInterface
     {
         return new InitializePaymentAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
     }
@@ -64,11 +81,11 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditPaymentProcessorInterface
+     * @return EasycreditPaymentInitializeProcessorInterface
      */
-    public function createEasycreditPaymentInitializeProcessor(): EasycreditPaymentProcessorInterface
+    public function createEasycreditPaymentInitializeProcessor(): EasycreditPaymentInitializeProcessorInterface
     {
-        return new EasycreditPaymentProcessor(
+        return new EasycreditPaymentInitializeProcessor(
             $this->createEasycreditInitializePaymentMapper(),
             $this->createEasycreditInitializePaymentResponseParser(),
             $this->createInitializePaymentAdapter()

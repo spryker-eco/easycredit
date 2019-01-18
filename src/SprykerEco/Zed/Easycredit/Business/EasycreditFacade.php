@@ -18,15 +18,20 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterface
 {
     /**
-     * @param QuoteTransfer $transfer
+     * @param QuoteTransfer $quoteTransfer
      *
      * @return EasycreditInitializePaymentResponseTransfer
      */
-    public function sendPaymentInitializeRequest(QuoteTransfer $transfer): EasycreditInitializePaymentResponseTransfer
+    public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
         return $this
             ->getFactory()
             ->createEasycreditPaymentInitializeProcessor()
-            ->process($transfer);
+            ->process($quoteTransfer);
+    }
+
+    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer)
+    {
+        // TODO: Implement sendQueryCreditAssessmentRequest() method.
     }
 }

@@ -62,4 +62,12 @@ class EasycreditConfig extends AbstractBundleConfig
     {
         return $this->getSharedConfig()->getPaymentPageIntegrationType();
     }
+
+    /**
+     * @return string
+     */
+    public function getApiUrl(): string
+    {
+        return $this->get(EasycreditConstants::API_URL);
+    }
 }

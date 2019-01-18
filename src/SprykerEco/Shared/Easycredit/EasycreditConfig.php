@@ -7,7 +7,7 @@ use Spryker\Shared\Kernel\AbstractBundleConfig;
 class EasycreditConfig extends AbstractBundleConfig
 {
     public const PROVIDER_NAME = 'easycredit';
-    public const PAYMENT_METHOD = 'installments';
+    public const PAYMENT_METHOD = 'easycredit';
     public const PAYMENT_PAGE_INTEGRATION_TYPE = 'PAYMENT_PAGE';
 
     /**

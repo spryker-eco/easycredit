@@ -29,6 +29,12 @@ abstract class AbstractAdapter implements AdapterInterface
 
     protected const HEADER_TBK_RK_SHOP = 'tbk-rk-shop';
     protected const HEADER_TBK_RK_TOKEN = 'tbk-rk-token';
+    protected const HEADER_CONTENT_TYPE = 'Content-Type';
+
+    protected const CONTENT_TYPE_JSON = 'application/json';
+
+    protected const URL_CREDIT_ASSESSMENTS_IDENTIFIER = 'entscheidung';
+    protected const URL_ORDER_COMPLETION_IDENTIFIER = 'bestaetigen';
 
     /**
      * @var Client
@@ -46,9 +52,16 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $config;
 
     /**
+     * @param EasycreditRequestTransfer $requestTransfer
+     *
      * @return string
      */
-    abstract protected function getUrl(): string;
+    abstract protected function getUrl(EasycreditRequestTransfer $requestTransfer): string;
+
+    /**
+     * @return string
+     */
+    abstract protected function getMethod(): string;
 
     public function __construct(
         ClientInterface $client,
@@ -67,24 +80,25 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function sendRequest(EasycreditRequestTransfer $transfer): StreamInterface
     {
+        $url = $this->getUrl($transfer);
+        $method = $this->getMethod();
         $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($transfer->getPayload());
         $options[RequestOptions::HEADERS] = $this->getHeaders();
 
-        return $this->send($options);
+        return $this->send($method, $url, $options);
     }
 
     /**
+     * @param string $method
+     * @param string $url
      * @param array $options
      *
      * @return \Psr\Http\Message\StreamInterface
      */
-    protected function send(array $options = []): StreamInterface
+    protected function send(string $method, string $url, array $options = []): StreamInterface
     {
         try {
-            $response = $this->client->post(
-                $this->getUrl(),
-                $options
-            );
+            $response = $this->client->request($method, $url, $options);
         } catch (RequestException $requestException) {
             throw new EasycreditApiHttpRequestException(
                 $requestException->getMessage(),
@@ -102,7 +116,7 @@ abstract class AbstractAdapter implements AdapterInterface
     protected function getHeaders(): array
     {
         return [
-            'Content-Type' => 'application/json',
+            static::HEADER_CONTENT_TYPE => static::CONTENT_TYPE_JSON,
             static::HEADER_TBK_RK_SHOP => $this->config->getShopIdentifier(),
             static::HEADER_TBK_RK_TOKEN => $this->config->getShopToken(),
         ];

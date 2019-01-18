@@ -15,4 +15,6 @@ interface EasycreditConstants
 
     public const SHOP_IDENTIFIER = 'EASYCREDIT:SHOP_IDENTIFIER';
     public const SHOP_TOKEN = 'EASYCREDIT:SHOP_TOKEN';
+
+    public const API_URL = 'EASYCREDIT:API_URL';
 }

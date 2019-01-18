@@ -5,19 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Easycredit\Business;
+namespace SprykerEco\Zed\Easycredit\Business\Processor;
 
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface EasycreditFacadeInterface
+interface EasycreditPaymentInitializeProcessorInterface
 {
     /**
      * @param QuoteTransfer $quoteTransfer
      *
      * @return EasycreditInitializePaymentResponseTransfer
      */
-    public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
-
-    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer);
+    public function process(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 }

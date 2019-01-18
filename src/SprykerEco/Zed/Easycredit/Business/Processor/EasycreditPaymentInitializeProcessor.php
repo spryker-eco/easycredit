@@ -5,8 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Easycredit\Business\PaymentProcessor;
+namespace SprykerEco\Zed\Easycredit\Business\Processor;
 
+use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -14,7 +15,7 @@ use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 
-class EasycreditPaymentProcessor implements EasycreditPaymentProcessorInterface
+class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializeProcessorInterface
 {
     /**
      * @var MapperInterface
@@ -47,17 +48,32 @@ class EasycreditPaymentProcessor implements EasycreditPaymentProcessorInterface
     }
 
     /**
-     * @param QuoteTransfer $transfer
+     * @param QuoteTransfer $quoteTransfer
      *
-     * @return AbstractTransfer
+     * @return EasycreditInitializePaymentResponseTransfer
      */
-    public function process(QuoteTransfer $transfer): AbstractTransfer
+    public function process(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
-        $requestTransfer = new EasycreditRequestTransfer();
-        $requestTransfer->setPayload($this->mapper->map($transfer));
-
+        $requestTransfer = $this->map($quoteTransfer);
         $response = $this->adapter->sendRequest($requestTransfer);
 
         return $this->parser->parse($response);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditRequestTransfer
+     */
+    protected function map(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
+    {
+        $requestTransfer = new EasycreditRequestTransfer();
+        $requestTransfer->setPayload($this->mapper->map($quoteTransfer));
+
+        if ($quoteTransfer->getPayment() && $quoteTransfer->getPayment()->getEasycredit()) {
+            $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        }
+
+        return $requestTransfer;
     }
 }

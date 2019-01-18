@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Symfony\Component\HttpFoundation\Request;
 
-class InitializePaymentAdapter extends AbstractAdapter
+class QueryCreditAssessmentAdapter extends AbstractAdapter
 {
     /**
      * @param EasycreditRequestTransfer $requestTransfer
@@ -19,7 +19,11 @@ class InitializePaymentAdapter extends AbstractAdapter
      */
     protected function getUrl(EasycreditRequestTransfer $requestTransfer): string
     {
-        return $this->config->getApiUrl();
+        return sprintf('%s/%s/%s',
+            $this->config->getApiUrl(),
+            $requestTransfer->getVorgangskennung(),
+            static::URL_CREDIT_ASSESSMENTS_IDENTIFIER
+        );
     }
 
     /**
@@ -27,6 +31,6 @@ class InitializePaymentAdapter extends AbstractAdapter
      */
     protected function getMethod(): string
     {
-        return Request::METHOD_POST;
+        return Request::METHOD_GET;
     }
 }

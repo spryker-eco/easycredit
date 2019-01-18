@@ -4,15 +4,20 @@
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="Payment">
-        <property name="easycredit" type="string"/>
+        <property name="easycredit" type="Easycredit"/>
     </transfer>
 
     <transfer name="EasycreditRequest">
         <property name="payload" type="array" />
+        <property name="vorgangskennung" type="string" />
     </transfer>
 
     <transfer name="EasycreditInitializePaymentResponse">
         <property name="paymentIdentifier" type="string" />
+    </transfer>
+
+    <transfer name="Easycredit">
+        <property name="vorgangskennung" type="string" />
     </transfer>
 
     <!--Response container replacement related transfers end-->
