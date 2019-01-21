@@ -26,4 +26,9 @@ interface EasycreditFacadeInterface
      * @return EasycreditQueryAssessmentResponseTransfer
      */
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer;
+
+    /**
+     * @param int $orderId
+     */
+    public function sendOrderConfirmationRequest(int $orderId): void;
 }

@@ -43,4 +43,15 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
             ->createEasycreditPaymentQueryAssessmentProcessor()
             ->process($quoteTransfer);
     }
+
+    /**
+     * @param int $orderId
+     */
+    public function sendOrderConfirmationRequest(int $orderId): void
+    {
+        return $this
+            ->getFactory()
+            ->createEasycreditOrderConfirmationProcessor()
+            ->process($orderId);
+    }
 }

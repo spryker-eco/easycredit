@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderCompletionAdapter extends AbstractAdapter
+class OrderConfirmationAdapter extends AbstractAdapter
 {
     /**
      * @param EasycreditRequestTransfer $requestTransfer

@@ -12,7 +12,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderCompletionAdapter;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderConfirmationAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\QueryCreditAssessmentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
@@ -25,6 +25,8 @@ use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\Easyc
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessorInterface;
+use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessorInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
@@ -51,9 +53,9 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     /**
      * @return AdapterInterface
      */
-    public function createOrderCompletionAdapter(): AdapterInterface
+    public function createOrderConfirmationAdapter(): AdapterInterface
     {
-        return new OrderCompletionAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+        return new OrderConfirmationAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
     }
 
     /**
@@ -103,6 +105,17 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditPaymentQueryAssessmentProcessor(): EasycreditQueryAssessmentProcessorInterface
     {
         return new EasycreditQueryAssessmentProcessor(
+            $this->createEasycreditQueryCreditAssessmentParser(),
+            $this->createQueryCreditAssessmentAdapter()
+        );
+    }
+
+    /**
+     * @return OrderConfirmationProcessorInterface
+     */
+    public function createEasycreditOrderConfirmationProcessor(): OrderConfirmationProcessorInterface
+    {
+        return new OrderConfirmationProcessor(
             $this->createEasycreditQueryCreditAssessmentParser(),
             $this->createQueryCreditAssessmentAdapter()
         );

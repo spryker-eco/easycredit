@@ -20,6 +20,10 @@
         <property name="status" type="string" />
     </transfer>
 
+    <transfer name="EasycreditOrderConfirmationResponse">
+        <property name="confirmed" type="boolean" />
+    </transfer>
+
     <transfer name="Easycredit">
         <property name="vorgangskennung" type="string" />
     </transfer>
