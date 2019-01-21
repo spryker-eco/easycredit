@@ -7,15 +7,15 @@
 
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
-use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 
-class InitializePaymentResponseParser implements ParserInterface
+class QueryCreditAssessmentResponseParser implements ParserInterface
 {
-    protected const KEY_PAYMENT_IDENTIFIER = 'tbVorgangskennung';
-
+    protected const KEY_ENTSCHEIDUNG = 'entscheidung';
+    protected const KEY_ENTSCHEIDUNG_SERGEBNIS = 'entscheidungsergebnis';
     /**
      * @var EasycreditToUtilEncodingServiceInterface
      */
@@ -38,9 +38,11 @@ class InitializePaymentResponseParser implements ParserInterface
     {
         $payload = $this->utilEncoding->decodeJson($response->getContents(), true);
 
-        $transfer = new EasycreditInitializePaymentResponseTransfer();
+        $transfer = new EasycreditQueryAssessmentResponseTransfer();
 
-        $transfer->setPaymentIdentifier($payload[static::KEY_PAYMENT_IDENTIFIER]);
+        if (array_key_exists(static::KEY_ENTSCHEIDUNG, $payload)) {
+            $transfer->setStatus($payload[static::KEY_ENTSCHEIDUNG][static::KEY_ENTSCHEIDUNG_SERGEBNIS]);
+        }
 
         return $transfer;
     }

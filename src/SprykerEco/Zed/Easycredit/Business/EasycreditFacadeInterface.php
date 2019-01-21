@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Business;
 
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface EasycreditFacadeInterface
@@ -19,5 +20,10 @@ interface EasycreditFacadeInterface
      */
     public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 
-    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer);
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditQueryAssessmentResponseTransfer
+     */
+    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer;
 }

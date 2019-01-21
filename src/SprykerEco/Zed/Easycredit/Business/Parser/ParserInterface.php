@@ -16,7 +16,7 @@ interface ParserInterface
     /**
      * @param StreamInterface $response
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return AbstractTransfer
      */
-    public function parse(StreamInterface $response): EasycreditInitializePaymentResponseTransfer;
+    public function parse(StreamInterface $response): AbstractTransfer;
 }

@@ -16,7 +16,15 @@
         <property name="paymentIdentifier" type="string" />
     </transfer>
 
+    <transfer name="EasycreditQueryAssessmentResponse">
+        <property name="status" type="string" />
+    </transfer>
+
     <transfer name="Easycredit">
+        <property name="vorgangskennung" type="string" />
+    </transfer>
+
+    <transfer name="Quote">
         <property name="vorgangskennung" type="string" />
     </transfer>
 

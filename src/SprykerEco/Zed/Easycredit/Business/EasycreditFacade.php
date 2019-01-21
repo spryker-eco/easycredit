@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Business;
 
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -30,8 +31,16 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
             ->process($quoteTransfer);
     }
 
-    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer)
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditQueryAssessmentResponseTransfer
+     */
+    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
-        // TODO: Implement sendQueryCreditAssessmentRequest() method.
+        return $this
+            ->getFactory()
+            ->createEasycreditPaymentQueryAssessmentProcessor()
+            ->process($quoteTransfer);
     }
 }
