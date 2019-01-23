@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -46,12 +48,25 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
 
     /**
      * @param int $orderId
+     *
+     * @return EasycreditOrderConfirmationResponseTransfer
      */
-    public function sendOrderConfirmationRequest(int $orderId): void
+    public function sendOrderConfirmationRequest(int $orderId): EasycreditOrderConfirmationResponseTransfer
     {
         return $this
             ->getFactory()
             ->createEasycreditOrderConfirmationProcessor()
             ->process($orderId);
+    }
+
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
+    {
+        return $this
+            ->getFactory()
+            ->createEasycreditApprovalTextProcessor()
+            ->process();
     }
 }

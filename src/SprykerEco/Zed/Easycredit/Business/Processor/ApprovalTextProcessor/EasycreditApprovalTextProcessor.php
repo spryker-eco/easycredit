@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor;
+namespace SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor;
 
-use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 
-class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
+class EasycreditApprovalTextProcessor implements EasycreditApprovalTextProcessorInterface
 {
     /**
      * @var ParserInterface
@@ -37,27 +37,14 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
     }
 
     /**
-     * @param int $idOrder
-     *
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @return EasycreditApprovalTextResponseTransfer
      */
-    public function process(int $idOrder): EasycreditOrderConfirmationResponseTransfer
+    public function process(): EasycreditApprovalTextResponseTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $requestTransfer->setVorgangskennung($this->getOrderIdentifier($idOrder));
+
         $response = $this->adapter->sendRequest($requestTransfer);
 
         return $this->parser->parse($response);
-    }
-
-
-    /**
-     * @param int $idOrder
-     *
-     * @return string
-     */
-    protected function getOrderIdentifier(int $idOrder): string
-    {
-        return uniqid(); //TODO: Change it when persistance layer is implemented
     }
 }

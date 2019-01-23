@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Zed\Easycredit\Communication\Controller;
 
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -35,4 +36,15 @@ class GatewayController extends AbstractGatewayController
             ->getFacade()
             ->sendQueryCreditAssessmentRequest($quoteTransfer);
     }
+
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
+    {
+        return $this
+            ->getFacade()
+            ->sendGettingApprovalTextRequest();
+    }
+
 }

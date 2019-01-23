@@ -11,15 +11,19 @@ use GuzzleHttp\ClientInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\ApprovalTextLoaderAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderConfirmationAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\QueryCreditAssessmentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
+use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\CreditAssessmentProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessorInterface;
@@ -67,6 +71,14 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return AdapterInterface
+     */
+    public function createApprovalTextLoaderAdapter(): AdapterInterface
+    {
+        return new ApprovalTextLoaderAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+    }
+
+    /**
      * @return EasycreditToUtilEncodingServiceInterface
      */
     public function getUtilEncodingService(): EasycreditToUtilEncodingServiceInterface
@@ -85,6 +97,14 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditInitializePaymentResponseParser(): ParserInterface
     {
         return new InitializePaymentResponseParser($this->getUtilEncodingService());
+    }
+
+    /**
+     * @return ParserInterface
+     */
+    public function createEasycreditApprovalTextResponseParser(): ParserInterface
+    {
+        return new ApprovalTextResponseParser($this->getUtilEncodingService());
     }
 
     /**
@@ -107,6 +127,17 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
         return new EasycreditQueryAssessmentProcessor(
             $this->createEasycreditQueryCreditAssessmentParser(),
             $this->createQueryCreditAssessmentAdapter()
+        );
+    }
+
+    /**
+     * @return EasycreditApprovalTextProcessorInterface
+     */
+    public function createEasycreditApprovalTextProcessor(): EasycreditApprovalTextProcessorInterface
+    {
+        return new EasycreditApprovalTextProcessor(
+            $this->createEasycreditApprovalTextResponseParser(),
+            $this->createApprovalTextLoaderAdapter()
         );
     }
 

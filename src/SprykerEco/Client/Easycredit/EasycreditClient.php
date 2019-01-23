@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Client\Easycredit;
 
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -38,5 +39,13 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     public function sendEasycreditQueryAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
         return $this->getFactory()->createZedStub()->sendEasycreditQueryAssessmentRequest($quoteTransfer);
+    }
+
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
+    {
+        return $this->getFactory()->createZedStub()->getEasycreditApprovalTextAction();
     }
 }

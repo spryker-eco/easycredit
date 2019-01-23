@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderConfirmationAdapter extends AbstractAdapter
+class ApprovalTextLoaderAdapter extends AbstractAdapter
 {
     /**
      * @param EasycreditRequestTransfer $requestTransfer
@@ -21,9 +21,9 @@ class OrderConfirmationAdapter extends AbstractAdapter
     {
         return sprintf('%s/%s/%s/%s',
             $this->config->getApiUrl(),
-            static::REQUEST_TYPE_PROCESS,
-            $requestTransfer->getVorgangskennung(),
-            static::URL_ORDER_COMPLETION_IDENTIFIER
+            static::REQUEST_TYPE_TEXT,
+            static::URL_APPROVAL_TEXT_IDENTIFIER,
+            $this->config->getShopIdentifier()
         );
     }
 
@@ -32,6 +32,6 @@ class OrderConfirmationAdapter extends AbstractAdapter
      */
     protected function getMethod(): string
     {
-        return Request::METHOD_POST;
+        return Request::METHOD_GET;
     }
 }

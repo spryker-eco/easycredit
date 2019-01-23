@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Client\Easycredit;
 
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -22,4 +23,8 @@ interface EasycreditClientInterface
      */
     public function sendEasycreditQueryAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer;
 
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer;
 }

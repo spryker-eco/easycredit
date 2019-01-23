@@ -2,6 +2,7 @@
 
 namespace SprykerEco\Client\Easycredit\Zed;
 
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -19,8 +20,21 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
         return $this->zedStub->call('/easycredit/gateway/send-easycredit-payment-initialize', $quoteTransfer);
     }
 
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditQueryAssessmentResponseTransfer
+     */
     public function sendEasycreditQueryAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
         return $this->zedStub->call('/easycredit/gateway/send-easycredit-query-assessment-request', $quoteTransfer);
+    }
+
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
+    {
+        return $this->zedStub->call('/easycredit/gateway/get-easycredit-approval-text');
     }
 }

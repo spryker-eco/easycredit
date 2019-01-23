@@ -7,12 +7,14 @@
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor;
 
+use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+
 interface OrderConfirmationProcessorInterface
 {
     /**
      * @param int $idOrder
      *
-     * @return void
+     * @return EasycreditOrderConfirmationResponseTransfer
      */
-    public function process(int $idOrder): void;
+    public function process(int $idOrder): EasycreditOrderConfirmationResponseTransfer;
 }

@@ -10,6 +10,7 @@
     <transfer name="EasycreditRequest">
         <property name="payload" type="array" />
         <property name="vorgangskennung" type="string" />
+        <property name="webShopKennung" type="string" />
     </transfer>
 
     <transfer name="EasycreditInitializePaymentResponse">
@@ -22,6 +23,10 @@
 
     <transfer name="EasycreditOrderConfirmationResponse">
         <property name="confirmed" type="boolean" />
+    </transfer>
+
+    <transfer name="EasycreditApprovalTextResponse">
+        <property name="text" type="string" />
     </transfer>
 
     <transfer name="Easycredit">

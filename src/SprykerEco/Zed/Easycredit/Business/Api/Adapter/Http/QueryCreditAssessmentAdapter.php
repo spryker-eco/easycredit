@@ -19,8 +19,9 @@ class QueryCreditAssessmentAdapter extends AbstractAdapter
      */
     protected function getUrl(EasycreditRequestTransfer $requestTransfer): string
     {
-        return sprintf('%s/%s/%s',
+        return sprintf('%s/%s/%s/%s',
             $this->config->getApiUrl(),
+            static::REQUEST_TYPE_PROCESS,
             $requestTransfer->getVorgangskennung(),
             static::URL_CREDIT_ASSESSMENTS_IDENTIFIER
         );
