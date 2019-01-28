@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 
 class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentProcessorInterface
@@ -26,15 +27,23 @@ class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentPro
     protected $adapter;
 
     /**
+     * @var EasycreditLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param ParserInterface $parser
      * @param AdapterInterface $adapter
+     * @param EasycreditLoggerInterface $logger
      */
     public function __construct(
         ParserInterface $parser,
-        AdapterInterface $adapter
+        AdapterInterface $adapter,
+        EasycreditLoggerInterface $logger
     ) {
         $this->parser = $parser;
         $this->adapter = $adapter;
+        $this->logger = $logger;
     }
 
     /**
@@ -46,8 +55,11 @@ class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentPro
     {
         $requestTransfer = $this->map($quoteTransfer);
         $response = $this->adapter->sendRequest($requestTransfer);
+        $responseTransfer = $this->parser->parse($response);
 
-        return $this->parser->parse($response);
+        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_CREDIT_ASSESSMENT, $requestTransfer, $responseTransfer);
+
+        return $responseTransfer;
     }
 
     /**

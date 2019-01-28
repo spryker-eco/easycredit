@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcesso
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 
 class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
@@ -25,15 +26,23 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
     protected $adapter;
 
     /**
+     * @var EasycreditLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param ParserInterface $parser
      * @param AdapterInterface $adapter
+     * @param EasycreditLoggerInterface $logger
      */
     public function __construct(
         ParserInterface $parser,
-        AdapterInterface $adapter
+        AdapterInterface $adapter,
+        EasycreditLoggerInterface $logger
     ) {
         $this->parser = $parser;
         $this->adapter = $adapter;
+        $this->logger = $logger;
     }
 
     /**
@@ -46,8 +55,11 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
         $requestTransfer = new EasycreditRequestTransfer();
         $requestTransfer->setVorgangskennung($this->getOrderIdentifier($idOrder));
         $response = $this->adapter->sendRequest($requestTransfer);
+        $responseTransfer = $this->parser->parse($response);
 
-        return $this->parser->parse($response);
+        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $responseTransfer);
+
+        return $responseTransfer;
     }
 
 

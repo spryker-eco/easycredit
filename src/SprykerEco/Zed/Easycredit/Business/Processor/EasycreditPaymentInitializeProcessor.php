@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 
@@ -33,18 +34,26 @@ class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializ
     protected $adapter;
 
     /**
+     * @var EasycreditLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param MapperInterface $mapper
      * @param ParserInterface $parser
      * @param AdapterInterface $adapter
+     * @param EasycreditLoggerInterface $easycreditLogger
      */
     public function __construct(
         MapperInterface $mapper,
         ParserInterface $parser,
-        AdapterInterface $adapter
+        AdapterInterface $adapter,
+        EasycreditLoggerInterface $easycreditLogger
     ) {
         $this->mapper = $mapper;
         $this->parser = $parser;
         $this->adapter = $adapter;
+        $this->logger = $easycreditLogger;
     }
 
     /**
@@ -56,8 +65,11 @@ class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializ
     {
         $requestTransfer = $this->map($quoteTransfer);
         $response = $this->adapter->sendRequest($requestTransfer);
+        $responseTransfer = $this->parser->parse($response);
 
-        return $this->parser->parse($response);
+        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_PAYMENT_INITIALIZE, $requestTransfer, $responseTransfer);
+
+        return $responseTransfer;
     }
 
     /**

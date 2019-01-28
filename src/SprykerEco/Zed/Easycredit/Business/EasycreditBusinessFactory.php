@@ -16,6 +16,8 @@ use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderConfirmationAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\QueryCreditAssessmentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
@@ -117,7 +119,8 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
         return new EasycreditPaymentInitializeProcessor(
             $this->createEasycreditInitializePaymentMapper(),
             $this->createEasycreditInitializePaymentResponseParser(),
-            $this->createInitializePaymentAdapter()
+            $this->createInitializePaymentAdapter(),
+            $this->createEasycreditLogger()
         );
     }
 
@@ -128,7 +131,8 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new EasycreditQueryAssessmentProcessor(
             $this->createEasycreditQueryCreditAssessmentParser(),
-            $this->createQueryCreditAssessmentAdapter()
+            $this->createQueryCreditAssessmentAdapter(),
+            $this->createEasycreditLogger()
         );
     }
 
@@ -139,7 +143,8 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new EasycreditApprovalTextProcessor(
             $this->createEasycreditApprovalTextResponseParser(),
-            $this->createApprovalTextLoaderAdapter()
+            $this->createApprovalTextLoaderAdapter(),
+            $this->createEasycreditLogger()
         );
     }
 
@@ -150,7 +155,8 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new OrderConfirmationProcessor(
             $this->createEasycreditQueryCreditAssessmentParser(),
-            $this->createQueryCreditAssessmentAdapter()
+            $this->createQueryCreditAssessmentAdapter(),
+            $this->createEasycreditLogger()
         );
     }
 
@@ -168,5 +174,13 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createPaymentMethodFilter(): PaymentMethodFilterInterface
     {
         return new PaymentMethodFilter();
+    }
+
+    /**
+     * @return EasycreditLoggerInterface
+     */
+    public function createEasycreditLogger(): EasycreditLoggerInterface
+    {
+        return new EasycreditLogger();
     }
 }
