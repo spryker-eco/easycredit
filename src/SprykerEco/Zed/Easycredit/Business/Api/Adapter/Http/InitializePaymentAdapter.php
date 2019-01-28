@@ -19,7 +19,7 @@ class InitializePaymentAdapter extends AbstractAdapter
      */
     protected function getUrl(EasycreditRequestTransfer $requestTransfer): string
     {
-        return $this->config->getApiUrl();
+        return sprintf('%s/%s/', $this->config->getApiUrl(), static::REQUEST_TYPE_PROCESS);
     }
 
     /**

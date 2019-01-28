@@ -22,6 +22,8 @@ use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
+use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\CreditAssessmentProcessorInterface;
@@ -158,5 +160,13 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     protected function createEasycreditQueryCreditAssessmentParser(): ParserInterface
     {
         return new QueryCreditAssessmentResponseParser($this->getUtilEncodingService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodFilter(): PaymentMethodFilterInterface
+    {
+        return new PaymentMethodFilter();
     }
 }

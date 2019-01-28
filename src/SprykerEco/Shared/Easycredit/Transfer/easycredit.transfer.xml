@@ -4,7 +4,7 @@
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="Payment">
-        <property name="easycredit" type="Easycredit"/>
+        <property name="easycredit" type="Easycredit" />
     </transfer>
 
     <transfer name="EasycreditRequest">
@@ -31,10 +31,15 @@
 
     <transfer name="Easycredit">
         <property name="vorgangskennung" type="string" />
+        <property name="optInCheckbox" type="boolean" />
     </transfer>
 
     <transfer name="Quote">
-        <property name="vorgangskennung" type="string" />
+        <property name="easycreditLegalText" type="EasycreditLegalText" />
+    </transfer>
+
+    <transfer name="EasycreditLegalText">
+        <property name="text" type="string" />
     </transfer>
 
     <!--Response container replacement related transfers end-->

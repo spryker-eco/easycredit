@@ -14,7 +14,7 @@ use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingSer
 
 class ApprovalTextResponseParser implements ParserInterface
 {
-    protected const KEY_TEXT_IDENTIFIER = 'ustimmungDatenuebertragungPaymentPage';
+    protected const KEY_TEXT_IDENTIFIER = 'zustimmungDatenuebertragungPaymentPage';
 
     /**
      * @var EasycreditToUtilEncodingServiceInterface

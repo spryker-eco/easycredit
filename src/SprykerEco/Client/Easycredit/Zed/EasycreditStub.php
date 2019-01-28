@@ -35,6 +35,6 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/get-easycredit-approval-text');
+        return $this->zedStub->call('/easycredit/gateway/get-easycredit-approval-text', new QuoteTransfer());
     }
 }

@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -21,6 +22,10 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterface
 {
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param QuoteTransfer $quoteTransfer
      *
      * @return EasycreditInitializePaymentResponseTransfer
@@ -34,6 +39,10 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param QuoteTransfer $quoteTransfer
      *
      * @return EasycreditQueryAssessmentResponseTransfer
@@ -47,6 +56,10 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param int $orderId
      *
      * @return EasycreditOrderConfirmationResponseTransfer
@@ -60,6 +73,10 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @return EasycreditApprovalTextResponseTransfer
      */
     public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
@@ -68,5 +85,22 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
             ->getFactory()
             ->createEasycreditApprovalTextProcessor()
             ->process();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer
+    {
+        return $this->getFactory()
+            ->createPaymentMethodFilter()
+            ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
     }
 }

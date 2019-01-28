@@ -1,5 +1,57 @@
-<div class="payment-method payment-subform easy-credit-form easy-credit-installments-form payment-form" id="easyCreditInstallments">
-    <div class="easycredit small-12 columns">
-        EASYCREDIT DIRECT INTEGRATION
-    </div>
-</div>
+{% extends model('component') %}
+
+{% define config = {
+    name: 'form',
+    tag: 'div'
+} %}
+
+{% define data = {
+    form: required,
+    enableStart: true,
+    enableEnd: true,
+    legalText: required,
+    layout: {},
+    options: {
+        attr: {
+            novalidate: 'novalidate'
+        }
+    },
+
+    title: null,
+
+    submit: {
+        text: 'forms.submit-btn' | trans,
+        class: 'button button--success',
+        icon: null,
+        enable: false,
+        qa: 'submit-button'
+    },
+
+    cancel: {
+        text: 'general.back.button' | trans,
+        class: 'button button--secondary button--hollow',
+        icon: 'chevron-left',
+        url: '#',
+        enable: false,
+        qa: 'cancel-button'
+    }
+} %}
+
+{% block body %}
+    {% embed molecule('form') with {
+        data: {
+            form: data.form,
+            legalText: data.legalText,
+        },
+        modifiers: ['grid-indent', 'login', 'checkout-actions']
+    } only %}
+        {% block field %}
+            {{ form_row(field, {
+                rowAttr: {
+                    class: config.name ~ '__field ' ~ fieldLayoutClass
+                }
+            }) }}
+            <p>{{ data.legalText }}</p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
