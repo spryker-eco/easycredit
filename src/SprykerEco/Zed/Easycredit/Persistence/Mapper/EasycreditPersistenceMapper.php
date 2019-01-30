@@ -7,8 +7,10 @@
 
 namespace SprykerEco\Zed\Easycredit\Persistence\Mapper;
 
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
 use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog;
+use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier;
 
 class EasycreditPersistenceMapper implements EasycreditPersistenceMapperInterface
 {
@@ -39,5 +41,34 @@ class EasycreditPersistenceMapper implements EasycreditPersistenceMapperInterfac
         PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer): PaymentEasycreditApiLogTransfer
     {
         return $easycreditApiLogTransfer->fromArray($spyPaymentEasycreditApiLog->toArray(), true);
+    }
+
+    /**
+     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     *
+     * @return SpyPaymentEasycreditOrderIdentifier
+     */
+    public function mapEasycreditOrderIdentifierTransferToEntity(
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer,
+        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier): SpyPaymentEasycreditOrderIdentifier
+    {
+        $spyPaymentEasycreditOrderIdentifier->fromArray($paymentEasycreditOrderIdentifierTransfer->modifiedToArray());
+        $spyPaymentEasycreditOrderIdentifier->setNew($paymentEasycreditOrderIdentifierTransfer->getIdPaymentEasycreditOrderIdentifier() === null);
+
+        return $spyPaymentEasycreditOrderIdentifier;
+    }
+
+    /**
+     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     *
+     * @return PaymentEasycreditOrderIdentifierTransfer
+     */
+    public function mapEntityToSpyPaymentEasycreditOrderIdentifierTransfer(
+        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier,
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer
+    {
+        return $paymentEasycreditOrderIdentifierTransfer->fromArray($spyPaymentEasycreditOrderIdentifier->toArray(), true);
     }
 }

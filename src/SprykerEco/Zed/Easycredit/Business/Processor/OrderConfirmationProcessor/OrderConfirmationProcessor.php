@@ -57,7 +57,7 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
         $response = $this->adapter->sendRequest($requestTransfer);
         $responseTransfer = $this->parser->parse($response);
 
-        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $responseTransfer);
+//        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $responseTransfer);
 
         return $responseTransfer;
     }

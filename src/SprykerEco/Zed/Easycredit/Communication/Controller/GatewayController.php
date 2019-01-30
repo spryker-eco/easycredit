@@ -46,5 +46,4 @@ class GatewayController extends AbstractGatewayController
             ->getFacade()
             ->sendGettingApprovalTextRequest();
     }
-
 }

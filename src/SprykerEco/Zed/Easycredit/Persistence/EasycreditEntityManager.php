@@ -8,7 +8,9 @@
 namespace SprykerEco\Zed\Easycredit\Persistence;
 
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog;
+use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -19,7 +21,7 @@ class EasycreditEntityManager extends AbstractEntityManager implements Easycredi
     /**
      * @param PaymentEasycreditApiLogTransfer $apiLogTransfer
      *
-     * @return mixed
+     * @return PaymentEasycreditApiLogTransfer
      */
     public function saveEasycreditApiLog(PaymentEasycreditApiLogTransfer $apiLogTransfer): PaymentEasycreditApiLogTransfer
     {
@@ -32,5 +34,23 @@ class EasycreditEntityManager extends AbstractEntityManager implements Easycredi
         return $this->getFactory()
             ->createEasycreditPersistenceMapper()
             ->mapEntityToPaymentEasycreditApiLogTransfer($easycreditApiLog, $apiLogTransfer);
+    }
+
+    /**
+     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @return PaymentEasycreditOrderIdentifierTransfer
+     *
+     */
+    public function saveEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer
+    {
+        $easycreditOrderIdentifier = $this->getFactory()
+            ->createEasycreditPersistenceMapper()
+            ->mapEasycreditOrderIdentifierTransferToEntity($paymentEasycreditOrderIdentifierTransfer, new SpyPaymentEasycreditOrderIdentifier());
+
+        $easycreditOrderIdentifier->save();
+
+        return $this->getFactory()
+            ->createEasycreditPersistenceMapper()
+            ->mapEntityToSpyPaymentEasycreditOrderIdentifierTransfer($easycreditOrderIdentifier, $paymentEasycreditOrderIdentifierTransfer);
     }
 }

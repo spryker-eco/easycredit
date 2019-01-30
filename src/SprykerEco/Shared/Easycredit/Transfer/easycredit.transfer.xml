@@ -69,5 +69,11 @@
         <property name="errorType" type="string" />
     </transfer>
 
+    <transfer name="PaymentEasycreditOrderIdentifier">
+        <property name="idPaymentEasycreditOrderIdentifier" type="int" />
+        <property name="identifier" type="string" />
+        <property name="fkSalesOrderItem" type="int" />
+    </transfer>
+
     <!--Response container replacement related transfers end-->
 </transfers>

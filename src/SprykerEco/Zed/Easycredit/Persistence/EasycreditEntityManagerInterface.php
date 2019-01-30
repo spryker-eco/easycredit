@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Persistence;
 
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 
 interface EasycreditEntityManagerInterface
 {
@@ -17,4 +18,11 @@ interface EasycreditEntityManagerInterface
      * @return mixed
      */
     public function saveEasycreditApiLog(PaymentEasycreditApiLogTransfer $apiLogTransfer): PaymentEasycreditApiLogTransfer;
+
+    /**
+     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     *
+     * @return PaymentEasycreditOrderIdentifierTransfer
+     */
+    public function saveEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer;
 }

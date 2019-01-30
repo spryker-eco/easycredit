@@ -22,6 +22,7 @@ use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\OrderConfirmationResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
@@ -35,10 +36,13 @@ use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProc
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessorInterface;
+use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaver;
+use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaverInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface getEntityManager()
  */
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
@@ -154,8 +158,8 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditOrderConfirmationProcessor(): OrderConfirmationProcessorInterface
     {
         return new OrderConfirmationProcessor(
-            $this->createEasycreditQueryCreditAssessmentParser(),
-            $this->createQueryCreditAssessmentAdapter(),
+            $this->createEasycreditOrderConfirmationResponseParser(),
+            $this->createOrderConfirmationAdapter(),
             $this->createEasycreditLogger()
         );
     }
@@ -166,6 +170,14 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     protected function createEasycreditQueryCreditAssessmentParser(): ParserInterface
     {
         return new QueryCreditAssessmentResponseParser($this->getUtilEncodingService());
+    }
+
+    /**
+     * @return ParserInterface
+     */
+    protected function createEasycreditOrderConfirmationResponseParser(): ParserInterface
+    {
+        return new OrderConfirmationResponseParser($this->getUtilEncodingService());
     }
 
     /**
@@ -182,5 +194,13 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditLogger(): EasycreditLoggerInterface
     {
         return new EasycreditLogger();
+    }
+
+    /**
+     * @return EasycreditOrderIdentifierSaverInterface
+     */
+    public function createEasycreditOrderIdentifierSaver(): EasycreditOrderIdentifierSaverInterface
+    {
+        return new EasycreditOrderIdentifierSaver($this->getEntityManager());
     }
 }
