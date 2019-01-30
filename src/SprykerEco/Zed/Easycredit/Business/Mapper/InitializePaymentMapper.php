@@ -53,6 +53,13 @@ class InitializePaymentMapper implements MapperInterface
     public const KEY_PREIS= 'preis';
     public const KEY_PRODUKTBEZEICHNUNG = 'produktbezeichnung';
 
+    protected const SALUTATION_MAPPER = [
+        'Mr' => 'HERR',
+        'Mrs' => 'FRAU',
+        'Dr' => 'HERR',
+        'Ms' => 'FRAU',
+    ];
+
     /**
      * @var EasycreditConfig
      */
@@ -70,7 +77,7 @@ class InitializePaymentMapper implements MapperInterface
             static::KEY_BESTELL_WERT => $transfer->getTotals()->getGrandTotal() / 100,
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
-                static::KEY_ANREDE => "HERR", // TODO: Add mapping
+                static::KEY_ANREDE => static::SALUTATION_MAPPER[$transfer->getCustomer()->getSalutation()],
                 static::KEY_VORNAME => $transfer->getShippingAddress()->getFirstName(),
                 static::KEY_NACHNAME => $transfer->getShippingAddress()->getLastName(),
                 static::KEY_GEBURTS_DATUM => '',
@@ -79,7 +86,7 @@ class InitializePaymentMapper implements MapperInterface
                 static::KEY_STRASSE_HAUS_NR => $transfer->getBillingAddress()->getAddress1() . $transfer->getBillingAddress()->getAddress2(),
                 static::KEY_PLZ => $transfer->getBillingAddress()->getZipCode(),
                 static::KEY_ORT => $transfer->getBillingAddress()->getCity(),
-                static::KEY_LAND => 'DE',
+                static::KEY_LAND => $transfer->getBillingAddress()->getIso2Code(),
             ],
             static::KEY_LIEFER_ADRESSE => [
                 static::KEY_VORNAME => $transfer->getShippingAddress()->getFirstName(),
@@ -87,7 +94,7 @@ class InitializePaymentMapper implements MapperInterface
                 static::KEY_STRASSE_HAUS_NR => $transfer->getShippingAddress()->getAddress1() . $transfer->getShippingAddress()->getAddress2(),
                 static::KEY_PLZ => $transfer->getShippingAddress()->getZipCode(),
                 static::KEY_ORT => $transfer->getShippingAddress()->getCity(),
-                static::KEY_LAND => 'DE',
+                static::KEY_LAND => $transfer->getShippingAddress()->getIso2Code(),
             ],
             static::KEY_WEITERE_KAEUFER_ANGABEN => [
                 static::KEY_TELEFON_NUMMER => $transfer->getCustomer()->getPhone(),

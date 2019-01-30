@@ -15,6 +15,10 @@ use Generated\Shared\Transfer\QuoteTransfer;
 class PaymentMethodFilter implements PaymentMethodFilterInterface
 {
     protected const EASYCREDIT_PAYMENT_METHOD = 'easycredit';
+    protected const AVAILABLE_COUNTRIES = ['DE'];
+
+    protected const MIN_AVAILABLE_MONEY_VALUE = 20000;
+    protected const MAX_AVAILABLE_MONEY_VALUE = 500000;
 
     /**
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
@@ -45,7 +49,9 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isAvailable(QuoteTransfer $quoteTransfer): bool
     {
-        return $quoteTransfer->getTotals()->getGrandTotal() >= 20000 && $quoteTransfer->getTotals()->getGrandTotal() <= 500000;
+        return $quoteTransfer->getTotals()->getGrandTotal() >= static::MIN_AVAILABLE_MONEY_VALUE &&
+            $quoteTransfer->getTotals()->getGrandTotal() <= static::MAX_AVAILABLE_MONEY_VALUE ||
+            in_array($quoteTransfer->getBillingAddress(), static::AVAILABLE_COUNTRIES);
     }
 
     /**
