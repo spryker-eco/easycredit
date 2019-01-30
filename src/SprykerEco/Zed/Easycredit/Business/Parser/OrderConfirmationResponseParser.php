@@ -12,7 +12,7 @@ class OrderConfirmationResponseParser implements ParserInterface
     protected const KEY_WS_MESSAGES = 'wsMessages';
     protected const KEY_MESSAGES = 'messages';
     protected const KEY_KEY = 'key';
-    protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH"';
+    protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
     /**
      * @var EasycreditToUtilEncodingServiceInterface
      */
@@ -37,7 +37,7 @@ class OrderConfirmationResponseParser implements ParserInterface
 
         $transfer = new EasycreditOrderConfirmationResponseTransfer();
 
-        $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][static::KEY_KEY]
+        $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
             == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
 
         return $transfer;

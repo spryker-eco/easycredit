@@ -36,9 +36,9 @@ class EasycreditOrderIdentifierSaver implements EasycreditOrderIdentifierSaverIn
             $paymentEasycreditOrderIdentifierTransfer = new PaymentEasycreditOrderIdentifierTransfer();
             $paymentEasycreditOrderIdentifierTransfer->setIdentifier($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
             $paymentEasycreditOrderIdentifierTransfer->setFkSalesOrderItem($saveOrderTransfer->getIdSalesOrder());
+            $paymentEasycreditOrderIdentifierTransfer->setConfirmed(false);
 
             $this->entityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
         }
-
     }
 }

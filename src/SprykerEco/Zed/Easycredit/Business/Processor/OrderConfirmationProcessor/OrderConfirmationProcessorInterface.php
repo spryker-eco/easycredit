@@ -12,9 +12,9 @@ use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 interface OrderConfirmationProcessorInterface
 {
     /**
-     * @param int $idOrder
+     * @param int $fkSalesOrder
      *
      * @return EasycreditOrderConfirmationResponseTransfer
      */
-    public function process(int $idOrder): EasycreditOrderConfirmationResponseTransfer;
+    public function process(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer;
 }

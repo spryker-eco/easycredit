@@ -73,6 +73,7 @@
         <property name="idPaymentEasycreditOrderIdentifier" type="int" />
         <property name="identifier" type="string" />
         <property name="fkSalesOrderItem" type="int" />
+        <property name="confirmed" type="bool" />
     </transfer>
 
     <!--Response container replacement related transfers end-->

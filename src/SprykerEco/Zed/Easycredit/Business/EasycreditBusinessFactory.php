@@ -43,6 +43,7 @@ use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 /**
  * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
  * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface getRepository()
  */
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
@@ -160,7 +161,9 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
         return new OrderConfirmationProcessor(
             $this->createEasycreditOrderConfirmationResponseParser(),
             $this->createOrderConfirmationAdapter(),
-            $this->createEasycreditLogger()
+            $this->createEasycreditLogger(),
+            $this->getRepository(),
+            $this->getEntityManager()
         );
     }
 

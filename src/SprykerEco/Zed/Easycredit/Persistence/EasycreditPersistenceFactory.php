@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Easycredit\Persistence;
 
+use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifierQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 use SprykerEco\Zed\Easycredit\Persistence\Mapper\EasycreditPersistenceMapper;
 use SprykerEco\Zed\Easycredit\Persistence\Mapper\EasycreditPersistenceMapperInterface;
@@ -19,5 +20,13 @@ class EasycreditPersistenceFactory extends AbstractPersistenceFactory
     public function createEasycreditPersistenceMapper(): EasycreditPersistenceMapperInterface
     {
         return new EasycreditPersistenceMapper();
+    }
+
+    /**
+     * @return SpyPaymentEasycreditOrderIdentifierQuery
+     */
+    public function createPaymentEasycreditOrderIdentifierQuery(): SpyPaymentEasycreditOrderIdentifierQuery
+    {
+        return SpyPaymentEasycreditOrderIdentifierQuery::create();
     }
 }
