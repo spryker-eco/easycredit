@@ -11,10 +11,10 @@ use ArrayObject;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Shared\Easycredit\EasycreditConfig;
 
 class PaymentMethodFilter implements PaymentMethodFilterInterface
 {
-    protected const EASYCREDIT_PAYMENT_METHOD = 'easycredit';
     protected const AVAILABLE_COUNTRIES = ['DE'];
 
     protected const MIN_AVAILABLE_MONEY_VALUE = 20000;
@@ -61,6 +61,6 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isPaymentMethodEasycredit(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return strpos($paymentMethodTransfer->getMethodName(), static::EASYCREDIT_PAYMENT_METHOD) !== false;
+        return strpos($paymentMethodTransfer->getMethodName(), EasycreditConfig::PAYMENT_METHOD) !== false;
     }
 }
