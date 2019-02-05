@@ -1,18 +1,21 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
-use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 
-class OrderConfirmationResponseParser implements ParserInterface
+class DisplayInterestAndAdjustTotalSumParser implements ParserInterface
 {
-    protected const KEY_WS_MESSAGES = 'wsMessages';
-    protected const KEY_MESSAGES = 'messages';
-    protected const KEY_KEY = 'key';
-    protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
+    protected const KEY_RATENPLAN = 'ratenplan';
+    protected const KEY_GESAMTSUMME = 'gesamtsumme';
 
     /**
      * @var EasycreditToUtilEncodingServiceInterface
@@ -36,10 +39,11 @@ class OrderConfirmationResponseParser implements ParserInterface
     {
         $payload = $this->utilEncoding->decodeJson($response->getContents(), true);
 
-        $transfer = new EasycreditOrderConfirmationResponseTransfer();
+        $transfer = new EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer();
 
-        $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
-            == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
+        if (array_key_exists(static::KEY_RATENPLAN, $payload)) {
+            $transfer->setGesamtsumme($payload[static::KEY_RATENPLAN][static::KEY_GESAMTSUMME]);
+        }
 
         return $transfer;
     }

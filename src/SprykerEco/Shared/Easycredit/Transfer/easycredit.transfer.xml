@@ -76,5 +76,14 @@
         <property name="confirmed" type="bool" />
     </transfer>
 
+    <transfer name="EasycreditPreContractualInformationAndRedemptionPlanResponse">
+        <property name="tilgungsplanText" type="string" />
+        <property name="urlVorvertraglicheInformationen" type="string" />
+    </transfer>
+
+    <transfer name="EasycreditDisplayInterestAndAdjustTotalSumResponse">
+        <property name="gesamtsumme" type="float" />
+    </transfer>
+
     <!--Response container replacement related transfers end-->
 </transfers>

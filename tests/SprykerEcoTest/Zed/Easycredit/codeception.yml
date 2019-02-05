@@ -15,8 +15,11 @@ coverage:
 suites:
   Service:
     path: .
-    class_name: Easycredit
+    class_name: EasycreditTester
     modules:
       enabled:
         - Asserts
         - \PyzTest\Shared\Testify\Helper\Environment
+        - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+        - \SprykerTest\Shared\Sales\Helper\SalesHelper
+        - \SprykerTest\Shared\Testify\Helper\LocatorHelper

@@ -12,8 +12,10 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\ApprovalTextLoaderAdapter;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\DisplayInterestAndAdjustTotalSumAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderConfirmationAdapter;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\PreContractualInformationAndRedemptionPlanAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\QueryCreditAssessmentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
@@ -21,9 +23,11 @@ use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\DisplayInterestAndAdjustTotalSumParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\OrderConfirmationResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
+use SprykerEco\Zed\Easycredit\Business\Parser\PreContractualInformationAndRedemptionPlanParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
@@ -34,8 +38,12 @@ use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\Easyc
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessorInterface;
+use SprykerEco\Zed\Easycredit\Business\Processor\InterestAndAdjustTotalSumProcessor\InterestAndAdjustTotalSumProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\InterestAndAdjustTotalSumProcessor\InterestAndAdjustTotalSumProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessorInterface;
+use SprykerEco\Zed\Easycredit\Business\Processor\PreContractualInformationAndRedemptionPlanProcessor\PreContractualInformationAndRedemptionPlanProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\PreContractualInformationAndRedemptionPlanProcessor\PreContractualInformationAndRedemptionPlanProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaver;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaverInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
@@ -86,6 +94,23 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new ApprovalTextLoaderAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
     }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function createDisplayInterestAndAdjustTotalSumAdapter(): AdapterInterface
+    {
+        return new DisplayInterestAndAdjustTotalSumAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+    }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface
+    {
+        return new PreContractualInformationAndRedemptionPlanAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
+    }
+
 
     /**
      * @return EasycreditToUtilEncodingServiceInterface
@@ -184,6 +209,22 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return ParserInterface
+     */
+    protected function createDisplayInterestAndAdjustTotalSumParser(): ParserInterface
+    {
+        return new DisplayInterestAndAdjustTotalSumParser($this->getUtilEncodingService());
+    }
+
+    /**
+     * @return ParserInterface
+     */
+    protected function createPreContractualInformationAndRedemptionPlanParser(): ParserInterface
+    {
+        return new PreContractualInformationAndRedemptionPlanParser($this->getUtilEncodingService());
+    }
+
+    /**
      * @return \SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface
      */
     public function createPaymentMethodFilter(): PaymentMethodFilterInterface
@@ -205,5 +246,29 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditOrderIdentifierSaver(): EasycreditOrderIdentifierSaverInterface
     {
         return new EasycreditOrderIdentifierSaver($this->getEntityManager());
+    }
+
+    /**
+     * @return InterestAndAdjustTotalSumProcessorInterface
+     */
+    public function createInterestAndAdjustTotalSumProcessor(): InterestAndAdjustTotalSumProcessorInterface
+    {
+        return new InterestAndAdjustTotalSumProcessor(
+            $this->createDisplayInterestAndAdjustTotalSumParser(),
+            $this->createDisplayInterestAndAdjustTotalSumAdapter(),
+            $this->createEasycreditLogger()
+        );
+    }
+
+    /**
+     * @return PreContractualInformationAndRedemptionPlanProcessorInterface
+     */
+    public function createPreContractualInformationAndRedemptionPlanProcessor(): PreContractualInformationAndRedemptionPlanProcessorInterface
+    {
+        return new PreContractualInformationAndRedemptionPlanProcessor(
+            $this->createPreContractualInformationAndRedemptionPlanParser(),
+            $this->createPreContractualInformationAndRedemptionPlanAdapter(),
+            $this->createEasycreditLogger()
+        );
     }
 }

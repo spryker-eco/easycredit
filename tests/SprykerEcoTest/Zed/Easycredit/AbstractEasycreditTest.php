@@ -8,14 +8,16 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\EasycreditTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 use SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
-use SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface;
+use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
 
 /**
  * @group SprykerEcoTest
@@ -26,11 +28,16 @@ use SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface;
 abstract class AbstractEasycreditTest extends Unit
 {
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface
+     * @var EasycreditTester
      */
-    protected function prepareFacade(): EasycreditFacadeInterface
+    protected $tester;
+
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\EasycreditFacade
+     */
+    protected function prepareFacade(): EasycreditFacade
     {
-        $facade = new EasycreditFacade();
+        $facade = $this->tester->getFacade();
         $facade->setFactory($this->createEasycreditBusinessFactoryMock());
 
         return $facade;
@@ -44,8 +51,14 @@ abstract class AbstractEasycreditTest extends Unit
         $factory = $this->getMockBuilder(EasycreditBusinessFactory::class)
             ->setMethodsExcept([
                 'createPaymentMethodFilter',
+                'createEasycreditOrderIdentifierSaver',
+            ])
+            ->setMethods([
+                'getEntityManager',
             ])
             ->getMock();
+
+        $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
 
         return $factory;
     }
@@ -72,6 +85,18 @@ abstract class AbstractEasycreditTest extends Unit
         $paymentMethodsTransfer->addMethod($paymentMethodTransfer);
 
         return $paymentMethodsTransfer;
+    }
+
+    protected function preparePaymentTransfer(): PaymentTransfer
+    {
+        $paymentTransfer = new PaymentTransfer();
+        $paymentTransfer->setPaymentSelection(EasycreditConfig::PAYMENT_METHOD);
+        $paymentTransfer->setEasycredit(
+            (new EasycreditTransfer())
+                ->setVorgangskennung('vorgangskennung')
+        );
+
+        return $paymentTransfer;
     }
 
     /**
