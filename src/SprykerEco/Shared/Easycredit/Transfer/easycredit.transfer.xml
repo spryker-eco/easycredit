@@ -82,7 +82,7 @@
     </transfer>
 
     <transfer name="EasycreditDisplayInterestAndAdjustTotalSumResponse">
-        <property name="gesamtsumme" type="float" />
+        <property name="anfallendeZinsen" type="float" />
     </transfer>
 
     <!--Response container replacement related transfers end-->

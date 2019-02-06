@@ -15,7 +15,8 @@ use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingSer
 class DisplayInterestAndAdjustTotalSumParser implements ParserInterface
 {
     protected const KEY_RATENPLAN = 'ratenplan';
-    protected const KEY_GESAMTSUMME = 'gesamtsumme';
+    protected const KEY_ZINSEN = 'zinsen';
+    protected const KEY_ANFALLENDE_ZINSEN = 'anfallendeZinsen';
 
     /**
      * @var EasycreditToUtilEncodingServiceInterface
@@ -42,7 +43,7 @@ class DisplayInterestAndAdjustTotalSumParser implements ParserInterface
         $transfer = new EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer();
 
         if (array_key_exists(static::KEY_RATENPLAN, $payload)) {
-            $transfer->setGesamtsumme($payload[static::KEY_RATENPLAN][static::KEY_GESAMTSUMME]);
+            $transfer->setAnfallendeZinsen($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN]);
         }
 
         return $transfer;
