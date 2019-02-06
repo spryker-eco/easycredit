@@ -12,7 +12,7 @@ namespace SprykerEcoTest\Zed\Easycredit;
  * @group Zed
  * @group Easycredit
  * @group EasycreditTest
- * @group EasycreditFilterPaymentMethodTet
+ * @group EasycreditFilterPaymentMethodTest
  */
 class EasycreditFilterPaymentMethodTest extends AbstractEasycreditTest
 {

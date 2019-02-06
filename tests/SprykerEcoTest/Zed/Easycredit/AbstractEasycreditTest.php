@@ -8,16 +8,41 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
+use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
+use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
+use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
+use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
+use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\DisplayInterestAndAdjustTotalSumParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\OrderConfirmationResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\PreContractualInformationAndRedemptionPlanParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\InterestAndAdjustTotalSumProcessor\InterestAndAdjustTotalSumProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessor;
+use SprykerEco\Zed\Easycredit\Business\Processor\PreContractualInformationAndRedemptionPlanProcessor\PreContractualInformationAndRedemptionPlanProcessor;
+use SprykerEco\Zed\Easycredit\EasycreditConfig as ZedEasycreditConfig;
 use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
+use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepository;
 
 /**
  * @group SprykerEcoTest
@@ -27,6 +52,13 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
  */
 abstract class AbstractEasycreditTest extends Unit
 {
+    protected const RESPONSE_KEY_PAYMENT_IDENTIFIER = 'payment_identifier';
+    protected const RESPONSE_KEY_STATUS = 'status';
+    protected const RESPONSE_KEY_TEXT = 'text';
+    protected const RESPONSE_KEY_ANFALLENDE_ZINSEN = '123.45';
+    protected const RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'url';
+    protected const RESPONSE_KEY_TILGUNGSPLAN_TEXT = 'text';
+
     /**
      * @var EasycreditTester
      */
@@ -49,16 +81,26 @@ abstract class AbstractEasycreditTest extends Unit
     protected function createEasycreditBusinessFactoryMock(): EasycreditBusinessFactory
     {
         $factory = $this->getMockBuilder(EasycreditBusinessFactory::class)
-            ->setMethodsExcept([
-                'createPaymentMethodFilter',
-                'createEasycreditOrderIdentifierSaver',
-            ])
             ->setMethods([
                 'getEntityManager',
+                'getConfig',
+                'createEasycreditPaymentInitializeProcessor',
+                'createEasycreditPaymentQueryAssessmentProcessor',
+                'createEasycreditOrderConfirmationProcessor',
+                'createEasycreditApprovalTextProcessor',
+                'createInterestAndAdjustTotalSumProcessor',
+                'createPreContractualInformationAndRedemptionPlanProcessor'
             ])
             ->getMock();
 
         $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
+        $factory->method('getConfig')->willReturn($this->getConfigMock());
+        $factory->method('createEasycreditPaymentInitializeProcessor')->willReturn($this->getEasycreditPaymentInitializeProcessorMock());
+        $factory->method('createEasycreditPaymentQueryAssessmentProcessor')->willReturn($this->getEasycreditPaymentQueryAssessmentProcessorMock());
+        $factory->method('createEasycreditOrderConfirmationProcessor')->willReturn($this->getEasycreditOrderConfirmationProcessorMock());
+        $factory->method('createEasycreditApprovalTextProcessor')->willReturn($this->getEasycreditApprovalTextProcessorMock());
+        $factory->method('createInterestAndAdjustTotalSumProcessor')->willReturn($this->getInterestAndAdjustTotalSumProcessorMock());
+        $factory->method('createPreContractualInformationAndRedemptionPlanProcessor')->willReturn($this->getPreContractualInformationAndRedemptionPlanProcessorMock());
 
         return $factory;
     }
@@ -110,5 +152,355 @@ abstract class AbstractEasycreditTest extends Unit
         $totalsTransfer->setGrandTotal($grandTotal);
 
         return $totalsTransfer;
+    }
+
+    /**
+     * @return ZedEasycreditConfig
+     */
+    protected function getConfigMock(): ZedEasycreditConfig
+    {
+        $config = $this->getMockBuilder(ZedEasycreditConfig::class)
+            ->setMethods([])
+            ->getMock();
+
+        return $config;
+    }
+
+    /**
+     * @return EasycreditPaymentInitializeProcessor
+     */
+    protected function getEasycreditPaymentInitializeProcessorMock(): EasycreditPaymentInitializeProcessor
+    {
+        $processor = $this->getMockBuilder(EasycreditPaymentInitializeProcessor::class)
+            ->setConstructorArgs([
+                $this->getInitializePaymentMapperMock(),
+                $this->getInitializePaymentResponseParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    /**
+     * @return EasycreditQueryAssessmentProcessor
+     */
+    protected function getEasycreditPaymentQueryAssessmentProcessorMock(): EasycreditQueryAssessmentProcessor
+    {
+        $processor = $this->getMockBuilder(EasycreditQueryAssessmentProcessor::class)
+            ->setConstructorArgs([
+                $this->getQueryCreditAssessmentResponseParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    /**
+     * @return OrderConfirmationProcessor
+     */
+    protected function getEasycreditOrderConfirmationProcessorMock(): OrderConfirmationProcessor
+    {
+        $processor = $this->getMockBuilder(OrderConfirmationProcessor::class)
+            ->setConstructorArgs([
+                $this->getOrderConfirmationResponseParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock(),
+                new EasycreditRepository(),
+                new EasycreditEntityManager()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->setMethods([
+                'getEasycreditOrderIdentifierTransfer'
+            ])
+            ->getMock();
+
+        $processor->method('getEasycreditOrderIdentifierTransfer')->willReturn(new PaymentEasycreditOrderIdentifierTransfer());
+
+        return $processor;
+    }
+
+    /**
+     * @return EasycreditApprovalTextProcessor
+     */
+    protected function getEasycreditApprovalTextProcessorMock(): EasycreditApprovalTextProcessor
+    {
+        $processor = $this->getMockBuilder(EasycreditApprovalTextProcessor::class)
+            ->setConstructorArgs([
+                $this->getApprovalTextResponseParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    /**
+     * @return InterestAndAdjustTotalSumProcessor
+     */
+    protected function getInterestAndAdjustTotalSumProcessorMock(): InterestAndAdjustTotalSumProcessor
+    {
+        $processor = $this->getMockBuilder(InterestAndAdjustTotalSumProcessor::class)
+            ->setConstructorArgs([
+                $this->getDisplayInterestAndAdjustTotalSumParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    protected function getPreContractualInformationAndRedemptionPlanProcessorMock(): PreContractualInformationAndRedemptionPlanProcessor
+    {
+        $processor = $this->getMockBuilder(PreContractualInformationAndRedemptionPlanProcessor::class)
+            ->setConstructorArgs([
+                $this->getPreContractualInformationAndRedemptionPlanParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock()
+            ])
+            ->setMethodsExcept([
+                'process'
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    /**
+     * @return InitializePaymentMapper
+     */
+    protected function getInitializePaymentMapperMock(): InitializePaymentMapper
+    {
+        $mapper = $this->getMockBuilder(InitializePaymentMapper::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'map'
+            ])
+            ->getMock();
+
+        return $mapper;
+    }
+
+    /**
+     * @return InitializePaymentResponseParser
+     */
+    protected function getInitializePaymentResponseParserMock(): InitializePaymentResponseParser
+    {
+        $parser = $this->getMockBuilder(InitializePaymentResponseParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditInitializePaymentResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return QueryCreditAssessmentResponseParser
+     */
+    protected function getQueryCreditAssessmentResponseParserMock(): QueryCreditAssessmentResponseParser
+    {
+        $parser = $this->getMockBuilder(QueryCreditAssessmentResponseParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditQueryAssessmentResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return OrderConfirmationResponseParser
+     */
+    protected function getOrderConfirmationResponseParserMock(): OrderConfirmationResponseParser
+    {
+        $parser = $this->getMockBuilder(OrderConfirmationResponseParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditOrderConfirmationResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return ApprovalTextResponseParser
+     */
+    protected function getApprovalTextResponseParserMock(): ApprovalTextResponseParser
+    {
+        $parser = $this->getMockBuilder(ApprovalTextResponseParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditApprovalTextResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return DisplayInterestAndAdjustTotalSumParser
+     */
+    protected function getDisplayInterestAndAdjustTotalSumParserMock(): DisplayInterestAndAdjustTotalSumParser
+    {
+        $parser = $this->getMockBuilder(DisplayInterestAndAdjustTotalSumParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditDisplayInterestAndAdjustTotalSumResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return PreContractualInformationAndRedemptionPlanParser
+     */
+    protected function getPreContractualInformationAndRedemptionPlanParserMock(): PreContractualInformationAndRedemptionPlanParser
+    {
+        $parser = $this->getMockBuilder(PreContractualInformationAndRedemptionPlanParser::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'parse'
+            ])
+            ->getMock();
+
+        $parser->method('parse')->willReturn($this->prepareEasycreditPreContractualInformationAndRedemptionPlanResponseTransfer());
+
+        return $parser;
+    }
+
+    /**
+     * @return InitializePaymentAdapter
+     */
+    protected function getEasycreditAdapterMock(): AdapterInterface
+    {
+        $adapter = $this->getMockBuilder(AdapterInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'sendRequest'
+            ])
+            ->getMock();
+
+
+        return $adapter;
+    }
+
+    /**
+     * @return EasycreditLogger
+     */
+    protected function getLoggerMock(): EasycreditLogger
+    {
+        $logger = $this->getMockBuilder(EasycreditLogger::class)
+            ->disableOriginalConstructor()
+            ->setMethods([])
+            ->getMock();
+
+        return $logger;
+    }
+
+    /**
+     * @return EasycreditInitializePaymentResponseTransfer
+     */
+    protected function prepareEasycreditInitializePaymentResponseTransfer(): EasycreditInitializePaymentResponseTransfer
+    {
+        $transfer = new EasycreditInitializePaymentResponseTransfer();
+        $transfer->setPaymentIdentifier(static::RESPONSE_KEY_PAYMENT_IDENTIFIER);
+        $transfer->setSuccess(true);
+
+        return $transfer;
+    }
+
+    /**
+     * @return EasycreditQueryAssessmentResponseTransfer
+     */
+    protected function prepareEasycreditQueryAssessmentResponseTransfer(): EasycreditQueryAssessmentResponseTransfer
+    {
+        $transfer = new EasycreditQueryAssessmentResponseTransfer();
+        $transfer->setStatus(static::RESPONSE_KEY_STATUS);
+        $transfer->setSuccess(true);
+
+        return $transfer;
+    }
+
+    /**
+     * @return EasycreditOrderConfirmationResponseTransfer
+     */
+    protected function prepareEasycreditOrderConfirmationResponseTransfer(): EasycreditOrderConfirmationResponseTransfer
+    {
+        $transfer = new EasycreditOrderConfirmationResponseTransfer();
+        $transfer->setConfirmed(false);
+        $transfer->setSuccess(true);
+
+        return $transfer;
+    }
+
+    /**
+     * @return EasycreditApprovalTextResponseTransfer
+     */
+    protected function prepareEasycreditApprovalTextResponseTransfer(): EasycreditApprovalTextResponseTransfer
+    {
+        $transfer = new EasycreditApprovalTextResponseTransfer();
+        $transfer->setText(static::RESPONSE_KEY_TEXT);
+        $transfer->setSuccess(true);
+
+        return $transfer;
+    }
+
+    /**
+     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     */
+    protected function prepareEasycreditDisplayInterestAndAdjustTotalSumResponseTransfer(): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    {
+        $transfer = new EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer();
+        $transfer->setAnfallendeZinsen(static::RESPONSE_KEY_ANFALLENDE_ZINSEN);
+        $transfer->setSuccess(true);
+
+        return $transfer;
+    }
+
+    /**
+     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     */
+    protected function prepareEasycreditPreContractualInformationAndRedemptionPlanResponseTransfer(): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+    {
+        $transfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
+        $transfer->setTilgungsplanText(static::RESPONSE_KEY_TILGUNGSPLAN_TEXT);
+        $transfer->setUrlVorvertraglicheInformationen(static::RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN);
+        $transfer->setSuccess(true);
+
+        return $transfer;
     }
 }

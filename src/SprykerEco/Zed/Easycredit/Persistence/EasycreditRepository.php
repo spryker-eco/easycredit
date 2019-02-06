@@ -16,14 +16,14 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class EasycreditRepository extends AbstractRepository implements EasycreditRepositoryInterface
 {
     /**
-     * @param int $fkSalesOrderItem
+     * @param int $fkSalesOrder
      *
      * @return PaymentEasycreditOrderIdentifierTransfer
      */
-    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrderItem): PaymentEasycreditOrderIdentifierTransfer
+    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer
     {
         $paymentEasycreditOrderIdentifier = $this->getFactory()->createPaymentEasycreditOrderIdentifierQuery()
-            ->findOneByFkSalesOrderItem($fkSalesOrderItem);
+            ->findOneByFkSalesOrder($fkSalesOrder);
 
         return $this->getFactory()
             ->createEasycreditPersistenceMapper()

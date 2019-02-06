@@ -79,10 +79,12 @@
     <transfer name="EasycreditPreContractualInformationAndRedemptionPlanResponse">
         <property name="tilgungsplanText" type="string" />
         <property name="urlVorvertraglicheInformationen" type="string" />
+        <property name="success" type="boolean" />
     </transfer>
 
     <transfer name="EasycreditDisplayInterestAndAdjustTotalSumResponse">
         <property name="anfallendeZinsen" type="float" />
+        <property name="success" type="boolean" />
     </transfer>
 
     <!--Response container replacement related transfers end-->

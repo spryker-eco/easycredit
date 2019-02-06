@@ -12,9 +12,9 @@ use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 interface EasycreditRepositoryInterface
 {
     /**
-     * @param int $fkSalesOrderItem
+     * @param int $fkSalesOrder
      *
      * @return PaymentEasycreditOrderIdentifierTransfer
      */
-    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrderItem): PaymentEasycreditOrderIdentifierTransfer;
+    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer;
 }

@@ -14,7 +14,7 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
  * @group Zed
  * @group Easycredit
  * @group EasycreditTest
- * @group EasycreditOrderIdentifierSaver
+ * @group EasycreditOrderIdentifierSaverTest
  */
 class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
 {
