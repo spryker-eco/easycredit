@@ -72,7 +72,7 @@
     <transfer name="PaymentEasycreditOrderIdentifier">
         <property name="idPaymentEasycreditOrderIdentifier" type="int" />
         <property name="identifier" type="string" />
-        <property name="fkSalesOrderItem" type="int" />
+        <property name="fkSalesOrder" type="int" />
         <property name="confirmed" type="bool" />
     </transfer>
 

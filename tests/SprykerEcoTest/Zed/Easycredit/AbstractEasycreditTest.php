@@ -37,7 +37,7 @@ abstract class AbstractEasycreditTest extends Unit
      */
     protected function prepareFacade(): EasycreditFacade
     {
-        $facade = $this->tester->getFacade();
+        $facade = new EasycreditFacade();
         $facade->setFactory($this->createEasycreditBusinessFactoryMock());
 
         return $facade;

@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -111,10 +112,12 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     /**
      * @param QuoteTransfer $quoteTransfer
      * @param SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer
     {
-        $this->getFactory()->createEasycreditOrderIdentifierSaver()->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
+        return $this->getFactory()->createEasycreditOrderIdentifierSaver()->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
     }
 
     /**

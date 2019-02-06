@@ -22,4 +22,3 @@ suites:
         - \PyzTest\Shared\Testify\Helper\Environment
         - \SprykerTest\Shared\Propel\Helper\TransactionHelper
         - \SprykerTest\Shared\Sales\Helper\SalesHelper
-        - \SprykerTest\Shared\Testify\Helper\LocatorHelper

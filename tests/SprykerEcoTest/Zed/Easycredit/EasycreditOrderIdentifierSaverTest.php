@@ -11,6 +11,13 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
 use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
 
+/**
+ * @group SprykerEcoTest
+ * @group Zed
+ * @group Easycredit
+ * @group EasycreditTest
+ * @group EasycreditOrderIdentifierSaver
+ */
 class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
 {
     /**
@@ -21,25 +28,17 @@ class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
 
-        $em = $this->createEasycreditEntityManager();
+        $idSalesOrder = $this->tester->createOrder();
 
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($idSalesOrder);
 
         /** @var EasycreditFacade $facade */
         $facade = $this->prepareFacade();
-        $facade->saveEasycreditOrderIdentifier($quoteTransfer, new SaveOrderTransfer());
-        $em->expects($this->once())->method('saveEasycreditOrderIdentifier');
-    }
+        $easycreditOrderIdentifierTransfer = $facade->saveEasycreditOrderIdentifier($quoteTransfer, $saveOrderTransfer);
 
-    /**
-     * @return EasycreditEntityManager
-     */
-    protected function createEasycreditEntityManager(): EasycreditEntityManager
-    {
-        $em =  $this->getMockBuilder(EasycreditEntityManager::class)
-            ->getMock();
-
-        $em->expects($this->once())->method('saveEasycreditOrderIdentifier');
-
-        return $em;
+        $this->assertEquals($easycreditOrderIdentifierTransfer->getIdentifier(), $quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        $this->assertEquals($easycreditOrderIdentifierTransfer->getFkSalesOrder(), $idSalesOrder);
+        $this->assertEquals($easycreditOrderIdentifierTransfer->getConfirmed(), false);
     }
 }
