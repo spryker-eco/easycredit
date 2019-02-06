@@ -54,12 +54,9 @@ class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentPro
     public function process(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
         $requestTransfer = $this->map($quoteTransfer);
-        $response = $this->adapter->sendRequest($requestTransfer);
-        $responseTransfer = $this->parser->parse($response);
+        $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
-//        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_CREDIT_ASSESSMENT, $requestTransfer, $responseTransfer);
-
-        return $responseTransfer;
+        return $this->parser->parse($responseTransfer);
     }
 
     /**

@@ -54,9 +54,8 @@ class PreContractualInformationAndRedemptionPlanProcessor implements PreContract
     public function process(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $response = $this->adapter->sendRequest($requestTransfer);
-        $responseTransfer = $this->parser->parse($response);
+        $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
-        return $responseTransfer;
+        return $this->parser->parse($responseTransfer);
     }
 }

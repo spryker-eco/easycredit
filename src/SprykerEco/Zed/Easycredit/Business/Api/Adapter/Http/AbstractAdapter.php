@@ -8,6 +8,8 @@
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
+use Generated\Shared\Transfer\EasycreditResponseErrorTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use GuzzleHttp\ClientInterface;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
@@ -81,9 +83,9 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * @param EasycreditRequestTransfer $transfer
      *
-     * @return \Psr\Http\Message\StreamInterface
+     * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
-    public function sendRequest(EasycreditRequestTransfer $transfer): StreamInterface
+    public function sendRequest(EasycreditRequestTransfer $transfer): EasycreditResponseTransfer
     {
         $url = $this->getUrl($transfer);
         $method = $this->getMethod();
@@ -98,21 +100,24 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param string $url
      * @param array $options
      *
-     * @return \Psr\Http\Message\StreamInterface
+     * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
-    protected function send(string $method, string $url, array $options = []): StreamInterface
+    protected function send(string $method, string $url, array $options = []): EasycreditResponseTransfer
     {
+        $responseTransfer = new EasycreditResponseTransfer();
+
         try {
             $response = $this->client->request($method, $url, $options);
+            $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody()));
         } catch (RequestException $requestException) {
-            throw new EasycreditApiHttpRequestException(
-                $requestException->getMessage(),
-                $requestException->getCode(),
-                $requestException
-            );
+            $errorTransfer = new EasycreditResponseErrorTransfer();
+            $errorTransfer->setErrorCode($requestException->getCode());
+            $errorTransfer->setErrorMessage($requestException->getMessage());
+
+            $responseTransfer->setError($errorTransfer);
         }
 
-        return $response->getBody();
+        return $responseTransfer;
     }
 
     /**

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
@@ -19,30 +20,19 @@ class PreContractualInformationAndRedemptionPlanParser implements ParserInterfac
     protected const KEY_TILGUNGSPLAN_TEXT = 'tilgungsplanText';
 
     /**
-     * @var EasycreditToUtilEncodingServiceInterface
-     */
-    protected $utilEncoding;
-
-    /**
-     * @param EasycreditToUtilEncodingServiceInterface $utilEncoding
-     */
-    public function __construct(EasycreditToUtilEncodingServiceInterface $utilEncoding)
-    {
-        $this->utilEncoding = $utilEncoding;
-    }
-
-    /**
-     * @param StreamInterface $response
+     * @param EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return AbstractTransfer
      */
-    public function parse(StreamInterface $response): AbstractTransfer
+    public function parse(EasycreditResponseTransfer $easycreditResponseTransfer): AbstractTransfer
     {
-        $payload = $this->utilEncoding->decodeJson($response->getContents(), true);
+        $payload = $easycreditResponseTransfer->getBody();
 
         $transfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
+        $transfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN, $payload)) {
+        if (array_key_exists(static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN, $payload) && !$easycreditResponseTransfer->getError()) {
+            $transfer->setSuccess(true);
             $transfer->setUrlVorvertraglicheInformationen(
                 $payload[static::KEY_ALLGEMEINE_VORGANGSDATEN][static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN]
             );

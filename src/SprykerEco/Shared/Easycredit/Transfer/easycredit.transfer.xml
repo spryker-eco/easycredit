@@ -13,6 +13,11 @@
         <property name="webShopKennung" type="string" />
     </transfer>
 
+    <transfer name="EasycreditResponse">
+        <property name="error" type="EasycreditResponseError" />
+        <property name="body" type="array" />
+    </transfer>
+
     <transfer name="EasycreditInitializePaymentResponse">
         <property name="paymentIdentifier" type="string" />
         <property name="success" type="boolean" />
@@ -66,7 +71,6 @@
         <property name="statusCode" type="int" />
         <property name="errorCode" type="string" />
         <property name="errorMessage" type="string" />
-        <property name="errorType" type="string" />
     </transfer>
 
     <transfer name="PaymentEasycreditOrderIdentifier">

@@ -8,15 +8,14 @@
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter;
 
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
-use Psr\Http\Message\StreamInterface;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 
 interface AdapterInterface
 {
     /**
      * @param EasycreditRequestTransfer $transfer
      *
-     * @return \Psr\Http\Message\StreamInterface
+     * @return EasycreditResponseTransfer
      */
-    public function sendRequest(EasycreditRequestTransfer $transfer): StreamInterface;
+    public function sendRequest(EasycreditRequestTransfer $transfer): EasycreditResponseTransfer;
 }

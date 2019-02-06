@@ -8,15 +8,16 @@
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 interface ParserInterface
 {
     /**
-     * @param StreamInterface $response
+     * @param EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return AbstractTransfer
      */
-    public function parse(StreamInterface $response): AbstractTransfer;
+    public function parse(EasycreditResponseTransfer $easycreditResponseTransfer): AbstractTransfer;
 }

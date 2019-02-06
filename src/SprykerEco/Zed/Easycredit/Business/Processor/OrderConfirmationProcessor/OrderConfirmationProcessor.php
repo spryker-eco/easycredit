@@ -71,10 +71,10 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
      */
     public function process(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer
     {
-        $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
-
         $paymentEasycreditOrderIdentifierTransfer = $this->getEasycreditOrderIdentifierTransfer($fkSalesOrder);
+
         if ($paymentEasycreditOrderIdentifierTransfer->getConfirmed()) {
+            $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
             $responseTransfer->setConfirmed(true);
 
             return $responseTransfer;
@@ -83,7 +83,10 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
         $requestTransfer = new EasycreditRequestTransfer();
         $requestTransfer->setVorgangskennung($paymentEasycreditOrderIdentifierTransfer->getIdentifier());
 
-        $responseTransfer = $this->parser->parse($this->adapter->sendRequest($requestTransfer));
+        $easycreditResponseTransfer = $this->adapter->sendRequest($requestTransfer);
+        $responseTransfer = $this->parser->parse($easycreditResponseTransfer);
+
+        /** @var EasycreditOrderConfirmationResponseTransfer $responseTransfer */
         if ($responseTransfer->getConfirmed()) {
             $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
             $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
@@ -96,7 +99,7 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
     /**
      * @param int $fkSalesOrder
      *
-     * @return string
+     * @return PaymentEasycreditOrderIdentifierTransfer
      */
     protected function getEasycreditOrderIdentifierTransfer(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer
     {

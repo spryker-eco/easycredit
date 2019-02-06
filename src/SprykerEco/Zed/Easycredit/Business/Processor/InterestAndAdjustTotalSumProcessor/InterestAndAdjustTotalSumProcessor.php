@@ -55,9 +55,8 @@ class InterestAndAdjustTotalSumProcessor implements InterestAndAdjustTotalSumPro
     public function process(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $response = $this->adapter->sendRequest($requestTransfer);
-        $responseTransfer = $this->parser->parse($response);
+        $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
-        return $responseTransfer;
+        return $this->parser->parse($responseTransfer);
     }
 }

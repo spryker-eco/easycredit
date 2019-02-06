@@ -3,6 +3,7 @@
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
@@ -15,31 +16,24 @@ class OrderConfirmationResponseParser implements ParserInterface
     protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
 
     /**
-     * @var EasycreditToUtilEncodingServiceInterface
-     */
-    protected $utilEncoding;
-
-    /**
-     * @param EasycreditToUtilEncodingServiceInterface $utilEncoding
-     */
-    public function __construct(EasycreditToUtilEncodingServiceInterface $utilEncoding)
-    {
-        $this->utilEncoding = $utilEncoding;
-    }
-
-    /**
-     * @param StreamInterface $response
+     * @param EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return AbstractTransfer
      */
-    public function parse(StreamInterface $response): AbstractTransfer
+    public function parse(EasycreditResponseTransfer $easycreditResponseTransfer): AbstractTransfer
     {
-        $payload = $this->utilEncoding->decodeJson($response->getContents(), true);
+        $payload = $easycreditResponseTransfer->getBody();
 
         $transfer = new EasycreditOrderConfirmationResponseTransfer();
+        $transfer->setSuccess(false);
 
-        $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
-            == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
+        if (array_key_exists(static::KEY_WS_MESSAGES, $payload) && !$easycreditResponseTransfer->getError()) {
+            if (array_key_exists(static::KEY_MESSAGES, $payload[static::KEY_WS_MESSAGES])) {
+                $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
+                == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
+                $transfer->setSuccess(true);
+            }
+        }
 
         return $transfer;
     }

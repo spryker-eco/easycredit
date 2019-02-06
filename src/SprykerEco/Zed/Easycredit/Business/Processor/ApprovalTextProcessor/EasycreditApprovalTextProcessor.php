@@ -51,11 +51,8 @@ class EasycreditApprovalTextProcessor implements EasycreditApprovalTextProcessor
     public function process(): EasycreditApprovalTextResponseTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $response = $this->adapter->sendRequest($requestTransfer);
-        $responseTransfer = $this->parser->parse($response);
+        $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
-//        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_APPROVAL_TEXT, $requestTransfer, $responseTransfer);
-
-        return $responseTransfer;
+        return $this->parser->parse($responseTransfer);
     }
 }
