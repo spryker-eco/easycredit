@@ -237,7 +237,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createEasycreditLogger(): EasycreditLoggerInterface
     {
-        return new EasycreditLogger();
+        return new EasycreditLogger($this->getEntityManager());
     }
 
     /**

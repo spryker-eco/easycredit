@@ -45,6 +45,10 @@
     <transfer name="Easycredit">
         <property name="vorgangskennung" type="string" />
         <property name="optInCheckbox" type="boolean" />
+        <property name="tilgungsplanText" type="string" />
+        <property name="urlVorvertraglicheInformationen" type="string" />
+        <property name="anfallendeZinsen" type="float" />
+
     </transfer>
 
     <transfer name="Quote">

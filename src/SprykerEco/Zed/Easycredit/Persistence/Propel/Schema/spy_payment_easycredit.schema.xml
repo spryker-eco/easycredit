@@ -6,10 +6,7 @@
 
         <column name="type" required="true" type="VARCHAR"/>
         <column name="request" required="true" type="VARCHAR"/>
-        <column name="is_success" required="true" type="BOOLEAN"/>
-
         <column name="response" required="true" type="VARCHAR"/>
-
         <column name="status_code" required="false" type="INTEGER" />
         <column name="error_code" required="false" type="VARCHAR" />
         <column name="error_message" required="false" type="VARCHAR" />

@@ -108,7 +108,7 @@ abstract class AbstractAdapter implements AdapterInterface
 
         try {
             $response = $this->client->request($method, $url, $options);
-            $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody()));
+            $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody(), true));
         } catch (RequestException $requestException) {
             $errorTransfer = new EasycreditResponseErrorTransfer();
             $errorTransfer->setErrorCode($requestException->getCode());

@@ -54,7 +54,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
-    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    public function sendInterestAndAdjustTotalSumRequestAction(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
         return $this->getFacade()->sendInterestAndAdjustTotalSumRequest($quoteTransfer);
     }
@@ -64,7 +64,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+    public function sendPreContractualInformationAndRedemptionPlanRequestAction(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
         return $this->getFacade()->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
     }

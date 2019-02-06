@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Logger;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
+use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface;
 
 class EasycreditLogger implements EasycreditLoggerInterface
 {
@@ -17,6 +18,12 @@ class EasycreditLogger implements EasycreditLoggerInterface
      * @var \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface
      */
     protected $entityManager;
+
+    public function __construct(
+        EasycreditEntityManagerInterface $entityManager
+    ) {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param string $type
@@ -30,10 +37,9 @@ class EasycreditLogger implements EasycreditLoggerInterface
         $paymentEasycreditApiLog = (new PaymentEasycreditApiLogTransfer())
             ->setType($type)
             ->setRequest($request->serialize())
-            ->setIsSuccess($response->getSuccess())
             ->setResponse($response->serialize());
 
-        if (!$response->getSuccess()) {
+        if ($response->getError()) {
             $paymentEasycreditApiLog
                 ->setStatusCode($response->getError()->getStatusCode())
                 ->setErrorCode($response->getError()->getErrorCode())
