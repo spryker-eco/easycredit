@@ -72,8 +72,17 @@
     <transfer name="PaymentEasycreditOrderIdentifier">
         <property name="idPaymentEasycreditOrderIdentifier" type="int" />
         <property name="identifier" type="string" />
-        <property name="fkSalesOrderItem" type="int" />
+        <property name="fkSalesOrder" type="int" />
         <property name="confirmed" type="bool" />
+    </transfer>
+
+    <transfer name="EasycreditPreContractualInformationAndRedemptionPlanResponse">
+        <property name="tilgungsplanText" type="string" />
+        <property name="urlVorvertraglicheInformationen" type="string" />
+    </transfer>
+
+    <transfer name="EasycreditDisplayInterestAndAdjustTotalSumResponse">
+        <property name="anfallendeZinsen" type="float" />
     </transfer>
 
     <!--Response container replacement related transfers end-->

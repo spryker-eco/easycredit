@@ -7,14 +7,18 @@
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
+use Generated\Shared\Transfer\DisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
+use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
+use Generated\Shared\Transfer\PreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -108,9 +112,35 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     /**
      * @param QuoteTransfer $quoteTransfer
      * @param SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer
     {
-        $this->getFactory()->createEasycreditOrderIdentifierSaver()->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
+        return $this->getFactory()->createEasycreditOrderIdentifierSaver()->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     */
+    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    {
+        return $this
+            ->getFactory()
+            ->createInterestAndAdjustTotalSumProcessor()
+            ->process($quoteTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     */
+    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+    {
+        return $this
+            ->getFactory()
+            ->createPreContractualInformationAndRedemptionPlanProcessor()
+            ->process($quoteTransfer);
     }
 }

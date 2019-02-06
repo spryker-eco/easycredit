@@ -3,7 +3,9 @@
 namespace SprykerEco\Zed\Easycredit\Communication\Controller;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
+use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
@@ -45,5 +47,25 @@ class GatewayController extends AbstractGatewayController
         return $this
             ->getFacade()
             ->sendGettingApprovalTextRequest();
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     */
+    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    {
+        return $this->getFacade()->sendInterestAndAdjustTotalSumRequest($quoteTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     */
+    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+    {
+        return $this->getFacade()->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
     }
 }

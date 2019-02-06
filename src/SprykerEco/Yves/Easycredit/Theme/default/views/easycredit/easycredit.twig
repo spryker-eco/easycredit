@@ -38,10 +38,12 @@
 } %}
 
 {% block body %}
+    test
     {% embed molecule('form') with {
         data: {
             form: data.form,
             legalText: data.legalText,
+            enableEnd: false
         },
         modifiers: ['grid-indent', 'login', 'checkout-actions']
     } only %}

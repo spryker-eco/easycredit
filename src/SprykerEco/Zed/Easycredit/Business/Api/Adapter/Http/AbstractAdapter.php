@@ -36,6 +36,7 @@ abstract class AbstractAdapter implements AdapterInterface
     protected const URL_CREDIT_ASSESSMENTS_IDENTIFIER = 'entscheidung';
     protected const URL_ORDER_COMPLETION_IDENTIFIER = 'bestaetigen';
     protected const URL_APPROVAL_TEXT_IDENTIFIER = 'zustimmung';
+    protected const URL_DISPLAY_INTEREST_IDENTIFIER = 'finanzierung';
 
     protected const REQUEST_TYPE_PROCESS = 'vorgang';
     protected const REQUEST_TYPE_TEXT = 'texte';

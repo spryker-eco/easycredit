@@ -7,11 +7,16 @@
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
+use Generated\Shared\Transfer\DisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
+use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
+use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
+use Generated\Shared\Transfer\PreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 
@@ -44,6 +49,20 @@ interface EasycreditFacadeInterface
     public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
 
     /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     */
+    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     */
+    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+
+    /**
      *
      * @api
      *
@@ -58,7 +77,7 @@ interface EasycreditFacadeInterface
      * @param QuoteTransfer $quoteTransfer
      * @param SaveOrderTransfer $saveOrderTransfer
      *
-     * @return void
+     * @return PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
+    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer;
 }
