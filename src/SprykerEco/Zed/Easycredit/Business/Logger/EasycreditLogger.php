@@ -7,8 +7,9 @@
 
 namespace SprykerEco\Zed\Easycredit\Business\Logger;
 
+use Generated\Shared\Transfer\EasycreditRequestTransfer;
+use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class EasycreditLogger implements EasycreditLoggerInterface
 {
@@ -19,12 +20,12 @@ class EasycreditLogger implements EasycreditLoggerInterface
 
     /**
      * @param string $type
-     * @param AbstractTransfer $request
-     * @param AbstractTransfer $response
+     * @param EasycreditRequestTransfer $request
+     * @param EasycreditResponseTransfer $response
      *
-     * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
+     * @return PaymentEasycreditApiLogTransfer
      */
-    public function saveApiLog(string $type, AbstractTransfer $request, AbstractTransfer $response): PaymentEasycreditApiLogTransfer
+    public function saveApiLog(string $type, EasycreditRequestTransfer $request, EasycreditResponseTransfer $response): PaymentEasycreditApiLogTransfer
     {
         $paymentEasycreditApiLog = (new PaymentEasycreditApiLogTransfer())
             ->setType($type)
@@ -36,8 +37,7 @@ class EasycreditLogger implements EasycreditLoggerInterface
             $paymentEasycreditApiLog
                 ->setStatusCode($response->getError()->getStatusCode())
                 ->setErrorCode($response->getError()->getErrorCode())
-                ->setErrorMessage($response->getError()->getErrorMessage())
-                ->setErrorType($response->getError()->getErrorType());
+                ->setErrorMessage($response->getError()->getErrorMessage());
         }
 
         return $this->entityManager->saveEasycreditApiLog($paymentEasycreditApiLog);

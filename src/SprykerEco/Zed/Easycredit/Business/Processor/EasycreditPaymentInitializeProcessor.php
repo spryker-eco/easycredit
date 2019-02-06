@@ -66,6 +66,8 @@ class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializ
         $requestTransfer = $this->map($quoteTransfer);
         $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
+        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_PAYMENT_INITIALIZE, $requestTransfer, $responseTransfer);
+
         return $this->parser->parse($responseTransfer);
     }
 

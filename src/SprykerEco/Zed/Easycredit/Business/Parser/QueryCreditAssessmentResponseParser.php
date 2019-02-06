@@ -9,9 +9,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
-use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 
 class QueryCreditAssessmentResponseParser implements ParserInterface
 {

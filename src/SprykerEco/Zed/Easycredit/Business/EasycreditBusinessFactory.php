@@ -130,7 +130,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createEasycreditInitializePaymentResponseParser(): ParserInterface
     {
-        return new InitializePaymentResponseParser($this->getUtilEncodingService());
+        return new InitializePaymentResponseParser();
     }
 
     /**
@@ -138,7 +138,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createEasycreditApprovalTextResponseParser(): ParserInterface
     {
-        return new ApprovalTextResponseParser($this->getUtilEncodingService());
+        return new ApprovalTextResponseParser();
     }
 
     /**
@@ -197,7 +197,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     protected function createEasycreditQueryCreditAssessmentParser(): ParserInterface
     {
-        return new QueryCreditAssessmentResponseParser($this->getUtilEncodingService());
+        return new QueryCreditAssessmentResponseParser();
     }
 
     /**
@@ -205,7 +205,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     protected function createEasycreditOrderConfirmationResponseParser(): ParserInterface
     {
-        return new OrderConfirmationResponseParser($this->getUtilEncodingService());
+        return new OrderConfirmationResponseParser();
     }
 
     /**
@@ -213,7 +213,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     protected function createDisplayInterestAndAdjustTotalSumParser(): ParserInterface
     {
-        return new DisplayInterestAndAdjustTotalSumParser($this->getUtilEncodingService());
+        return new DisplayInterestAndAdjustTotalSumParser();
     }
 
     /**
@@ -221,7 +221,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPreContractualInformationAndRedemptionPlanParser(): ParserInterface
     {
-        return new PreContractualInformationAndRedemptionPlanParser($this->getUtilEncodingService());
+        return new PreContractualInformationAndRedemptionPlanParser();
     }
 
     /**

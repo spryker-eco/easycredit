@@ -84,6 +84,9 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
         $requestTransfer->setVorgangskennung($paymentEasycreditOrderIdentifierTransfer->getIdentifier());
 
         $easycreditResponseTransfer = $this->adapter->sendRequest($requestTransfer);
+
+        $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $easycreditResponseTransfer);
+
         $responseTransfer = $this->parser->parse($easycreditResponseTransfer);
 
         /** @var EasycreditOrderConfirmationResponseTransfer $responseTransfer */
