@@ -8,8 +8,6 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use Generated\Shared\Transfer\SaveOrderTransfer;
-use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
-use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
 
 /**
  * @group SprykerEcoTest
@@ -33,7 +31,6 @@ class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
         $saveOrderTransfer = new SaveOrderTransfer();
         $saveOrderTransfer->setIdSalesOrder($idSalesOrder);
 
-        /** @var EasycreditFacade $facade */
         $facade = $this->prepareFacade();
         $easycreditOrderIdentifierTransfer = $facade->saveEasycreditOrderIdentifier($quoteTransfer, $saveOrderTransfer);
 
