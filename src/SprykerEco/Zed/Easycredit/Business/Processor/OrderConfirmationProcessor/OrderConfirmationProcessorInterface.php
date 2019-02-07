@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor;
@@ -14,7 +14,7 @@ interface OrderConfirmationProcessorInterface
     /**
      * @param int $fkSalesOrder
      *
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     public function process(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer;
 }

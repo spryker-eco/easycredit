@@ -1,13 +1,17 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Client\Easycredit;
 
-use SprykerEco\Client\Easycredit\Zed\EasycreditStub;
 use Spryker\Client\Kernel\AbstractFactory;
+use SprykerEco\Client\Easycredit\Zed\EasycreditStub;
 
 class EasycreditFactory extends AbstractFactory
 {
-
     /**
      * @return \SprykerEco\Client\Easycredit\Zed\EasycreditStubInterface
      */
@@ -23,5 +27,4 @@ class EasycreditFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::CLIENT_ZED_REQUEST);
     }
-
 }

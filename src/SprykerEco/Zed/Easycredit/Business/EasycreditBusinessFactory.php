@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business;
@@ -33,7 +33,6 @@ use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessorInterface;
-use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\CreditAssessmentProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessor;
 use SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessorInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor;
@@ -56,7 +55,7 @@ use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return ClientInterface
+     * @return \GuzzleHttp\ClientInterface
      */
     public function createEasycreditClient(): ClientInterface
     {
@@ -64,7 +63,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createInitializePaymentAdapter(): AdapterInterface
     {
@@ -72,7 +71,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createOrderConfirmationAdapter(): AdapterInterface
     {
@@ -80,7 +79,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createQueryCreditAssessmentAdapter(): AdapterInterface
     {
@@ -88,7 +87,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createApprovalTextLoaderAdapter(): AdapterInterface
     {
@@ -96,7 +95,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createDisplayInterestAndAdjustTotalSumAdapter(): AdapterInterface
     {
@@ -104,29 +103,31 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface
     {
         return new PreContractualInformationAndRedemptionPlanAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
     }
 
-
     /**
-     * @return EasycreditToUtilEncodingServiceInterface
+     * @return \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface
      */
     public function getUtilEncodingService(): EasycreditToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::UTIL_ENCODING_SERVICE);
     }
 
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface
+     */
     public function createEasycreditInitializePaymentMapper(): MapperInterface
     {
         return new InitializePaymentMapper($this->getConfig());
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     public function createEasycreditInitializePaymentResponseParser(): ParserInterface
     {
@@ -134,7 +135,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     public function createEasycreditApprovalTextResponseParser(): ParserInterface
     {
@@ -142,7 +143,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditPaymentInitializeProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessorInterface
      */
     public function createEasycreditPaymentInitializeProcessor(): EasycreditPaymentInitializeProcessorInterface
     {
@@ -155,7 +156,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditQueryAssessmentProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessorInterface
      */
     public function createEasycreditPaymentQueryAssessmentProcessor(): EasycreditQueryAssessmentProcessorInterface
     {
@@ -167,7 +168,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditApprovalTextProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessorInterface
      */
     public function createEasycreditApprovalTextProcessor(): EasycreditApprovalTextProcessorInterface
     {
@@ -179,7 +180,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return OrderConfirmationProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessorInterface
      */
     public function createEasycreditOrderConfirmationProcessor(): OrderConfirmationProcessorInterface
     {
@@ -193,33 +194,33 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
-    protected function createEasycreditQueryCreditAssessmentParser(): ParserInterface
+    public function createEasycreditQueryCreditAssessmentParser(): ParserInterface
     {
         return new QueryCreditAssessmentResponseParser();
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
-    protected function createEasycreditOrderConfirmationResponseParser(): ParserInterface
+    public function createEasycreditOrderConfirmationResponseParser(): ParserInterface
     {
         return new OrderConfirmationResponseParser();
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
-    protected function createDisplayInterestAndAdjustTotalSumParser(): ParserInterface
+    public function createDisplayInterestAndAdjustTotalSumParser(): ParserInterface
     {
         return new DisplayInterestAndAdjustTotalSumParser();
     }
 
     /**
-     * @return ParserInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
-    protected function createPreContractualInformationAndRedemptionPlanParser(): ParserInterface
+    public function createPreContractualInformationAndRedemptionPlanParser(): ParserInterface
     {
         return new PreContractualInformationAndRedemptionPlanParser();
     }
@@ -233,7 +234,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditLoggerInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     public function createEasycreditLogger(): EasycreditLoggerInterface
     {
@@ -241,7 +242,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return EasycreditOrderIdentifierSaverInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaverInterface
      */
     public function createEasycreditOrderIdentifierSaver(): EasycreditOrderIdentifierSaverInterface
     {
@@ -249,7 +250,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return InterestAndAdjustTotalSumProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\InterestAndAdjustTotalSumProcessor\InterestAndAdjustTotalSumProcessorInterface
      */
     public function createInterestAndAdjustTotalSumProcessor(): InterestAndAdjustTotalSumProcessorInterface
     {
@@ -261,7 +262,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return PreContractualInformationAndRedemptionPlanProcessorInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\PreContractualInformationAndRedemptionPlanProcessor\PreContractualInformationAndRedemptionPlanProcessorInterface
      */
     public function createPreContractualInformationAndRedemptionPlanProcessor(): PreContractualInformationAndRedemptionPlanProcessorInterface
     {

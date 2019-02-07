@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
@@ -11,14 +11,10 @@ use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\EasycreditResponseErrorTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
 use GuzzleHttp\ClientInterface;
-use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
-use Generated\Shared\Transfer\InxmailRequestTransfer;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
-use Psr\Http\Message\StreamInterface;
-use SprykerEco\Zed\Easycredit\Business\Exception\EasycreditApiHttpRequestException;
+use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 abstract class AbstractAdapter implements AdapterInterface
@@ -44,22 +40,22 @@ abstract class AbstractAdapter implements AdapterInterface
     protected const REQUEST_TYPE_TEXT = 'texte';
 
     /**
-     * @var Client
+     * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
-     * @var EasycreditToUtilEncodingServiceInterface
+     * @var \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
     /**
-     * @var EasycreditConfig
+     * @var \SprykerEco\Zed\Easycredit\EasycreditConfig
      */
     protected $config;
 
     /**
-     * @param EasycreditRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
      *
      * @return string
      */
@@ -70,6 +66,11 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     abstract protected function getMethod(): string;
 
+    /**
+     * @param \GuzzleHttp\ClientInterface $client
+     * @param \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
+     */
     public function __construct(
         ClientInterface $client,
         EasycreditToUtilEncodingServiceInterface $utilEncodingService,
@@ -81,7 +82,7 @@ abstract class AbstractAdapter implements AdapterInterface
     }
 
     /**
-     * @param EasycreditRequestTransfer $transfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $transfer
      *
      * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */

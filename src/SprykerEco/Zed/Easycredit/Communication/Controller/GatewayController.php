@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\Easycredit\Communication\Controller;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
@@ -16,9 +21,9 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 class GatewayController extends AbstractGatewayController
 {
     /**
-     * @param QuoteTransfer $transfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $transfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function sendEasycreditPaymentInitializeAction(QuoteTransfer $transfer): EasycreditInitializePaymentResponseTransfer
     {
@@ -28,9 +33,9 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
      */
     public function sendEasycreditQueryAssessmentRequestAction(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
@@ -40,7 +45,7 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
     {
@@ -50,9 +55,9 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
     public function sendInterestAndAdjustTotalSumRequestAction(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
@@ -60,9 +65,9 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequestAction(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {

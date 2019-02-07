@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor;
@@ -17,24 +17,24 @@ use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentProcessorInterface
 {
     /**
-     * @var ParserInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     protected $parser;
 
     /**
-     * @var AdapterInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     protected $adapter;
 
     /**
-     * @var EasycreditLoggerInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     protected $logger;
 
     /**
-     * @param ParserInterface $parser
-     * @param AdapterInterface $adapter
-     * @param EasycreditLoggerInterface $logger
+     * @param \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface $parser
+     * @param \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface $adapter
+     * @param \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface $logger
      */
     public function __construct(
         ParserInterface $parser,
@@ -47,9 +47,9 @@ class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentPro
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
      */
     public function process(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
@@ -62,9 +62,9 @@ class EasycreditQueryAssessmentProcessor implements EasycreditQueryAssessmentPro
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     protected function map(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {

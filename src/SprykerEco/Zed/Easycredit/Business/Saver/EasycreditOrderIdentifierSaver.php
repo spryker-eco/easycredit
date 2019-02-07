@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Saver;
@@ -16,10 +16,13 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface;
 class EasycreditOrderIdentifierSaver implements EasycreditOrderIdentifierSaverInterface
 {
     /**
-     * @var EasycreditEntityManagerInterface
+     * @var \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface
      */
     protected $entityManager;
 
+    /**
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface $entityManager
+     */
     public function __construct(
         EasycreditEntityManagerInterface $entityManager
     ) {
@@ -27,10 +30,10 @@ class EasycreditOrderIdentifierSaver implements EasycreditOrderIdentifierSaverIn
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param SaveOrderTransfer $saveOrderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer|null
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer|null
      */
     public function saveOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): ?PaymentEasycreditOrderIdentifierTransfer
     {

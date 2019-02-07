@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
 
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
-use Psr\Http\Message\StreamInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 
 class OrderConfirmationResponseParser implements ParserInterface
 {
@@ -16,9 +19,9 @@ class OrderConfirmationResponseParser implements ParserInterface
     protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
-     * @return AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     public function parse(EasycreditResponseTransfer $easycreditResponseTransfer): AbstractTransfer
     {

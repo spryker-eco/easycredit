@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\Easycredit;
@@ -23,7 +23,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
@@ -76,7 +75,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditBusinessFactory
+     * @return \SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory
      */
     protected function createEasycreditBusinessFactoryMock(): EasycreditBusinessFactory
     {
@@ -89,7 +88,7 @@ abstract class AbstractEasycreditTest extends Unit
                 'createEasycreditOrderConfirmationProcessor',
                 'createEasycreditApprovalTextProcessor',
                 'createInterestAndAdjustTotalSumProcessor',
-                'createPreContractualInformationAndRedemptionPlanProcessor'
+                'createPreContractualInformationAndRedemptionPlanProcessor',
             ])
             ->getMock();
 
@@ -106,7 +105,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function prepareQuoteTransfer(): QuoteTransfer
     {
@@ -116,7 +115,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return PaymentMethodsTransfer
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
     protected function preparePaymentMethodsTransfer(): PaymentMethodsTransfer
     {
@@ -144,7 +143,7 @@ abstract class AbstractEasycreditTest extends Unit
     /**
      * @param int $grandTotal
      *
-     * @return TotalsTransfer
+     * @return \Generated\Shared\Transfer\TotalsTransfer
      */
     protected function prepareTotalsTransfer(int $grandTotal): TotalsTransfer
     {
@@ -155,7 +154,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return ZedEasycreditConfig
+     * @return \SprykerEco\Zed\Easycredit\EasycreditConfig
      */
     protected function getConfigMock(): ZedEasycreditConfig
     {
@@ -167,7 +166,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditPaymentInitializeProcessor
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\EasycreditPaymentInitializeProcessor
      */
     protected function getEasycreditPaymentInitializeProcessorMock(): EasycreditPaymentInitializeProcessor
     {
@@ -176,10 +175,10 @@ abstract class AbstractEasycreditTest extends Unit
                 $this->getInitializePaymentMapperMock(),
                 $this->getInitializePaymentResponseParserMock(),
                 $this->getEasycreditAdapterMock(),
-                $this->getLoggerMock()
+                $this->getLoggerMock(),
             ])
             ->setMethodsExcept([
-                'process'
+                'process',
             ])
             ->getMock();
 
@@ -187,7 +186,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditQueryAssessmentProcessor
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\CreditAssessmentProcessor\EasycreditQueryAssessmentProcessor
      */
     protected function getEasycreditPaymentQueryAssessmentProcessorMock(): EasycreditQueryAssessmentProcessor
     {
@@ -195,10 +194,10 @@ abstract class AbstractEasycreditTest extends Unit
             ->setConstructorArgs([
                 $this->getQueryCreditAssessmentResponseParserMock(),
                 $this->getEasycreditAdapterMock(),
-                $this->getLoggerMock()
+                $this->getLoggerMock(),
             ])
             ->setMethodsExcept([
-                'process'
+                'process',
             ])
             ->getMock();
 
@@ -206,7 +205,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return OrderConfirmationProcessor
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor\OrderConfirmationProcessor
      */
     protected function getEasycreditOrderConfirmationProcessorMock(): OrderConfirmationProcessor
     {
@@ -216,13 +215,13 @@ abstract class AbstractEasycreditTest extends Unit
                 $this->getEasycreditAdapterMock(),
                 $this->getLoggerMock(),
                 new EasycreditRepository(),
-                new EasycreditEntityManager()
+                new EasycreditEntityManager(),
             ])
             ->setMethodsExcept([
-                'process'
+                'process',
             ])
             ->setMethods([
-                'getEasycreditOrderIdentifierTransfer'
+                'getEasycreditOrderIdentifierTransfer',
             ])
             ->getMock();
 
@@ -232,7 +231,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditApprovalTextProcessor
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor
      */
     protected function getEasycreditApprovalTextProcessorMock(): EasycreditApprovalTextProcessor
     {
@@ -240,10 +239,10 @@ abstract class AbstractEasycreditTest extends Unit
             ->setConstructorArgs([
                 $this->getApprovalTextResponseParserMock(),
                 $this->getEasycreditAdapterMock(),
-                $this->getLoggerMock()
+                $this->getLoggerMock(),
             ])
             ->setMethodsExcept([
-                'process'
+                'process',
             ])
             ->getMock();
 
@@ -251,7 +250,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return InterestAndAdjustTotalSumProcessor
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\InterestAndAdjustTotalSumProcessor\InterestAndAdjustTotalSumProcessor
      */
     protected function getInterestAndAdjustTotalSumProcessorMock(): InterestAndAdjustTotalSumProcessor
     {
@@ -259,26 +258,10 @@ abstract class AbstractEasycreditTest extends Unit
             ->setConstructorArgs([
                 $this->getDisplayInterestAndAdjustTotalSumParserMock(),
                 $this->getEasycreditAdapterMock(),
-                $this->getLoggerMock()
+                $this->getLoggerMock(),
             ])
             ->setMethodsExcept([
-                'process'
-            ])
-            ->getMock();
-
-        return $processor;
-    }
-
-    protected function getPreContractualInformationAndRedemptionPlanProcessorMock(): PreContractualInformationAndRedemptionPlanProcessor
-    {
-        $processor = $this->getMockBuilder(PreContractualInformationAndRedemptionPlanProcessor::class)
-            ->setConstructorArgs([
-                $this->getPreContractualInformationAndRedemptionPlanParserMock(),
-                $this->getEasycreditAdapterMock(),
-                $this->getLoggerMock()
-            ])
-            ->setMethodsExcept([
-                'process'
+                'process',
             ])
             ->getMock();
 
@@ -286,14 +269,33 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return InitializePaymentMapper
+     * @return \SprykerEco\Zed\Easycredit\Business\Processor\PreContractualInformationAndRedemptionPlanProcessor\PreContractualInformationAndRedemptionPlanProcessor
+     */
+    protected function getPreContractualInformationAndRedemptionPlanProcessorMock(): PreContractualInformationAndRedemptionPlanProcessor
+    {
+        $processor = $this->getMockBuilder(PreContractualInformationAndRedemptionPlanProcessor::class)
+            ->setConstructorArgs([
+                $this->getPreContractualInformationAndRedemptionPlanParserMock(),
+                $this->getEasycreditAdapterMock(),
+                $this->getLoggerMock(),
+            ])
+            ->setMethodsExcept([
+                'process',
+            ])
+            ->getMock();
+
+        return $processor;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper
      */
     protected function getInitializePaymentMapperMock(): InitializePaymentMapper
     {
         $mapper = $this->getMockBuilder(InitializePaymentMapper::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'map'
+                'map',
             ])
             ->getMock();
 
@@ -301,14 +303,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return InitializePaymentResponseParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\InitializePaymentResponseParser
      */
     protected function getInitializePaymentResponseParserMock(): InitializePaymentResponseParser
     {
         $parser = $this->getMockBuilder(InitializePaymentResponseParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -318,14 +320,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return QueryCreditAssessmentResponseParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser
      */
     protected function getQueryCreditAssessmentResponseParserMock(): QueryCreditAssessmentResponseParser
     {
         $parser = $this->getMockBuilder(QueryCreditAssessmentResponseParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -335,14 +337,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return OrderConfirmationResponseParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\OrderConfirmationResponseParser
      */
     protected function getOrderConfirmationResponseParserMock(): OrderConfirmationResponseParser
     {
         $parser = $this->getMockBuilder(OrderConfirmationResponseParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -352,14 +354,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return ApprovalTextResponseParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser
      */
     protected function getApprovalTextResponseParserMock(): ApprovalTextResponseParser
     {
         $parser = $this->getMockBuilder(ApprovalTextResponseParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -369,14 +371,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return DisplayInterestAndAdjustTotalSumParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\DisplayInterestAndAdjustTotalSumParser
      */
     protected function getDisplayInterestAndAdjustTotalSumParserMock(): DisplayInterestAndAdjustTotalSumParser
     {
         $parser = $this->getMockBuilder(DisplayInterestAndAdjustTotalSumParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -386,14 +388,14 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return PreContractualInformationAndRedemptionPlanParser
+     * @return \SprykerEco\Zed\Easycredit\Business\Parser\PreContractualInformationAndRedemptionPlanParser
      */
     protected function getPreContractualInformationAndRedemptionPlanParserMock(): PreContractualInformationAndRedemptionPlanParser
     {
         $parser = $this->getMockBuilder(PreContractualInformationAndRedemptionPlanParser::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'parse'
+                'parse',
             ])
             ->getMock();
 
@@ -403,23 +405,22 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return InitializePaymentAdapter
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter
      */
     protected function getEasycreditAdapterMock(): AdapterInterface
     {
         $adapter = $this->getMockBuilder(AdapterInterface::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                'sendRequest'
+                'sendRequest',
             ])
             ->getMock();
-
 
         return $adapter;
     }
 
     /**
-     * @return EasycreditLogger
+     * @return \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger
      */
     protected function getLoggerMock(): EasycreditLogger
     {
@@ -432,7 +433,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     protected function prepareEasycreditInitializePaymentResponseTransfer(): EasycreditInitializePaymentResponseTransfer
     {
@@ -444,7 +445,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
      */
     protected function prepareEasycreditQueryAssessmentResponseTransfer(): EasycreditQueryAssessmentResponseTransfer
     {
@@ -456,7 +457,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     protected function prepareEasycreditOrderConfirmationResponseTransfer(): EasycreditOrderConfirmationResponseTransfer
     {
@@ -468,7 +469,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     protected function prepareEasycreditApprovalTextResponseTransfer(): EasycreditApprovalTextResponseTransfer
     {
@@ -480,7 +481,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
     protected function prepareEasycreditDisplayInterestAndAdjustTotalSumResponseTransfer(): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
@@ -492,7 +493,7 @@ abstract class AbstractEasycreditTest extends Unit
     }
 
     /**
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     protected function prepareEasycreditPreContractualInformationAndRedemptionPlanResponseTransfer(): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {

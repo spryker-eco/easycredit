@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Client\Easycredit\Zed;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
@@ -13,9 +18,9 @@ use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function sendEasycreditPaymentInitialize(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
@@ -23,9 +28,9 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
      */
     public function sendEasycreditQueryAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
     {
@@ -33,7 +38,7 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
     {
@@ -41,8 +46,9 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
     public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
@@ -50,8 +56,9 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {

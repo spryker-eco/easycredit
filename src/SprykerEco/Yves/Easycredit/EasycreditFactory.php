@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Yves\Easycredit;
@@ -18,7 +18,7 @@ use SprykerEco\Yves\Easycredit\Handler\EasycreditPaymentHandlerInterface;
 class EasycreditFactory extends AbstractFactory
 {
     /**
-     * @return SubFormInterface
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createEasycreditSubForm(): SubFormInterface
     {
@@ -26,7 +26,7 @@ class EasycreditFactory extends AbstractFactory
     }
 
     /**
-     * @return StepEngineFormDataProviderInterface
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createEasycreditDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -34,11 +34,10 @@ class EasycreditFactory extends AbstractFactory
     }
 
     /**
-     * @return EasycreditPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Easycredit\Handler\EasycreditPaymentHandlerInterface
      */
     public function createEasycreditPaymentHandler(): EasycreditPaymentHandlerInterface
     {
         return new EasycreditPaymentHandler();
     }
-
 }

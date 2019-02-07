@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor;
@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Easycredit\Business\Processor;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
@@ -19,30 +18,30 @@ use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializeProcessorInterface
 {
     /**
-     * @var MapperInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface
      */
     protected $mapper;
 
     /**
-     * @var ParserInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     protected $parser;
 
     /**
-     * @var AdapterInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     protected $adapter;
 
     /**
-     * @var EasycreditLoggerInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     protected $logger;
 
     /**
-     * @param MapperInterface $mapper
-     * @param ParserInterface $parser
-     * @param AdapterInterface $adapter
-     * @param EasycreditLoggerInterface $easycreditLogger
+     * @param \SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface $mapper
+     * @param \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface $parser
+     * @param \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface $adapter
+     * @param \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface $easycreditLogger
      */
     public function __construct(
         MapperInterface $mapper,
@@ -57,9 +56,9 @@ class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializ
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function process(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
@@ -72,9 +71,9 @@ class EasycreditPaymentInitializeProcessor implements EasycreditPaymentInitializ
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     protected function map(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {

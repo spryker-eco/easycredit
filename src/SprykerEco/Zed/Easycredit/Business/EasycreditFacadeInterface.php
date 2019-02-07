@@ -2,68 +2,77 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
-use Generated\Shared\Transfer\DisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
-use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
-use Generated\Shared\Transfer\PreContractualInformationAndRedemptionPlanResponseTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 
 interface EasycreditFacadeInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @api
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @api
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
      */
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer;
 
     /**
-     * @param int EasycreditOrderConfirmationResponseTransfer
+     * @api
      *
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @param int $orderId
+     *
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     public function sendOrderConfirmationRequest(int $orderId): EasycreditOrderConfirmationResponseTransfer;
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @api
      *
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
     public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @api
      *
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
-     *
      * @api
      *
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
@@ -74,10 +83,12 @@ interface EasycreditFacadeInterface
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param SaveOrderTransfer $saveOrderTransfer
+     * @api
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer;
 }

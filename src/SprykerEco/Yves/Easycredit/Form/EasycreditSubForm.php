@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Yves\Easycredit\Form;
 
 use Generated\Shared\Transfer\EasycreditTransfer;
@@ -38,9 +43,11 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
     }
 
     /**
-     * @param FormView $view
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormView $view
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param array $options
+     *
+     * @return void
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -81,6 +88,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
     {
         $this->addCreditCardPaymentOptions($builder, $options);
     }
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

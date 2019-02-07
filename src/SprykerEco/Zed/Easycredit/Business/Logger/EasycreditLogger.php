@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Logger;
@@ -19,6 +19,9 @@ class EasycreditLogger implements EasycreditLoggerInterface
      */
     protected $entityManager;
 
+    /**
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface $entityManager
+     */
     public function __construct(
         EasycreditEntityManagerInterface $entityManager
     ) {
@@ -27,10 +30,10 @@ class EasycreditLogger implements EasycreditLoggerInterface
 
     /**
      * @param string $type
-     * @param EasycreditRequestTransfer $request
-     * @param EasycreditResponseTransfer $response
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $request
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $response
      *
-     * @return PaymentEasycreditApiLogTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
     public function saveApiLog(string $type, EasycreditRequestTransfer $request, EasycreditResponseTransfer $response): PaymentEasycreditApiLogTransfer
     {

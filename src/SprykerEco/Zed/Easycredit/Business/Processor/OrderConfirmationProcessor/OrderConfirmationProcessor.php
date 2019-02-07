@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor\OrderConfirmationProcessor;
@@ -19,36 +19,36 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
 class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
 {
     /**
-     * @var ParserInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     protected $parser;
 
     /**
-     * @var AdapterInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     protected $adapter;
 
     /**
-     * @var EasycreditLoggerInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     protected $logger;
 
     /**
-     * @var EasycreditRepositoryInterface
+     * @var \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface
      */
     protected $easycreditRepository;
 
     /**
-     * @var EasycreditEntityManagerInterface
+     * @var \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface
      */
     protected $easycreditEntityManager;
 
     /**
-     * @param ParserInterface $parser
-     * @param AdapterInterface $adapter
-     * @param EasycreditLoggerInterface $logger
-     * @param EasycreditRepositoryInterface $easycreditRepository
-     * @param EasycreditEntityManagerInterface $easycreditEntityManager
+     * @param \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface $parser
+     * @param \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface $adapter
+     * @param \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface $logger
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface $easycreditRepository
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface $easycreditEntityManager
      */
     public function __construct(
         ParserInterface $parser,
@@ -67,7 +67,7 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
     /**
      * @param int $fkSalesOrder
      *
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     public function process(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer
     {
@@ -89,7 +89,7 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
 
         $responseTransfer = $this->parser->parse($easycreditResponseTransfer);
 
-        /** @var EasycreditOrderConfirmationResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer $responseTransfer */
         if ($responseTransfer->getConfirmed()) {
             $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
             $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
@@ -98,11 +98,10 @@ class OrderConfirmationProcessor implements OrderConfirmationProcessorInterface
         return $responseTransfer;
     }
 
-
     /**
      * @param int $fkSalesOrder
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     protected function getEasycreditOrderIdentifierTransfer(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer
     {

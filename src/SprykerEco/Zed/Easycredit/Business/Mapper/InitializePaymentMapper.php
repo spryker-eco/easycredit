@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Mapper;
@@ -50,7 +50,7 @@ class InitializePaymentMapper implements MapperInterface
     public const KEY_LOGISTIK_DIENSTLEISTER = 'logistikDienstleister';
 
     public const KEY_MENGE = 'menge';
-    public const KEY_PREIS= 'preis';
+    public const KEY_PREIS = 'preis';
     public const KEY_PRODUKTBEZEICHNUNG = 'produktbezeichnung';
 
     protected const SALUTATION_MAPPER = [
@@ -61,15 +61,23 @@ class InitializePaymentMapper implements MapperInterface
     ];
 
     /**
-     * @var EasycreditConfig
+     * @var \SprykerEco\Zed\Easycredit\EasycreditConfig
      */
     protected $config;
 
+    /**
+     * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
+     */
     public function __construct(EasycreditConfig $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $transfer
+     *
+     * @return array
+     */
     public function map(QuoteTransfer $transfer): array
     {
         $payload = [
@@ -110,7 +118,7 @@ class InitializePaymentMapper implements MapperInterface
             ],
             static::KEY_RISIKORELEVANTE_ANGABEN => [
                 static::KEY_BESTELLUNG_ERFOLGT_UEBER_LOGIN => false,
-                static::KEY_LOGISTIK_DIENSTLEISTER => $transfer->getShipment()->getShipmentSelection()
+                static::KEY_LOGISTIK_DIENSTLEISTER => $transfer->getShipment()->getShipmentSelection(),
             ],
         ];
 
@@ -120,7 +128,7 @@ class InitializePaymentMapper implements MapperInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return array
      */

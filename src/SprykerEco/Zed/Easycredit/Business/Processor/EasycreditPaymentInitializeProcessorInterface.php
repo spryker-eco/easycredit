@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor;
@@ -13,9 +13,9 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface EasycreditPaymentInitializeProcessorInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function process(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 }

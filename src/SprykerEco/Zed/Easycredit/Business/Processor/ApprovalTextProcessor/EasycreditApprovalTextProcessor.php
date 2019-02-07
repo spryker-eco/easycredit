@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor;
@@ -16,24 +16,24 @@ use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 class EasycreditApprovalTextProcessor implements EasycreditApprovalTextProcessorInterface
 {
     /**
-     * @var ParserInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface
      */
     protected $parser;
 
     /**
-     * @var AdapterInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     protected $adapter;
 
     /**
-     * @var EasycreditLoggerInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     protected $logger;
 
     /**
-     * @param ParserInterface $parser
-     * @param AdapterInterface $adapter
-     * @param EasycreditLoggerInterface $easycreditLogger
+     * @param \SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface $parser
+     * @param \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface $adapter
+     * @param \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface $easycreditLogger
      */
     public function __construct(
         ParserInterface $parser,
@@ -46,7 +46,7 @@ class EasycreditApprovalTextProcessor implements EasycreditApprovalTextProcessor
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function process(): EasycreditApprovalTextResponseTransfer
     {

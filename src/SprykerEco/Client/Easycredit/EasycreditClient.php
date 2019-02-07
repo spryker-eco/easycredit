@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Client\Easycredit;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
@@ -44,7 +49,11 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
     {
@@ -52,8 +61,13 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
      */
     public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
     {
@@ -61,8 +75,13 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
