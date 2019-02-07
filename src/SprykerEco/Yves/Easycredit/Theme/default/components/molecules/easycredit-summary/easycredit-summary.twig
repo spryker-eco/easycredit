@@ -1,0 +1,23 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'easycredit-summary',
+    tag: 'div'
+} %}
+
+{% define data = {
+    title: 'EasyCredit Summary:',
+    interest: required,
+    url: required,
+    text: required
+} %}
+
+{% block body %}
+    <div class="box">
+        {{ data.interest }}
+        <br>
+        {{ data.url }}
+        <br>
+        {{ data.text }}
+    </div>
+{% endblock %}
