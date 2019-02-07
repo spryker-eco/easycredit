@@ -13,9 +13,9 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 interface EasycreditPaymentHandlerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param AbstractTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): QuoteTransfer;
+    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): AbstractTransfer;
 }

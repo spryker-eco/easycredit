@@ -15,7 +15,7 @@ interface EasycreditEntityManagerInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $apiLogTransfer
      *
-     * @return mixed
+     * @return PaymentEasycreditApiLogTransfer
      */
     public function saveEasycreditApiLog(PaymentEasycreditApiLogTransfer $apiLogTransfer): PaymentEasycreditApiLogTransfer;
 

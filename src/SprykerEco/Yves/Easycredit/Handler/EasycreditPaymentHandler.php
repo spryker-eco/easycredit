@@ -16,11 +16,11 @@ class EasycreditPaymentHandler implements EasycreditPaymentHandlerInterface
     public const PAYMENT_PROVIDER = EasycreditConfig::PROVIDER_NAME;
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param AbstractTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): QuoteTransfer
+    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         $quoteTransfer->getPayment()
             ->setPaymentProvider(static::PAYMENT_PROVIDER)

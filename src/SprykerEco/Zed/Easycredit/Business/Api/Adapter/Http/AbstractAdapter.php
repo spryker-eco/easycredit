@@ -40,7 +40,7 @@ abstract class AbstractAdapter implements AdapterInterface
     protected const REQUEST_TYPE_TEXT = 'texte';
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var \GuzzleHttp\ClientInterface
      */
     protected $client;
 
