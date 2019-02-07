@@ -31,12 +31,12 @@ class PreContractualInformationAndRedemptionPlanParser implements ParserInterfac
         $transfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
         $transfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN, $payload) && !$easycreditResponseTransfer->getError()) {
+        if (array_key_exists(static::KEY_ALLGEMEINE_VORGANGSDATEN, $payload) && !$easycreditResponseTransfer->getError()) {
             $transfer->setSuccess(true);
             $transfer->setUrlVorvertraglicheInformationen(
                 $payload[static::KEY_ALLGEMEINE_VORGANGSDATEN][static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN]
             );
-            $transfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
+//            $transfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
         }
 
         return $transfer;

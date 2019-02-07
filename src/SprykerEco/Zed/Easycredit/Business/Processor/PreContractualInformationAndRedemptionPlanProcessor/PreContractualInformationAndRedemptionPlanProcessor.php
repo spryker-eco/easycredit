@@ -54,6 +54,8 @@ class PreContractualInformationAndRedemptionPlanProcessor implements PreContract
     public function process(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
+        $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+
         $responseTransfer = $this->adapter->sendRequest($requestTransfer);
 
         $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_PRE_CONTRACTUAL_INFORMATION_AMD_REDEMPTION_PLAN, $requestTransfer, $responseTransfer);

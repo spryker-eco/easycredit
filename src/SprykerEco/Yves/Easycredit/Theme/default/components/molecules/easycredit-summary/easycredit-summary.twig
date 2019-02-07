@@ -14,10 +14,12 @@
 
 {% block body %}
     <div class="box">
+        {{ data.title }}
+        <br/>
         {{ data.interest }}
-        <br>
-        {{ data.url }}
-        <br>
+        <br/>
+        <a href="{{ data.url }}">{{ data.url }}</a>
+        <br/>
         {{ data.text }}
     </div>
 {% endblock %}
