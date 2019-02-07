@@ -72,7 +72,7 @@ class InitializePaymentMapper implements MapperInterface
 
     public function map(QuoteTransfer $transfer): array
     {
-        return [
+        $payload = [
             static::KEY_SHOP_KENNUNG => $this->config->getShopIdentifier(),
             static::KEY_BESTELL_WERT => $transfer->getTotals()->getGrandTotal() / 100,
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
@@ -112,13 +112,30 @@ class InitializePaymentMapper implements MapperInterface
                 static::KEY_BESTELLUNG_ERFOLGT_UEBER_LOGIN => false,
                 static::KEY_LOGISTIK_DIENSTLEISTER => $transfer->getShipment()->getShipmentSelection()
             ],
-            static::KEY_WARENKORBINFOS => [
-                [
-                    static::KEY_MENGE => 1,
-                    static::KEY_PREIS => $transfer->getTotals()->getGrandTotal() / 100,
-                    static::KEY_PRODUKTBEZEICHNUNG => 'Test',
-                ]
-            ]
         ];
+
+        $payload[static::KEY_WARENKORBINFOS] = $this->prepareOrderItems($transfer);
+
+        return $payload;
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return array
+     */
+    protected function prepareOrderItems(QuoteTransfer $quoteTransfer): array
+    {
+        $items = [];
+
+        foreach ($quoteTransfer->getItems() as $item) {
+            $items[] = [
+                static::KEY_MENGE => 1,
+                static::KEY_PREIS => $item->getRefundableAmount(),
+                static::KEY_PRODUKTBEZEICHNUNG => $item->getName(),
+            ];
+        }
+
+        return $items;
     }
 }
