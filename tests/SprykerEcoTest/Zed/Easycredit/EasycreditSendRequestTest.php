@@ -17,15 +17,17 @@ namespace SprykerEcoTest\Zed\Easycredit;
 class EasycreditSendRequestTest extends AbstractEasycreditTest
 {
     /**
+     * @group test
+     *
      * @return void
      */
-    public function testSendPaymentInitializeRequest(): void
+    public function testSendInitializePaymentRequest(): void
     {
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
 
         $facade = $this->prepareFacade();
-        $responseTransfer = $facade->sendPaymentInitializeRequest($quoteTransfer);
+        $responseTransfer = $facade->sendInitializePaymentRequest($quoteTransfer);
 
         $this->assertEquals(static::RESPONSE_KEY_PAYMENT_IDENTIFIER, $responseTransfer->getPaymentIdentifier());
         $this->assertTrue($responseTransfer->getSuccess());
@@ -63,10 +65,10 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
     /**
      * @return void
      */
-    public function testSendGettingApprovalTextRequest(): void
+    public function testSendApprovalTextRequest(): void
     {
         $facade = $this->prepareFacade();
-        $responseTransfer = $facade->sendGettingApprovalTextRequest();
+        $responseTransfer = $facade->sendApprovalTextRequest();
 
         $this->assertTrue($responseTransfer->getSuccess());
         $this->assertEquals(static::RESPONSE_KEY_TEXT, $responseTransfer->getText());
@@ -75,13 +77,13 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
     /**
      * @return void
      */
-    public function testSendInterestAndAdjustTotalSumRequest(): void
+    public function testSendInterestAndTotalSumRequest(): void
     {
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
 
         $facade = $this->prepareFacade();
-        $responseTransfer = $facade->sendInterestAndAdjustTotalSumRequest($quoteTransfer);
+        $responseTransfer = $facade->sendInterestAndTotalSumRequest($quoteTransfer);
 
         $this->assertTrue($responseTransfer->getSuccess());
         $this->assertEquals(static::RESPONSE_KEY_ANFALLENDE_ZINSEN, $responseTransfer->getAnfallendeZinsen());
@@ -99,7 +101,6 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
         $responseTransfer = $facade->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
 
         $this->assertTrue($responseTransfer->getSuccess());
-        $this->assertEquals(static::RESPONSE_KEY_TILGUNGSPLAN_TEXT, $responseTransfer->getTilgungsplanText());
         $this->assertEquals(static::RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN, $responseTransfer->getUrlVorvertraglicheInformationen());
     }
 }
