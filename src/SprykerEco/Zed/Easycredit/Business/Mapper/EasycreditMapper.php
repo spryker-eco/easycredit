@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Easycredit\EasycreditConfig;
-use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
 
 class EasycreditMapper implements MapperInterface
 {
@@ -69,20 +68,12 @@ class EasycreditMapper implements MapperInterface
     protected $config;
 
     /**
-     * @var EasycreditRepositoryInterface
-     */
-    protected $easycreditRepository;
-
-    /**
      * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
-     * @param EasycreditRepositoryInterface $easycreditRepository
      */
     public function __construct(
-        EasycreditConfig $config,
-        EasycreditRepositoryInterface $easycreditRepository
+        EasycreditConfig $config
     ) {
         $this->config = $config;
-        $this->easycreditRepository = $easycreditRepository;
     }
 
     /**

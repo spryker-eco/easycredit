@@ -57,7 +57,7 @@ class RequestSender implements RequestSenderInterface
     /**
      * @param MapperInterface $mapper
      * @param AdapterFactoryInterface $adapterFactory
-     * @param ParserInterface $responseParser
+     * @param ResponseParserInterface $responseParser
      * @param EasycreditLoggerInterface $logger
      * @param EasycreditRepositoryInterface $easycreditRepository
      * @param EasycreditEntityManagerInterface $easycreditEntityManager
@@ -65,7 +65,7 @@ class RequestSender implements RequestSenderInterface
     public function __construct(
         MapperInterface $mapper,
         AdapterFactoryInterface $adapterFactory,
-        ParserInterface $responseParser,
+        ResponseParserInterface $responseParser,
         EasycreditLoggerInterface $logger,
         EasycreditRepositoryInterface $easycreditRepository,
         EasycreditEntityManagerInterface $easycreditEntityManager

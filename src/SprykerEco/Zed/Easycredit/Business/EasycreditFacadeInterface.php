@@ -10,9 +10,11 @@ namespace SprykerEco\Zed\Easycredit\Business;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -27,16 +29,16 @@ interface EasycreditFacadeInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
+    public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 
     /**
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer;
+    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer;
 
     /**
      * @api
@@ -52,16 +54,16 @@ interface EasycreditFacadeInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
-    public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
+    public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
 
     /**
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
+    public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer;
 
     /**
      * @api

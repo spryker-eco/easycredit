@@ -13,13 +13,18 @@ use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingSer
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\ApprovalTextLoaderAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\DisplayInterestAndAdjustTotalSumAdapter;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactory;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\OrderConfirmationAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\PreContractualInformationAndRedemptionPlanAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\QueryCreditAssessmentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
+use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSender;
+use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSenderInterface;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
+use SprykerEco\Zed\Easycredit\Business\Mapper\EasycreditMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\InitializePaymentMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ApprovalTextResponseParser;
@@ -29,6 +34,8 @@ use SprykerEco\Zed\Easycredit\Business\Parser\OrderConfirmationResponseParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\ParserInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\PreContractualInformationAndRedemptionPlanParser;
 use SprykerEco\Zed\Easycredit\Business\Parser\QueryCreditAssessmentResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\ResponseParser;
+use SprykerEco\Zed\Easycredit\Business\Parser\ResponseParserInterface;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Easycredit\Business\Processor\ApprovalTextProcessor\EasycreditApprovalTextProcessor;
@@ -100,5 +107,48 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createEasycreditOrderIdentifierSaver(): EasycreditOrderIdentifierSaverInterface
     {
         return new EasycreditOrderIdentifierSaver($this->getEntityManager());
+    }
+
+    /**
+     * @return MapperInterface
+     */
+    public function createMapper(): MapperInterface
+    {
+        return new EasycreditMapper($this->getConfig());
+    }
+
+    /**
+     * @return AdapterFactoryInterface
+     */
+    public function createAdapterFactory(): AdapterFactoryInterface
+    {
+        return new AdapterFactory(
+            $this->createEasycreditClient(),
+            $this->getUtilEncodingService(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return ResponseParserInterface
+     */
+    public function createResponseParser(): ResponseParserInterface
+    {
+        return new ResponseParser();
+    }
+
+    /**
+     * @return RequestSenderInterface
+     */
+    public function createRequestSender(): RequestSenderInterface
+    {
+        return new RequestSender(
+            $this->createMapper(),
+            $this->createAdapterFactory(),
+            $this->createResponseParser(),
+            $this->createEasycreditLogger(),
+            $this->getRepository(),
+            $this->getEntityManager()
+        );
     }
 }
