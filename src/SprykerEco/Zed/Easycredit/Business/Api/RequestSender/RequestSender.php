@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\RequestSender;
@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
-use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
@@ -25,22 +24,22 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
 class RequestSender implements RequestSenderInterface
 {
     /**
-     * @var MapperInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface
      */
     protected $mapper;
 
     /**
-     * @var AdapterFactoryInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface
      */
     protected $adapterFactory;
 
     /**
-     * @var ResponseParserInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Parser\ResponseParserInterface
      */
     protected $responseParser;
 
     /**
-     * @var EasycreditLoggerInterface
+     * @var \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface
      */
     protected $logger;
 
@@ -55,12 +54,12 @@ class RequestSender implements RequestSenderInterface
     protected $easycreditEntityManager;
 
     /**
-     * @param MapperInterface $mapper
-     * @param AdapterFactoryInterface $adapterFactory
-     * @param ResponseParserInterface $responseParser
-     * @param EasycreditLoggerInterface $logger
-     * @param EasycreditRepositoryInterface $easycreditRepository
-     * @param EasycreditEntityManagerInterface $easycreditEntityManager
+     * @param \SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface $mapper
+     * @param \SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface $adapterFactory
+     * @param \SprykerEco\Zed\Easycredit\Business\Parser\ResponseParserInterface $responseParser
+     * @param \SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface $logger
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface $easycreditRepository
+     * @param \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface $easycreditEntityManager
      */
     public function __construct(
         MapperInterface $mapper,

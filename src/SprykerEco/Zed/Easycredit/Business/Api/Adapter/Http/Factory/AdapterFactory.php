@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory;
@@ -51,7 +51,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createInitializePaymentAdapter(): AdapterInterface
     {
@@ -59,7 +59,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface
     {
@@ -67,7 +67,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createOrderConfirmationAdapter(): AdapterInterface
     {
@@ -75,7 +75,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createInterestAndTotalSumAdapter(): AdapterInterface
     {
@@ -83,7 +83,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createQueryCreditAssessmentAdapter(): AdapterInterface
     {
@@ -91,7 +91,7 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createApprovalTextAdapter(): AdapterInterface
     {

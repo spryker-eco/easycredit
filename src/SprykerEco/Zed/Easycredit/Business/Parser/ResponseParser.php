@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Parser;
@@ -33,8 +33,9 @@ class ResponseParser implements ResponseParserInterface
     protected const KEY_TEXT_IDENTIFIER = 'zustimmungDatenuebertragungPaymentPage';
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
     public function parseInitializePaymentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInitializePaymentResponseTransfer
     {
@@ -52,8 +53,9 @@ class ResponseParser implements ResponseParserInterface
     }
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function parsePreContractualInformationAndRedemptionPlanResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
@@ -73,8 +75,9 @@ class ResponseParser implements ResponseParserInterface
     }
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     public function parseOrderConfirmationResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditOrderConfirmationResponseTransfer
     {
@@ -95,8 +98,9 @@ class ResponseParser implements ResponseParserInterface
     }
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditInterestAndAdjustTotalSumResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
     public function parseInterestAndTotalSumResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
     {
@@ -114,8 +118,9 @@ class ResponseParser implements ResponseParserInterface
     }
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditQueryCreditAssessmentResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
     public function parseQueryCreditAssessmentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditQueryCreditAssessmentResponseTransfer
     {
@@ -133,8 +138,9 @@ class ResponseParser implements ResponseParserInterface
     }
 
     /**
-     * @param EasycreditResponseTransfer $easycreditResponseTransfer
-     * @return EasycreditApprovalTextResponseTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
     public function parseApprovalTextResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditApprovalTextResponseTransfer
     {

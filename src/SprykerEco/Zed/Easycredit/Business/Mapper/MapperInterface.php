@@ -16,41 +16,41 @@ interface MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
 
     /**
      * @param int $fkSalesOrder
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapOrderConfirmationRequest(int $fkSalesOrder, PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): EasycreditRequestTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
 
     /**
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapApprovalTextRequest(): EasycreditRequestTransfer;
 }

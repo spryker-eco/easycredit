@@ -128,6 +128,9 @@ abstract class AbstractEasycreditTest extends Unit
         return $paymentMethodsTransfer;
     }
 
+    /**
+     * @return \Generated\Shared\Transfer\PaymentTransfer
+     */
     protected function preparePaymentTransfer(): PaymentTransfer
     {
         $paymentTransfer = new PaymentTransfer();

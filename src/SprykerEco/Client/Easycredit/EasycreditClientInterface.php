@@ -8,11 +8,9 @@
 namespace SprykerEco\Client\Easycredit;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
-use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
-use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 

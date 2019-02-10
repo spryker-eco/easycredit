@@ -2,45 +2,42 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory;
 
-use GuzzleHttp\ClientInterface;
-use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 interface AdapterFactoryInterface
 {
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createInitializePaymentAdapter(): AdapterInterface;
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface;
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createOrderConfirmationAdapter(): AdapterInterface;
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createInterestAndTotalSumAdapter(): AdapterInterface;
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createQueryCreditAssessmentAdapter(): AdapterInterface;
 
     /**
-     * @return AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
      */
     public function createApprovalTextAdapter(): AdapterInterface;
 }

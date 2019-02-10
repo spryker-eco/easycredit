@@ -79,7 +79,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
@@ -140,7 +140,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
@@ -150,12 +150,11 @@ class EasycreditMapper implements MapperInterface
         return $requestTransfer;
     }
 
-
     /**
      * @param int $fkSalesOrder
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapOrderConfirmationRequest(int $fkSalesOrder, PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): EasycreditRequestTransfer
     {
@@ -168,7 +167,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
@@ -181,7 +180,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
@@ -195,7 +194,7 @@ class EasycreditMapper implements MapperInterface
     }
 
     /**
-     * @return EasycreditRequestTransfer
+     * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
     public function mapApprovalTextRequest(): EasycreditRequestTransfer
     {
