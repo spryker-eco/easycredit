@@ -118,7 +118,6 @@ class RequestSender implements RequestSenderInterface
      */
     public function sendOrderConfirmationRequest(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer
     {
-        //Move to plugin?
         $paymentEasycreditOrderIdentifierTransfer = $this->easycreditRepository->findPaymentEasycreditOrderIdentifierByFkSalesOrderItem($fkSalesOrder);
 
         if ($paymentEasycreditOrderIdentifierTransfer->getConfirmed()) {
@@ -133,16 +132,16 @@ class RequestSender implements RequestSenderInterface
             ->createOrderConfirmationAdapter()
             ->sendRequest($requestTransfer);
 
+        $easycreditOrderConfirmationResponseTransfer = $this->responseParser->parseOrderConfirmationResponse($responseTransfer);
+
+        if ($easycreditOrderConfirmationResponseTransfer->getConfirmed()) {
+            $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
+            $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
+        }
+
         $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $responseTransfer);
 
-        return $this->responseParser->parseOrderConfirmationResponse($responseTransfer);
-
-        //TODO: move to facade calling
-//        /** @var \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer $responseTransfer */
-//        if ($responseTransfer->getConfirmed()) {
-//            $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
-//            $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
-//        }
+        return $easycreditOrderConfirmationResponseTransfer;
     }
 
     /**

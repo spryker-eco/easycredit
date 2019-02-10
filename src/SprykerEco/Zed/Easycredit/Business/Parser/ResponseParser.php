@@ -112,6 +112,7 @@ class ResponseParser implements ResponseParserInterface
         if (array_key_exists(static::KEY_RATENPLAN, $payload) && !$easycreditResponseTransfer->getError()) {
             $transfer->setSuccess(true);
             $transfer->setAnfallendeZinsen($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN]);
+            $transfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
         }
 
         return $transfer;
