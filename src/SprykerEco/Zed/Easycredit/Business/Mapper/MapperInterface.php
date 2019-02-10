@@ -7,14 +7,50 @@
 
 namespace SprykerEco\Zed\Easycredit\Business\Mapper;
 
+use Generated\Shared\Transfer\EasycreditRequestTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface MapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $transfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return EasycreditRequestTransfer
      */
-    public function map(QuoteTransfer $transfer): array;
+    public function mapInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditRequestTransfer
+     */
+    public function mapPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
+
+    /**
+     * @param int $fkSalesOrder
+     *
+     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @return EasycreditRequestTransfer
+     */
+    public function mapOrderConfirmationRequest(int $fkSalesOrder, PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): EasycreditRequestTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditRequestTransfer
+     */
+    public function mapInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return EasycreditRequestTransfer
+     */
+    public function mapQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer;
+
+    /**
+     * @return EasycreditRequestTransfer
+     */
+    public function mapApprovalTextRequest(): EasycreditRequestTransfer;
 }

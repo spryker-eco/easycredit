@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Symfony\Component\HttpFoundation\Request;
 
-class DisplayInterestAndAdjustTotalSumAdapter extends AbstractAdapter
+class ApprovalTextAdapter extends AbstractAdapter
 {
     /**
      * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
@@ -22,9 +22,9 @@ class DisplayInterestAndAdjustTotalSumAdapter extends AbstractAdapter
         return sprintf(
             '%s/%s/%s/%s',
             $this->config->getApiUrl(),
-            static::REQUEST_TYPE_PROCESS,
-            $requestTransfer->getVorgangskennung(),
-            static::URL_DISPLAY_INTEREST_IDENTIFIER
+            static::REQUEST_TYPE_TEXT,
+            static::URL_APPROVAL_TEXT_IDENTIFIER,
+            $this->config->getShopIdentifier()
         );
     }
 
