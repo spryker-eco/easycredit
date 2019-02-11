@@ -17,7 +17,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface EasycreditClientInterface
 {
     /**
-     * This method calls facade for sending a request to Easycredit for payment initialization.
+     * This method calls a facade method for sending a request to Easycredit for payment initialization.
      *
      * @api
      *
@@ -28,7 +28,7 @@ interface EasycreditClientInterface
     public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 
     /**
-     * This method calls facade for sending a request to Easycredit for getting query assessment value.
+     * This method calls a facade method for sending a request to Easycredit for getting query assessment value.
      *
      * @api
      *
@@ -39,7 +39,7 @@ interface EasycreditClientInterface
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer;
 
     /**
-     * This method calls facade for sending a request to Easycredit for getting approval text to showing for the user.
+     * This method calls a facade method for sending a request to Easycredit for getting approval text to showing for the user.
      *
      * @api
      *
@@ -48,7 +48,7 @@ interface EasycreditClientInterface
     public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
 
     /**
-     * This method calls facade for sending a request to Easycredit for getting Easycredit interest for the user.
+     * This method calls a facade method for sending a request to Easycredit for getting Easycredit interest for the user.
      *
      * @api
      *
@@ -59,7 +59,7 @@ interface EasycreditClientInterface
     public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer;
 
     /**
-     * This method calls facade for sending a request to Easycredit for getting pre-contractual link and
+     * This method calls a facade method for sending a request to Easycredit for getting pre-contractual link and
      * redemption plan text for user.
      *
      * @api
