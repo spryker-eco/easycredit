@@ -22,14 +22,14 @@ export default class EasycreditBadge extends Component {
     }
 
     protected onScriptLoad(): void {
-        rkPlugin.anzeige(this.easyCreditContainerID, this.easyCreditPluginOptions);
+        rkPlugin.anzeige(this.easyCreditContainerId, this.easyCreditPluginOptions);
     }
 
     get easyCreditPluginOptions(): easyCreditPluginOptions {
         return JSON.parse(this.getAttribute('easycredit-options'));
     }
 
-    get easyCreditContainerID(): string {
-        return <string>this.querySelector(`.${this.jsName}__content`).id;
+    get easyCreditContainerId(): string {
+        return this.querySelector(`.${this.jsName}__content`).id;
     }
 }

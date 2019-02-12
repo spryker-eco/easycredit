@@ -5,8 +5,8 @@
 } %}
 
 {% define data = {
-    title: 'EasyCredit Summary:',
-    linkTitle: 'EasyCredit Link',
+    title: 'easycredit.summary.title' | trans,
+    linkTitle: 'easycredit.link.title' | trans,
     interest: required,
     url: required,
     text: required
@@ -14,9 +14,14 @@
 
 {% block body %}
     <div class="box">
-        <div class="spacing-y">{{ data.title }}</div>
-        <div class="spacing-y"> {{ data.interest }}</div>
-        <a href="{{ data.url }}">{{ data.linkTitle }}</a>
-        <div class="spacing-y">{{ data.text }}</div>
+        <h6 class="spacing-y">{{ data.title }}:</h6>
+        <p class="spacing-y spacing-y--small"><strong>{{ 'easycredit.interest' | trans }}: </strong>{{ data.interest }}</p>
+        <div class="spacing-y">
+            <a href="{{ data.url }}" title="{{ data.linkTitle }}">{{ data.linkTitle }}</a>
+        </div>
+        <p class="spacing-y spacing-y--small">
+            <strong>{{ 'easycredit.alternative' | trans }}:</strong>
+            <p class="spacing-y spacing-y--small">{{ data.text }}</p>
+        </p>
     </div>
 {% endblock %}
