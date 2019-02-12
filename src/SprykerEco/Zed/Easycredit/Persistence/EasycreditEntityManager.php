@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Persistence;
@@ -15,13 +15,15 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditPersistenceFactory getFactory()
+ *
+ * @SuppressWarnings(PHPMD)
  */
 class EasycreditEntityManager extends AbstractEntityManager implements EasycreditEntityManagerInterface
 {
     /**
-     * @param PaymentEasycreditApiLogTransfer $apiLogTransfer
+     * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $apiLogTransfer
      *
-     * @return PaymentEasycreditApiLogTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
     public function saveEasycreditApiLog(PaymentEasycreditApiLogTransfer $apiLogTransfer): PaymentEasycreditApiLogTransfer
     {
@@ -37,9 +39,9 @@ class EasycreditEntityManager extends AbstractEntityManager implements Easycredi
     }
 
     /**
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function saveEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer
     {

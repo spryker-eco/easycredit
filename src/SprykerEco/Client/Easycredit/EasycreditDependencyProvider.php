@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Client\Easycredit;
 
 use Spryker\Client\Kernel\AbstractDependencyProvider;
@@ -7,8 +12,7 @@ use Spryker\Client\Kernel\Container;
 
 class EasycreditDependencyProvider extends AbstractDependencyProvider
 {
-
-    const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
+    public const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 
     /**
      * @param \Spryker\Client\Kernel\Container $container
@@ -35,5 +39,4 @@ class EasycreditDependencyProvider extends AbstractDependencyProvider
 
         return $container;
     }
-
 }

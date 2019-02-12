@@ -2,27 +2,27 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
-use Generated\Shared\Transfer\DisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
-use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
-use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
-use Generated\Shared\Transfer\PaymentMethodsTransfer;
-use Generated\Shared\Transfer\PreContractualInformationAndRedemptionPlanResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface getRepository()
  */
 class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterface
 {
@@ -31,16 +31,16 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
      *
      * @api
      *
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function sendPaymentInitializeRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
+    public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createEasycreditPaymentInitializeProcessor()
-            ->process($quoteTransfer);
+            ->createRequestSender()
+            ->sendInitializePaymentRequest($quoteTransfer);
     }
 
     /**
@@ -48,16 +48,16 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
      *
      * @api
      *
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
+    public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createEasycreditPaymentQueryAssessmentProcessor()
-            ->process($quoteTransfer);
+            ->createRequestSender()
+            ->sendQueryCreditAssessmentRequest($quoteTransfer);
     }
 
     /**
@@ -67,14 +67,14 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
      *
      * @param int $orderId
      *
-     * @return EasycreditOrderConfirmationResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
     public function sendOrderConfirmationRequest(int $orderId): EasycreditOrderConfirmationResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createEasycreditOrderConfirmationProcessor()
-            ->process($orderId);
+            ->createRequestSender()
+            ->sendOrderConfirmationRequest($orderId);
     }
 
     /**
@@ -82,14 +82,14 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
      *
      * @api
      *
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
-    public function sendGettingApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
+    public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createEasycreditApprovalTextProcessor()
-            ->process();
+            ->createRequestSender()
+            ->sendApprovalTextRequest();
     }
 
     /**
@@ -110,10 +110,14 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param SaveOrderTransfer $saveOrderTransfer
+     * {@inheritdoc}
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer
     {
@@ -121,26 +125,36 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function sendInterestAndAdjustTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createInterestAndAdjustTotalSumProcessor()
-            ->process($quoteTransfer);
+            ->createRequestSender()
+            ->sendInterestAndTotalSumRequest($quoteTransfer);
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
         return $this
             ->getFactory()
-            ->createPreContractualInformationAndRedemptionPlanProcessor()
-            ->process($quoteTransfer);
+            ->createRequestSender()
+            ->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
     }
 }

@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\Easycredit\Communication\Controller;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
-use Generated\Shared\Transfer\EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
-use Generated\Shared\Transfer\EasycreditQueryAssessmentResponseTransfer;
+use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
@@ -16,23 +21,23 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 class GatewayController extends AbstractGatewayController
 {
     /**
-     * @param QuoteTransfer $transfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $transfer
      *
-     * @return EasycreditInitializePaymentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function sendEasycreditPaymentInitializeAction(QuoteTransfer $transfer): EasycreditInitializePaymentResponseTransfer
+    public function sendInitializePaymentRequestAction(QuoteTransfer $transfer): EasycreditInitializePaymentResponseTransfer
     {
         return $this
             ->getFacade()
-            ->sendPaymentInitializeRequest($transfer);
+            ->sendInitializePaymentRequest($transfer);
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditQueryAssessmentResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function sendEasycreditQueryAssessmentRequestAction(QuoteTransfer $quoteTransfer): EasycreditQueryAssessmentResponseTransfer
+    public function sendQueryCreditAssessmentRequestAction(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer
     {
         return $this
             ->getFacade()
@@ -40,32 +45,36 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @return EasycreditApprovalTextResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
-    public function getEasycreditApprovalTextAction(): EasycreditApprovalTextResponseTransfer
+    public function sendApprovalTextRequestAction(): EasycreditApprovalTextResponseTransfer
     {
         return $this
             ->getFacade()
-            ->sendGettingApprovalTextRequest();
+            ->sendApprovalTextRequest();
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function sendInterestAndAdjustTotalSumRequestAction(QuoteTransfer $quoteTransfer): EasycreditDisplayInterestAndAdjustTotalSumResponseTransfer
+    public function sendInterestAndTotalSumRequestAction(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
     {
-        return $this->getFacade()->sendInterestAndAdjustTotalSumRequest($quoteTransfer);
+        return $this
+            ->getFacade()
+            ->sendInterestAndTotalSumRequest($quoteTransfer);
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
     public function sendPreContractualInformationAndRedemptionPlanRequestAction(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
-        return $this->getFacade()->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
+        return $this
+            ->getFacade()
+            ->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
     }
 }

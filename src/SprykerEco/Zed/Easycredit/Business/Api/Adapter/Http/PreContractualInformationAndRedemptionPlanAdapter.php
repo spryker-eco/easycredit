@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PreContractualInformationAndRedemptionPlanAdapter extends AbstractAdapter
 {
     /**
-     * @param EasycreditRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
      *
      * @return string
      */

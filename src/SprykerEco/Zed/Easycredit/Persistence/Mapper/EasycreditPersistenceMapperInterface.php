@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Persistence\Mapper;
@@ -15,10 +15,10 @@ use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier;
 interface EasycreditPersistenceMapperInterface
 {
     /**
-     * @param PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
      *
-     * @param SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
-     * @return SpyPaymentEasycreditApiLog
+     * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog
      */
     public function mapPaymentEasycreditApiLogTransferToEntity(
         PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer,
@@ -26,10 +26,10 @@ interface EasycreditPersistenceMapperInterface
     ): SpyPaymentEasycreditApiLog;
 
     /**
-     * @param SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
-     * @param PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+     * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
      *
-     * @return PaymentEasycreditApiLogTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
     public function mapEntityToPaymentEasycreditApiLogTransfer(
         SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog,
@@ -37,10 +37,10 @@ interface EasycreditPersistenceMapperInterface
     ): PaymentEasycreditApiLogTransfer;
 
     /**
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
      *
-     * @return SpyPaymentEasycreditOrderIdentifier
+     * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier
      */
     public function mapEasycreditOrderIdentifierTransferToEntity(
         PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer,
@@ -48,10 +48,10 @@ interface EasycreditPersistenceMapperInterface
     ): SpyPaymentEasycreditOrderIdentifier;
 
     /**
-     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function mapEntityToSpyPaymentEasycreditOrderIdentifierTransfer(
         SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier,

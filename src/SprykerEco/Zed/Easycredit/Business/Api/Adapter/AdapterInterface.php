@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter;
@@ -13,9 +13,9 @@ use Generated\Shared\Transfer\EasycreditResponseTransfer;
 interface AdapterInterface
 {
     /**
-     * @param EasycreditRequestTransfer $transfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $transfer
      *
-     * @return EasycreditResponseTransfer
+     * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
     public function sendRequest(EasycreditRequestTransfer $transfer): EasycreditResponseTransfer;
 }

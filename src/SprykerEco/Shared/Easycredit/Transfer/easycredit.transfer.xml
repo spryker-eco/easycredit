@@ -24,7 +24,7 @@
         <property name="error" type="EasycreditResponseError" />
     </transfer>
 
-    <transfer name="EasycreditQueryAssessmentResponse">
+    <transfer name="EasycreditQueryCreditAssessmentResponse">
         <property name="status" type="string" />
         <property name="success" type="boolean" />
         <property name="error" type="EasycreditResponseError" />
@@ -85,15 +85,13 @@
     </transfer>
 
     <transfer name="EasycreditPreContractualInformationAndRedemptionPlanResponse">
-        <property name="tilgungsplanText" type="string" />
         <property name="urlVorvertraglicheInformationen" type="string" />
         <property name="success" type="boolean" />
     </transfer>
 
-    <transfer name="EasycreditDisplayInterestAndAdjustTotalSumResponse">
+    <transfer name="EasycreditInterestAndAdjustTotalSumResponse">
         <property name="anfallendeZinsen" type="float" />
+        <property name="tilgungsplanText" type="string" />
         <property name="success" type="boolean" />
     </transfer>
-
-    <!--Response container replacement related transfers end-->
 </transfers>

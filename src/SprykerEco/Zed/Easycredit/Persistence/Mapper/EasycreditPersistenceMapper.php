@@ -2,28 +2,28 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Persistence\Mapper;
 
-use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog;
 use Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier;
 
 class EasycreditPersistenceMapper implements EasycreditPersistenceMapperInterface
 {
     /**
-     * @param PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
      *
-     * @param SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
-     * @return SpyPaymentEasycreditApiLog
+     * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog
      */
     public function mapPaymentEasycreditApiLogTransferToEntity(
         PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer,
-        SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog): SpyPaymentEasycreditApiLog
-    {
+        SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+    ): SpyPaymentEasycreditApiLog {
         $spyPaymentEasycreditApiLog->fromArray($easycreditApiLogTransfer->modifiedToArray());
         $spyPaymentEasycreditApiLog->setNew($easycreditApiLogTransfer->getIdPaymentEasycreditApiLog() === null);
 
@@ -31,28 +31,28 @@ class EasycreditPersistenceMapper implements EasycreditPersistenceMapperInterfac
     }
 
     /**
-     * @param SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
-     * @param PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+     * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
      *
-     * @return PaymentEasycreditApiLogTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
     public function mapEntityToPaymentEasycreditApiLogTransfer(
         SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog,
-        PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer): PaymentEasycreditApiLogTransfer
-    {
+        PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
+    ): PaymentEasycreditApiLogTransfer {
         return $easycreditApiLogTransfer->fromArray($spyPaymentEasycreditApiLog->toArray(), true);
     }
 
     /**
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
      *
-     * @return SpyPaymentEasycreditOrderIdentifier
+     * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier
      */
     public function mapEasycreditOrderIdentifierTransferToEntity(
         PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer,
-        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier): SpyPaymentEasycreditOrderIdentifier
-    {
+        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+    ): SpyPaymentEasycreditOrderIdentifier {
         $spyPaymentEasycreditOrderIdentifier->fromArray($paymentEasycreditOrderIdentifierTransfer->modifiedToArray());
         $spyPaymentEasycreditOrderIdentifier->setNew($paymentEasycreditOrderIdentifierTransfer->getIdPaymentEasycreditOrderIdentifier() === null);
 
@@ -60,15 +60,15 @@ class EasycreditPersistenceMapper implements EasycreditPersistenceMapperInterfac
     }
 
     /**
-     * @param SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
-     * @param PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
-     * @return PaymentEasycreditOrderIdentifierTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function mapEntityToSpyPaymentEasycreditOrderIdentifierTransfer(
         SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier,
-        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer
-    {
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+    ): PaymentEasycreditOrderIdentifierTransfer {
         return $paymentEasycreditOrderIdentifierTransfer->fromArray($spyPaymentEasycreditOrderIdentifier->toArray(), true);
     }
 }

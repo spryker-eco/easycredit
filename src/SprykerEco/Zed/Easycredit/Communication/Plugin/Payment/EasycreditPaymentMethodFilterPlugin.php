@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\Easycredit\Communication\Plugin\Payment;
@@ -14,6 +14,7 @@ use Spryker\Zed\Payment\Dependency\Plugin\Payment\PaymentMethodFilterPluginInter
 
 /**
  * @method \SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
  */
 class EasycreditPaymentMethodFilterPlugin extends AbstractPlugin implements PaymentMethodFilterPluginInterface
 {
