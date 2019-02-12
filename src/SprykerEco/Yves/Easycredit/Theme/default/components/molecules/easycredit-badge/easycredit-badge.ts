@@ -3,18 +3,17 @@ declare var rkPlugin: any;
 import Component from 'ShopUi/models/component';
 import ScriptLoader from 'ShopUi/components/molecules/script-loader/script-loader';
 
-interface rkPluginOptions {
+interface easyCreditPluginOptions {
     webshopId: string,
     finanzierungsbetrag: string,
     textVariante: string
 }
 
 export default class EasycreditBadge extends Component {
-
     protected easyCreditScriptLoader: ScriptLoader;
 
     protected readyCallback(): void {
-        this.easyCreditScriptLoader = <ScriptLoader>this.querySelector(`${this.jsName}__script-loader`);
+        this.easyCreditScriptLoader = <ScriptLoader>this.querySelector(`.${this.jsName}__script-loader`);
         this.mapEvents();
     }
 
@@ -26,7 +25,7 @@ export default class EasycreditBadge extends Component {
         rkPlugin.anzeige(this.easyCreditContainerID, this.easyCreditPluginOptions);
     }
 
-    get easyCreditPluginOptions(): rkPluginOptions {
+    get easyCreditPluginOptions(): easyCreditPluginOptions {
         return JSON.parse(this.getAttribute('easycredit-options'));
     }
 

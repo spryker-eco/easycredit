@@ -1,12 +1,12 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'easycredit-summary',
-    tag: 'div'
+    name: 'easycredit-summary'
 } %}
 
 {% define data = {
     title: 'EasyCredit Summary:',
+    linkTitle: 'EasyCredit Link',
     interest: required,
     url: required,
     text: required
@@ -14,12 +14,9 @@
 
 {% block body %}
     <div class="box">
-        {{ data.title }}
-        <br/>
-        {{ data.interest }}
-        <br/>
-        <a href="{{ data.url }}">{{ data.url }}</a>
-        <br/>
-        {{ data.text }}
+        <div class="spacing-y">{{ data.title }}</div>
+        <div class="spacing-y"> {{ data.interest }}</div>
+        <a href="{{ data.url }}">{{ data.linkTitle }}</a>
+        <div class="spacing-y">{{ data.text }}</div>
     </div>
 {% endblock %}

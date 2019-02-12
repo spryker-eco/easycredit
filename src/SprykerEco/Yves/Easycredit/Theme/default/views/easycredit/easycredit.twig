@@ -1,40 +1,12 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'form',
-    tag: 'div'
+    name: 'form'
 } %}
 
 {% define data = {
     form: required,
-    enableStart: true,
-    enableEnd: true,
-    legalText: required,
-    layout: {},
-    options: {
-        attr: {
-            novalidate: 'novalidate'
-        }
-    },
-
-    title: null,
-
-    submit: {
-        text: 'forms.submit-btn' | trans,
-        class: 'button button--success',
-        icon: null,
-        enable: false,
-        qa: 'submit-button'
-    },
-
-    cancel: {
-        text: 'general.back.button' | trans,
-        class: 'button button--secondary button--hollow',
-        icon: 'chevron-left',
-        url: '#',
-        enable: false,
-        qa: 'cancel-button'
-    }
+    legalText: required
 } %}
 
 {% block body %}
