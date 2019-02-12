@@ -11,17 +11,18 @@
 } %}
 
 {% define attributes = {
-    'rk-options': required
+    'easycredit-options': required
 } %}
 
 {% block body %}
     {% include molecule('script-loader') with {
-        class: 'script-loader-rk-plugin',
+        class: config.jsName ~ '__script-loader',
         attributes: {
             src: 'https://ratenkauf.easycredit.de/ratenkauf/js/ratenrechner/v1/ratenrechner.js'
         }
     } only %}
-    <br>
-    {{ data.title }}
+    <div class="spacing-y spacing-y--small">
+        {{ data.title }}
+    </div>
     <div id="{{ data.id }}" class="{{ config.jsName }}__content"></div>
 {% endblock %}

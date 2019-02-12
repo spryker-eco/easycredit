@@ -11,25 +11,26 @@ interface rkPluginOptions {
 
 export default class EasycreditBadge extends Component {
 
-    scriptLoaderRkPlugin: ScriptLoader;
-    rkContainerID: String;
+    protected easyCreditScriptLoader: ScriptLoader;
 
     protected readyCallback(): void {
-        this.scriptLoaderRkPlugin = <ScriptLoader>this.querySelector('.script-loader-rk-plugin');
-        this.rkContainerID = <String>this.querySelector(`.${this.jsName}__content`).id;
+        this.easyCreditScriptLoader = <ScriptLoader>this.querySelector(`${this.jsName}__script-loader`);
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        this.scriptLoaderRkPlugin.addEventListener('scriptload', () => this.onScriptLoad());
-
+        this.easyCreditScriptLoader.addEventListener('scriptload', () => this.onScriptLoad());
     }
 
     protected onScriptLoad(): void {
-        rkPlugin.anzeige(this.rkContainerID, this.rkPluginOptions);
+        rkPlugin.anzeige(this.easyCreditContainerID, this.easyCreditPluginOptions);
     }
 
-    get rkPluginOptions(): rkPluginOptions {
-        return JSON.parse(this.getAttribute('rk-options'));
+    get easyCreditPluginOptions(): rkPluginOptions {
+        return JSON.parse(this.getAttribute('easycredit-options'));
+    }
+
+    get easyCreditContainerID(): string {
+        return <string>this.querySelector(`.${this.jsName}__content`).id;
     }
 }
