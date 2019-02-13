@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Easycredit\Processor;
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Easycredit\EasycreditClientInterface;
+use SprykerEco\Shared\Easycredit\EasycreditConstants;
 use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToCalculationClientInterface;
 use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientInterface;
 
@@ -60,15 +61,29 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $quoteTransfer->getPayment()->getEasycredit()->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen());
         $quoteTransfer->getPayment()->getEasycredit()->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText());
         $quoteTransfer->getPayment()->getEasycredit()->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
+        $quoteTransfer = $this->addEasycreditExpense($quoteTransfer);
+        $quoteTransfer = $this->calculationClient->recalculate($quoteTransfer);
 
+        $this->quoteClient->setQuote($quoteTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function addEasycreditExpense(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
         $expenseTransfer = new ExpenseTransfer();
-        $expenseTransfer->setType(static::EXPENSE_TYPE_EASYCREDIT);
+        $expenseTransfer->setType(EasycreditConstants::EASYCREDIT_EXPENSE_TYPE);
         $expenseTransfer->setUnitNetPrice(0);
         $expenseTransfer->setUnitGrossPrice($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen() * 100);
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);
 
-        return $this->calculationClient->recalculate($quoteTransfer);
+        return $quoteTransfer;
     }
 }
