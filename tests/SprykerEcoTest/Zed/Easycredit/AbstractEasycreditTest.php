@@ -150,8 +150,12 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getConfigMock(): ZedEasycreditConfig
     {
         $config = $this->getMockBuilder(ZedEasycreditConfig::class)
-            ->setMethods([])
+            ->setMethods([
+                'getSharedConfig',
+            ])
             ->getMock();
+
+        $config->method('getSharedConfig')->willReturn(new EasycreditConfig());
 
         return $config;
     }
@@ -326,7 +330,7 @@ abstract class AbstractEasycreditTest extends Unit
     {
         $repository = $this->getMockBuilder(EasycreditRepositoryInterface::class)
             ->setMethods([
-                'findPaymentEasycreditOrderIdentifierByFkSalesOrderItem'
+                'findPaymentEasycreditOrderIdentifierByFkSalesOrderItem',
             ])
             ->getMock();
 

@@ -47,6 +47,5 @@ class EasycreditOrderIdentifierSaver implements EasycreditOrderIdentifierSaverIn
         $paymentEasycreditOrderIdentifierTransfer->setConfirmed(false);
 
         return $this->entityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
-
     }
 }

@@ -11,14 +11,22 @@ use ArrayObject;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Shared\Easycredit\EasycreditConfig;
+use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 class PaymentMethodFilter implements PaymentMethodFilterInterface
 {
-    protected const AVAILABLE_COUNTRIES = ['DE'];
+    /**
+     * @var \SprykerEco\Zed\Easycredit\EasycreditConfig
+     */
+    protected $config;
 
-    protected const MIN_AVAILABLE_MONEY_VALUE = 20000;
-    protected const MAX_AVAILABLE_MONEY_VALUE = 500000;
+    /**
+     * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
+     */
+    public function __construct(EasycreditConfig $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
@@ -49,9 +57,9 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isAvailable(QuoteTransfer $quoteTransfer): bool
     {
-        return $quoteTransfer->getTotals()->getGrandTotal() >= static::MIN_AVAILABLE_MONEY_VALUE &&
-            $quoteTransfer->getTotals()->getGrandTotal() <= static::MAX_AVAILABLE_MONEY_VALUE ||
-            in_array($quoteTransfer->getBillingAddress(), static::AVAILABLE_COUNTRIES);
+        return $quoteTransfer->getTotals()->getGrandTotal() >= $this->config->getPaymentMethodMinAvailableMoneyValue() &&
+            $quoteTransfer->getTotals()->getGrandTotal() <= $this->config->getPaymentMethodMaxAvailableMoneyValue() ||
+            in_array($quoteTransfer->getBillingAddress(), $this->config->getPaymentMethodAvailableCountries());
     }
 
     /**
@@ -61,6 +69,6 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isPaymentMethodEasycredit(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return strpos($paymentMethodTransfer->getMethodName(), EasycreditConfig::PAYMENT_METHOD) !== false;
+        return strpos($paymentMethodTransfer->getMethodName(), $this->config->getPaymentMethod()) !== false;
     }
 }

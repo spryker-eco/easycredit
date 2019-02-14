@@ -64,6 +64,38 @@ class EasycreditConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return int
+     */
+    public function getPaymentMethodMinAvailableMoneyValue(): int
+    {
+        return $this->getSharedConfig()->getPaymentMethodMinAvailableMoneyValue();
+    }
+
+    /**
+     * @return int
+     */
+    public function getPaymentMethodMaxAvailableMoneyValue(): int
+    {
+        return $this->getSharedConfig()->getPaymentMethodMaxAvailableMoneyValue();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPaymentMethodAvailableCountries(): array
+    {
+        return $this->getSharedConfig()->getPaymentMethodAvailableCountries();
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentMethod(): string
+    {
+        return $this->getSharedConfig()->getPaymentMethod();
+    }
+
+    /**
      * @return string
      */
     public function getApiUrl(): string

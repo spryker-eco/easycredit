@@ -55,7 +55,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createPaymentMethodFilter(): PaymentMethodFilterInterface
     {
-        return new PaymentMethodFilter();
+        return new PaymentMethodFilter($this->getConfig());
     }
 
     /**
