@@ -18,12 +18,16 @@ class EasycreditRepository extends AbstractRepository implements EasycreditRepos
     /**
      * @param int $fkSalesOrder
      *
-     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer|null
      */
-    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer
+    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): ?PaymentEasycreditOrderIdentifierTransfer
     {
         $paymentEasycreditOrderIdentifier = $this->getFactory()->createPaymentEasycreditOrderIdentifierQuery()
             ->findOneByFkSalesOrder($fkSalesOrder);
+
+        if ($paymentEasycreditOrderIdentifier === null) {
+            return null;
+        }
 
         return $this->getFactory()
             ->createEasycreditPersistenceMapper()

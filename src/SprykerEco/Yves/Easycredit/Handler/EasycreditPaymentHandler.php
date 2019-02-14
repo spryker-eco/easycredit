@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Easycredit\Handler;
 
-use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 

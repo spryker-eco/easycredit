@@ -53,7 +53,7 @@ abstract class AbstractEasycreditTest extends Unit
     protected const TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD = 200;
 
     /**
-     * @var EasycreditTester
+     * @var \SprykerEcoTest\Zed\Easycredit\EasycreditTester
      */
     protected $tester;
 

@@ -121,6 +121,10 @@ class RequestSender implements RequestSenderInterface
     {
         $paymentEasycreditOrderIdentifierTransfer = $this->easycreditRepository->findPaymentEasycreditOrderIdentifierByFkSalesOrderItem($idSalesOrder);
 
+        if ($paymentEasycreditOrderIdentifierTransfer == null) {
+            return $this->createNotConfirmedEasycreditOrderConfirmationResponseTransfer();
+        }
+
         if ($paymentEasycreditOrderIdentifierTransfer->getConfirmed()) {
             return $this->createConfirmedEasycreditOrderConfirmationResponseTransfer();
         }
@@ -208,6 +212,17 @@ class RequestSender implements RequestSenderInterface
     {
         $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
         $responseTransfer->setConfirmed(true);
+
+        return $responseTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
+     */
+    protected function createNotConfirmedEasycreditOrderConfirmationResponseTransfer(): EasycreditOrderConfirmationResponseTransfer
+    {
+        $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
+        $responseTransfer->setConfirmed(false);
 
         return $responseTransfer;
     }

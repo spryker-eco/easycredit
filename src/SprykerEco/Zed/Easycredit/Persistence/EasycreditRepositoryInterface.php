@@ -14,7 +14,7 @@ interface EasycreditRepositoryInterface
     /**
      * @param int $fkSalesOrder
      *
-     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
+     * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer|null
      */
-    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): PaymentEasycreditOrderIdentifierTransfer;
+    public function findPaymentEasycreditOrderIdentifierByFkSalesOrderItem(int $fkSalesOrder): ?PaymentEasycreditOrderIdentifierTransfer;
 }
