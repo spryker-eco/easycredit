@@ -13,10 +13,23 @@ use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfe
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
+use SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientInterface;
 
-class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
+class EasycreditStub implements EasycreditStubInterface
 {
+    /**
+     * @var \SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientInterface
+     */
+    protected $zedRequestClient;
+
+    /**
+     * @param \SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientInterface $easycreditToZedRequestClient
+     */
+    public function __construct(EasycreditToZedRequestClientInterface $easycreditToZedRequestClient)
+    {
+        $this->zedRequestClient = $easycreditToZedRequestClient;
+    }
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -24,7 +37,7 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/send-initialize-payment-request', $quoteTransfer);
+        return $this->zedRequestClient->call('/easycredit/gateway/send-initialize-payment-request', $quoteTransfer);
     }
 
     /**
@@ -34,7 +47,7 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/send-query-credit-assessment-request', $quoteTransfer);
+        return $this->zedRequestClient->call('/easycredit/gateway/send-query-credit-assessment-request', $quoteTransfer);
     }
 
     /**
@@ -42,7 +55,7 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/send-approval-text-request', new QuoteTransfer());
+        return $this->zedRequestClient->call('/easycredit/gateway/send-approval-text-request', new QuoteTransfer());
     }
 
     /**
@@ -52,7 +65,7 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/send-interest-and-total-sum-request', $quoteTransfer);
+        return $this->zedRequestClient->call('/easycredit/gateway/send-interest-and-total-sum-request', $quoteTransfer);
     }
 
     /**
@@ -62,6 +75,6 @@ class EasycreditStub extends ZedRequestStub implements EasycreditStubInterface
      */
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
     {
-        return $this->zedStub->call('/easycredit/gateway/send-pre-contractual-information-and-redemption-plan-request', $quoteTransfer);
+        return $this->zedRequestClient->call('/easycredit/gateway/send-pre-contractual-information-and-redemption-plan-request', $quoteTransfer);
     }
 }

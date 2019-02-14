@@ -9,6 +9,7 @@ namespace SprykerEco\Client\Easycredit;
 
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
+use SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientBridge;
 
 class EasycreditDependencyProvider extends AbstractDependencyProvider
 {
@@ -31,12 +32,11 @@ class EasycreditDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    protected function addZedRequestClient(Container $container): Container
+    protected function addZedRequestClient(Container $container)
     {
         $container[static::CLIENT_ZED_REQUEST] = function (Container $container) {
-            return $container->getLocator()->zedRequest()->client();
+            return new EasycreditToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
         };
-
         return $container;
     }
 }

@@ -8,7 +8,7 @@
 namespace SprykerEco\Client\Easycredit;
 
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\ZedRequest\ZedRequestClientInterface;
+use SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientInterface;
 use SprykerEco\Client\Easycredit\Zed\EasycreditStub;
 use SprykerEco\Client\Easycredit\Zed\EasycreditStubInterface;
 
@@ -23,9 +23,9 @@ class EasycreditFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\ZedRequest\ZedRequestClientInterface
+     * @return \SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientInterface
      */
-    protected function getZedRequestClient(): ZedRequestClientInterface
+    protected function getZedRequestClient(): EasycreditToZedRequestClientInterface
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::CLIENT_ZED_REQUEST);
     }

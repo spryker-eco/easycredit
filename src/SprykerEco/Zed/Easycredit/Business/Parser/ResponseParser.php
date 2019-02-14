@@ -44,7 +44,11 @@ class ResponseParser implements ResponseParserInterface
         $easycreditInitializePaymentResponseTransfer = new EasycreditInitializePaymentResponseTransfer();
         $easycreditInitializePaymentResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_PAYMENT_IDENTIFIER, $payload) && !$easycreditResponseTransfer->getError()) {
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditInitializePaymentResponseTransfer;
+        }
+
+        if (isset($payload[static::KEY_PAYMENT_IDENTIFIER])) {
             $easycreditInitializePaymentResponseTransfer->setPaymentIdentifier($payload[static::KEY_PAYMENT_IDENTIFIER]);
             $easycreditInitializePaymentResponseTransfer->setSuccess(true);
         }
@@ -64,12 +68,13 @@ class ResponseParser implements ResponseParserInterface
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_ALLGEMEINE_VORGANGSDATEN, $payload) && !$easycreditResponseTransfer->getError()) {
-            $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess(true);
-            $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setUrlVorvertraglicheInformationen(
-                $payload[static::KEY_ALLGEMEINE_VORGANGSDATEN][static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN]
-            );
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
         }
+
+        $urlVorvertraglicheInformationen = $payload[static::KEY_ALLGEMEINE_VORGANGSDATEN][static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN] ?? null;
+        $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setUrlVorvertraglicheInformationen($urlVorvertraglicheInformationen);
+        $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess($urlVorvertraglicheInformationen !== null);
 
         return $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
     }
@@ -86,13 +91,15 @@ class ResponseParser implements ResponseParserInterface
         $easycreditOrderConfirmationResponseTransfer = new EasycreditOrderConfirmationResponseTransfer();
         $easycreditOrderConfirmationResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_WS_MESSAGES, $payload) && !$easycreditResponseTransfer->getError()) {
-            if (array_key_exists(static::KEY_MESSAGES, $payload[static::KEY_WS_MESSAGES])) {
-                $easycreditOrderConfirmationResponseTransfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
-                == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
-                $easycreditOrderConfirmationResponseTransfer->setSuccess(true);
-            }
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditOrderConfirmationResponseTransfer;
         }
+
+        $successIdentifier = $payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY] ?? null;
+
+        $isSuccess = $successIdentifier === static::VALUE_SUCCESS_CONFIRMATION;
+        $easycreditOrderConfirmationResponseTransfer->setConfirmed($isSuccess);
+        $easycreditOrderConfirmationResponseTransfer->setSuccess($isSuccess);
 
         return $easycreditOrderConfirmationResponseTransfer;
     }
@@ -109,11 +116,18 @@ class ResponseParser implements ResponseParserInterface
         $easycreditInterestAndAdjustTotalSumResponseTransfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_RATENPLAN, $payload) && !$easycreditResponseTransfer->getError()) {
-            $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess(true);
-            $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN]);
-            $easycreditInterestAndAdjustTotalSumResponseTransfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditInterestAndAdjustTotalSumResponseTransfer;
         }
+
+        $anfallendeZinsen = $payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN] ?? null;
+        $tilgungsplanText = $payload[static::KEY_TILGUNGSPLAN_TEXT] ?? null;
+
+        $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($anfallendeZinsen);
+        $easycreditInterestAndAdjustTotalSumResponseTransfer->setTilgungsplanText($tilgungsplanText);
+
+        $isSuccess = $anfallendeZinsen !== null && $tilgungsplanText !== null;
+        $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess($isSuccess);
 
         return $easycreditInterestAndAdjustTotalSumResponseTransfer;
     }
@@ -130,10 +144,14 @@ class ResponseParser implements ResponseParserInterface
         $easycreditQueryCreditAssessmentResponseTransfer = new EasycreditQueryCreditAssessmentResponseTransfer();
         $easycreditQueryCreditAssessmentResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_ENTSCHEIDUNG, $payload) && !$easycreditResponseTransfer->getError()) {
-            $easycreditQueryCreditAssessmentResponseTransfer->setSuccess(true);
-            $easycreditQueryCreditAssessmentResponseTransfer->setStatus($payload[static::KEY_ENTSCHEIDUNG][static::KEY_ENTSCHEIDUNG_SERGEBNIS]);
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditQueryCreditAssessmentResponseTransfer;
         }
+
+        $status = $payload[static::KEY_ENTSCHEIDUNG][static::KEY_ENTSCHEIDUNG_SERGEBNIS] ?? null;
+
+        $easycreditQueryCreditAssessmentResponseTransfer->setStatus($status);
+        $easycreditQueryCreditAssessmentResponseTransfer->setSuccess($status !== null);
 
         return $easycreditQueryCreditAssessmentResponseTransfer;
     }
@@ -150,7 +168,11 @@ class ResponseParser implements ResponseParserInterface
         $easycreditApprovalTextResponseTransfer = new EasycreditApprovalTextResponseTransfer();
         $easycreditApprovalTextResponseTransfer->setSuccess(false);
 
-        if (array_key_exists(static::KEY_TEXT_IDENTIFIER, $payload) && !$easycreditResponseTransfer->getError()) {
+        if ($easycreditResponseTransfer->getError() === null) {
+            return $easycreditApprovalTextResponseTransfer;
+        }
+
+        if (isset($payload[static::KEY_TEXT_IDENTIFIER])) {
             $easycreditApprovalTextResponseTransfer->setSuccess(true);
             $easycreditApprovalTextResponseTransfer->setText($payload[static::KEY_TEXT_IDENTIFIER]);
         }

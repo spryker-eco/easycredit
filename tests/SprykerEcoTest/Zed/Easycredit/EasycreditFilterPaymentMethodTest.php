@@ -26,7 +26,7 @@ class EasycreditFilterPaymentMethodTest extends AbstractEasycreditTest
         $quoteTransfer = $this->prepareQuoteTransfer();
         $paymentMethodsTransfer = $this->preparePaymentMethodsTransfer();
 
-        $quoteTransfer->setTotals($this->prepareTotalsTransfer(static::TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD));
+        $quoteTransfer->setTotals($this->prepareTotalsTransfer(static::TOTAL_VALUE_FOR_FILTERED_EASYCREDIT_PAYMENT_METHOD));
 
         $paymentMethodsTransfer = $facade->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
 
@@ -43,7 +43,7 @@ class EasycreditFilterPaymentMethodTest extends AbstractEasycreditTest
         $quoteTransfer = $this->prepareQuoteTransfer();
         $paymentMethodsTransfer = $this->preparePaymentMethodsTransfer();
 
-        $quoteTransfer->setTotals($this->prepareTotalsTransfer(static::TOTAL_VALUE_FOR_FILTERED_EASYCREDIT_PAYMENT_METHOD));
+        $quoteTransfer->setTotals($this->prepareTotalsTransfer(static::TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD));
 
         $paymentMethodsTransfer = $facade->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
 
