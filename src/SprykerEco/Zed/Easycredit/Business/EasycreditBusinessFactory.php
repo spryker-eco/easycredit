@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business;
 use GuzzleHttp\ClientInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactory;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\PreContractualInformationAndRedemptionPlanAdapter;
@@ -45,19 +45,11 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
-     */
-    public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface
-    {
-        return new PreContractualInformationAndRedemptionPlanAdapter($this->createEasycreditClient(), $this->getUtilEncodingService(), $this->getConfig());
-    }
-
-    /**
      * @return \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface
      */
     public function getUtilEncodingService(): EasycreditToUtilEncodingServiceInterface
     {
-        return $this->getProvidedDependency(EasycreditDependencyProvider::UTIL_ENCODING_SERVICE);
+        return $this->getProvidedDependency(EasycreditDependencyProvider::SERVICE_UTIL_ENCODING);
     }
 
     /**

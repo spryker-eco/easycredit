@@ -7,37 +7,37 @@
 
 namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory;
 
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface;
 
 interface AdapterFactoryInterface
 {
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createInitializePaymentAdapter(): AdapterInterface;
+    public function createInitializePaymentAdapter(): EasycreditAdapterInterface;
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface;
+    public function createPreContractualInformationAndRedemptionPlanAdapter(): EasycreditAdapterInterface;
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createOrderConfirmationAdapter(): AdapterInterface;
+    public function createOrderConfirmationAdapter(): EasycreditAdapterInterface;
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createInterestAndTotalSumAdapter(): AdapterInterface;
+    public function createInterestAndTotalSumAdapter(): EasycreditAdapterInterface;
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createQueryCreditAssessmentAdapter(): AdapterInterface;
+    public function createQueryCreditAssessmentAdapter(): EasycreditAdapterInterface;
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createApprovalTextAdapter(): AdapterInterface;
+    public function createApprovalTextAdapter(): EasycreditAdapterInterface;
 }

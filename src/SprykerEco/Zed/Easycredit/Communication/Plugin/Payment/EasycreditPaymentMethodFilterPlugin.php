@@ -20,7 +20,7 @@ class EasycreditPaymentMethodFilterPlugin extends AbstractPlugin implements Paym
 {
     /**
      * Specification:
-     * - Returns filtered by set of plugins array object of payments
+     * - Returns filtered by set of plugins array object of payments.
      *
      * @api
      *

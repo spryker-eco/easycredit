@@ -14,13 +14,11 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
-abstract class AbstractAdapter implements AdapterInterface
+abstract class AbstractAdapter implements EasycreditAdapterInterface
 {
-    protected const DEFAULT_TIMEOUT = 45;
-
     protected const API_KEY_EVENT = 'event';
     protected const API_KEY_PAYLOAD = 'payload';
     protected const API_KEY_TRANSACTION_ID = 'transactionId';
@@ -28,21 +26,15 @@ abstract class AbstractAdapter implements AdapterInterface
     protected const HEADER_TBK_RK_SHOP = 'tbk-rk-shop';
     protected const HEADER_TBK_RK_TOKEN = 'tbk-rk-token';
     protected const HEADER_CONTENT_TYPE = 'Content-Type';
-
     protected const CONTENT_TYPE_JSON = 'application/json';
 
-    protected const URL_CREDIT_ASSESSMENTS_IDENTIFIER = 'entscheidung';
-    protected const URL_ORDER_COMPLETION_IDENTIFIER = 'bestaetigen';
-    protected const URL_APPROVAL_TEXT_IDENTIFIER = 'zustimmung';
-    protected const URL_DISPLAY_INTEREST_IDENTIFIER = 'finanzierung';
-
-    protected const REQUEST_TYPE_PROCESS = 'vorgang';
     protected const REQUEST_TYPE_TEXT = 'texte';
+    protected const REQUEST_TYPE_PROCESS = 'vorgang';
 
     /**
      * @var \GuzzleHttp\ClientInterface
      */
-    protected $client;
+    protected $httpClient;
 
     /**
      * @var \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface
@@ -55,11 +47,11 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $config;
 
     /**
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
      *
      * @return string
      */
-    abstract protected function getUrl(EasycreditRequestTransfer $requestTransfer): string;
+    abstract protected function getUrl(EasycreditRequestTransfer $easycreditRequestTransfer): string;
 
     /**
      * @return string
@@ -76,21 +68,21 @@ abstract class AbstractAdapter implements AdapterInterface
         EasycreditToUtilEncodingServiceInterface $utilEncodingService,
         EasycreditConfig $config
     ) {
-        $this->client = $client;
+        $this->httpClient = $client;
         $this->utilEncodingService = $utilEncodingService;
         $this->config = $config;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $transfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
-    public function sendRequest(EasycreditRequestTransfer $transfer): EasycreditResponseTransfer
+    public function sendRequest(EasycreditRequestTransfer $easycreditRequestTransfer): EasycreditResponseTransfer
     {
-        $url = $this->getUrl($transfer);
+        $url = $this->getUrl($easycreditRequestTransfer);
         $method = $this->getMethod();
-        $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($transfer->getPayload());
+        $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($easycreditRequestTransfer->getPayload());
         $options[RequestOptions::HEADERS] = $this->getHeaders();
 
         return $this->send($method, $url, $options);
@@ -108,7 +100,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $responseTransfer = new EasycreditResponseTransfer();
 
         try {
-            $response = $this->client->request($method, $url, $options);
+            $response = $this->httpClient->request($method, $url, $options);
             $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody(), true));
         } catch (RequestException $requestException) {
             $errorTransfer = new EasycreditResponseErrorTransfer();

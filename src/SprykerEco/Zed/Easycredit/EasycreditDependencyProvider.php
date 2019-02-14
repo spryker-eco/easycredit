@@ -13,7 +13,7 @@ use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingSer
 
 class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
 {
-    public const UTIL_ENCODING_SERVICE = 'UTIL_ENCODING_SERVICE';
+    public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -34,7 +34,7 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addUtilEncodingService(Container $container): Container
     {
-        $container[static::UTIL_ENCODING_SERVICE] = function (Container $container) {
+        $container[static::SERVICE_UTIL_ENCODING] = function (Container $container) {
             return new EasycreditToUtilEncodingServiceBridge($container->getLocator()->utilEncoding()->service());
         };
 

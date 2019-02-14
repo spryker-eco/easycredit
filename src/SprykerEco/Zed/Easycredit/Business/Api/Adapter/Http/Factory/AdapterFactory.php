@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory;
 
 use GuzzleHttp\ClientInterface;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\ApprovalTextAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InitializePaymentAdapter;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\InterestAndTotalSumAdapter;
@@ -51,49 +51,49 @@ class AdapterFactory implements AdapterFactoryInterface
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createInitializePaymentAdapter(): AdapterInterface
+    public function createInitializePaymentAdapter(): EasycreditAdapterInterface
     {
         return new InitializePaymentAdapter($this->client, $this->utilEncodingService, $this->config);
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createPreContractualInformationAndRedemptionPlanAdapter(): AdapterInterface
+    public function createPreContractualInformationAndRedemptionPlanAdapter(): EasycreditAdapterInterface
     {
         return new PreContractualInformationAndRedemptionPlanAdapter($this->client, $this->utilEncodingService, $this->config);
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createOrderConfirmationAdapter(): AdapterInterface
+    public function createOrderConfirmationAdapter(): EasycreditAdapterInterface
     {
         return new OrderConfirmationAdapter($this->client, $this->utilEncodingService, $this->config);
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createInterestAndTotalSumAdapter(): AdapterInterface
+    public function createInterestAndTotalSumAdapter(): EasycreditAdapterInterface
     {
         return new InterestAndTotalSumAdapter($this->client, $this->utilEncodingService, $this->config);
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createQueryCreditAssessmentAdapter(): AdapterInterface
+    public function createQueryCreditAssessmentAdapter(): EasycreditAdapterInterface
     {
         return new QueryCreditAssessmentAdapter($this->client, $this->utilEncodingService, $this->config);
     }
 
     /**
-     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\AdapterInterface
+     * @return \SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface
      */
-    public function createApprovalTextAdapter(): AdapterInterface
+    public function createApprovalTextAdapter(): EasycreditAdapterInterface
     {
         return new ApprovalTextAdapter($this->client, $this->utilEncodingService, $this->config);
     }

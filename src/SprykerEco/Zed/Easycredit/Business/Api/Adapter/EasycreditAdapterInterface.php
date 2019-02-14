@@ -10,12 +10,12 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
 
-interface AdapterInterface
+interface EasycreditAdapterInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $transfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
-    public function sendRequest(EasycreditRequestTransfer $transfer): EasycreditResponseTransfer;
+    public function sendRequest(EasycreditRequestTransfer $easycreditRequestTransfer): EasycreditResponseTransfer;
 }

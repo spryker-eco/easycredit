@@ -29,7 +29,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::EASYCREDIT;
     }
@@ -49,7 +49,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
      *
      * @return void
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
 
@@ -95,7 +95,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
      *
      * @return $this
      */
-    public function addCreditCardPaymentOptions(FormBuilderInterface $builder, array $options): self
+    public function addCreditCardPaymentOptions(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
             static::FIELD_OPT_IN_CHECKBOX,
@@ -123,7 +123,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
     /**
      * @return string
      */
-    public function getProviderName()
+    public function getProviderName(): string
     {
         return PaymentTransfer::EASYCREDIT;
     }

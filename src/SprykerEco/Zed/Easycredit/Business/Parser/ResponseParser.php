@@ -41,15 +41,15 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditInitializePaymentResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditInitializePaymentResponseTransfer = new EasycreditInitializePaymentResponseTransfer();
+        $easycreditInitializePaymentResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_PAYMENT_IDENTIFIER, $payload) && !$easycreditResponseTransfer->getError()) {
-            $transfer->setPaymentIdentifier($payload[static::KEY_PAYMENT_IDENTIFIER]);
-            $transfer->setSuccess(true);
+            $easycreditInitializePaymentResponseTransfer->setPaymentIdentifier($payload[static::KEY_PAYMENT_IDENTIFIER]);
+            $easycreditInitializePaymentResponseTransfer->setSuccess(true);
         }
 
-        return $transfer;
+        return $easycreditInitializePaymentResponseTransfer;
     }
 
     /**
@@ -61,17 +61,17 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
+        $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_ALLGEMEINE_VORGANGSDATEN, $payload) && !$easycreditResponseTransfer->getError()) {
-            $transfer->setSuccess(true);
-            $transfer->setUrlVorvertraglicheInformationen(
+            $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess(true);
+            $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setUrlVorvertraglicheInformationen(
                 $payload[static::KEY_ALLGEMEINE_VORGANGSDATEN][static::KEY_URL_VORVERTRAGLICHE_INFORMATIONEN]
             );
         }
 
-        return $transfer;
+        return $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
     }
 
     /**
@@ -83,18 +83,18 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditOrderConfirmationResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditOrderConfirmationResponseTransfer = new EasycreditOrderConfirmationResponseTransfer();
+        $easycreditOrderConfirmationResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_WS_MESSAGES, $payload) && !$easycreditResponseTransfer->getError()) {
             if (array_key_exists(static::KEY_MESSAGES, $payload[static::KEY_WS_MESSAGES])) {
-                $transfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
+                $easycreditOrderConfirmationResponseTransfer->setConfirmed($payload[static::KEY_WS_MESSAGES][static::KEY_MESSAGES][0][static::KEY_KEY]
                 == static::VALUE_SUCCESS_CONFIRMATION ? true : false);
-                $transfer->setSuccess(true);
+                $easycreditOrderConfirmationResponseTransfer->setSuccess(true);
             }
         }
 
-        return $transfer;
+        return $easycreditOrderConfirmationResponseTransfer;
     }
 
     /**
@@ -106,16 +106,16 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditInterestAndAdjustTotalSumResponseTransfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
+        $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_RATENPLAN, $payload) && !$easycreditResponseTransfer->getError()) {
-            $transfer->setSuccess(true);
-            $transfer->setAnfallendeZinsen($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN]);
-            $transfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
+            $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess(true);
+            $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN]);
+            $easycreditInterestAndAdjustTotalSumResponseTransfer->setTilgungsplanText($payload[static::KEY_TILGUNGSPLAN_TEXT]);
         }
 
-        return $transfer;
+        return $easycreditInterestAndAdjustTotalSumResponseTransfer;
     }
 
     /**
@@ -127,15 +127,15 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditQueryCreditAssessmentResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditQueryCreditAssessmentResponseTransfer = new EasycreditQueryCreditAssessmentResponseTransfer();
+        $easycreditQueryCreditAssessmentResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_ENTSCHEIDUNG, $payload) && !$easycreditResponseTransfer->getError()) {
-            $transfer->setSuccess(true);
-            $transfer->setStatus($payload[static::KEY_ENTSCHEIDUNG][static::KEY_ENTSCHEIDUNG_SERGEBNIS]);
+            $easycreditQueryCreditAssessmentResponseTransfer->setSuccess(true);
+            $easycreditQueryCreditAssessmentResponseTransfer->setStatus($payload[static::KEY_ENTSCHEIDUNG][static::KEY_ENTSCHEIDUNG_SERGEBNIS]);
         }
 
-        return $transfer;
+        return $easycreditQueryCreditAssessmentResponseTransfer;
     }
 
     /**
@@ -147,14 +147,14 @@ class ResponseParser implements ResponseParserInterface
     {
         $payload = $easycreditResponseTransfer->getBody();
 
-        $transfer = new EasycreditApprovalTextResponseTransfer();
-        $transfer->setSuccess(false);
+        $easycreditApprovalTextResponseTransfer = new EasycreditApprovalTextResponseTransfer();
+        $easycreditApprovalTextResponseTransfer->setSuccess(false);
 
         if (array_key_exists(static::KEY_TEXT_IDENTIFIER, $payload) && !$easycreditResponseTransfer->getError()) {
-            $transfer->setSuccess(true);
-            $transfer->setText($payload[static::KEY_TEXT_IDENTIFIER]);
+            $easycreditApprovalTextResponseTransfer->setSuccess(true);
+            $easycreditApprovalTextResponseTransfer->setText($payload[static::KEY_TEXT_IDENTIFIER]);
         }
 
-        return $transfer;
+        return $easycreditApprovalTextResponseTransfer;
     }
 }

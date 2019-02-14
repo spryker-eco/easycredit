@@ -21,7 +21,6 @@ use SprykerEco\Yves\Easycredit\Processor\SuccessResponseProcessorInterface;
 
 /**
  * @method \SprykerEco\Client\Easycredit\EasycreditClientInterface getClient()
-
  */
 class EasycreditFactory extends AbstractFactory
 {

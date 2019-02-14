@@ -21,6 +21,9 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface EasycreditFacadeInterface
 {
     /**
+     * Specification:
+     * - Send a request to Easycredit for payment initialization.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -30,6 +33,9 @@ interface EasycreditFacadeInterface
     public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
 
     /**
+     * Specification:
+     * - Send a request to Easycredit for getting query assessment value.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -39,6 +45,9 @@ interface EasycreditFacadeInterface
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer;
 
     /**
+     * Specification:
+     * - Send a request to Easycredit for confirmation order. It can be used in order state machine command.
+     *
      * @api
      *
      * @param int $orderId
@@ -48,6 +57,9 @@ interface EasycreditFacadeInterface
     public function sendOrderConfirmationRequest(int $orderId): EasycreditOrderConfirmationResponseTransfer;
 
     /**
+     * Specification:
+     * - Send a request to Easycredit for getting approval text to showing to a user.
+     *
      * @api
      *
      * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
@@ -55,6 +67,9 @@ interface EasycreditFacadeInterface
     public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer;
 
     /**
+     * Specification:
+     * - Send a request to Easycredit for getting Easycredit interest for the order.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -64,6 +79,9 @@ interface EasycreditFacadeInterface
     public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer;
 
     /**
+     * Specification:
+     * - Send a request to Easycredit for getting pre-contractual link and redemption plan text for order.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -73,6 +91,9 @@ interface EasycreditFacadeInterface
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
+     * Specification:
+     * - Filter array object of payments by set of plugins.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
@@ -83,6 +104,9 @@ interface EasycreditFacadeInterface
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
 
     /**
+     * Specification:
+     * - Save order identifier for new order. It can be used in CheckoutDoSaveOrderInterface plugins.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

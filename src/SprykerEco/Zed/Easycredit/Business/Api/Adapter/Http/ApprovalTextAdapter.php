@@ -12,12 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApprovalTextAdapter extends AbstractAdapter
 {
+    protected const URL_APPROVAL_TEXT_IDENTIFIER = 'zustimmung';
+
     /**
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
      *
      * @return string
      */
-    protected function getUrl(EasycreditRequestTransfer $requestTransfer): string
+    protected function getUrl(EasycreditRequestTransfer $easycreditRequestTransfer): string
     {
         return sprintf(
             '%s/%s/%s/%s',

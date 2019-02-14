@@ -27,7 +27,7 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addClientCalculation($container);
         $container = $this->addClientQuote($container);
 
-        return parent::provideDependencies($container);
+        return $container;
     }
 
     /**

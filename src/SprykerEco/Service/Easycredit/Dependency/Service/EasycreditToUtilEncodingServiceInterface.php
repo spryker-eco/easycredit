@@ -26,5 +26,5 @@ interface EasycreditToUtilEncodingServiceInterface
      *
      * @return string|null
      */
-    public function encodeJson($value, $options = null, $depth = null);
+    public function encodeJson($value, $options = null, $depth = null): ?string;
 }

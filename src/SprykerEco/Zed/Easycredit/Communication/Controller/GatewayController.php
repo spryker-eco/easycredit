@@ -21,15 +21,15 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 class GatewayController extends AbstractGatewayController
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $transfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function sendInitializePaymentRequestAction(QuoteTransfer $transfer): EasycreditInitializePaymentResponseTransfer
+    public function sendInitializePaymentRequestAction(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
         return $this
             ->getFacade()
-            ->sendInitializePaymentRequest($transfer);
+            ->sendInitializePaymentRequest($quoteTransfer);
     }
 
     /**

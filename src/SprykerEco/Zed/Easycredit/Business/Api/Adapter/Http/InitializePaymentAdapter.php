@@ -13,13 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 class InitializePaymentAdapter extends AbstractAdapter
 {
     /**
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
      *
      * @return string
      */
-    protected function getUrl(EasycreditRequestTransfer $requestTransfer): string
+    protected function getUrl(EasycreditRequestTransfer $easycreditRequestTransfer): string
     {
-        return sprintf('%s/%s/', $this->config->getApiUrl(), static::REQUEST_TYPE_PROCESS);
+        return sprintf(
+            '%s/%s/',
+            $this->config->getApiUrl(),
+            static::REQUEST_TYPE_PROCESS
+        );
     }
 
     /**

@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Easycredit\Controller;
 
 use SprykerShop\Yves\CheckoutPage\Plugin\Provider\CheckoutPageControllerProvider;
 use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @method \SprykerEco\Yves\Easycredit\EasycreditFactory getFactory()
@@ -18,7 +19,7 @@ class EasycreditController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successEasycreditResponseAction()
+    public function successEasycreditResponseAction(): RedirectResponse
     {
         $this->getFactory()->createSuccessResponseProcessor()->process();
 

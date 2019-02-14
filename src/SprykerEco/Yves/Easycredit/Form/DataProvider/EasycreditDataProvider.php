@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Easycredit\Form\DataProvider;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Easycredit\Form\EasycreditSubForm;
@@ -18,7 +19,7 @@ class EasycreditDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
         return $quoteTransfer;
     }
@@ -28,7 +29,7 @@ class EasycreditDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             EasycreditSubForm::VARS_KEY_LEGAL_TEXT => $quoteTransfer->getEasycreditLegalText()->getText(),

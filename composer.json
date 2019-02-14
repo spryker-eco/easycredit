@@ -4,6 +4,7 @@
   "description": "EasyCredit module",
   "license": "proprietary",
   "require": {
+    "php": ">=7.1",
     "spryker/checkout-extension": "^1.0.0",
     "spryker/guzzle": "^2.2.0",
     "spryker/kernel": "^3.31.0",

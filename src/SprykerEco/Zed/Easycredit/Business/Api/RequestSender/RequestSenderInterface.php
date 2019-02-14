@@ -32,11 +32,11 @@ interface RequestSenderInterface
     public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
-     * @param int $fkSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
-    public function sendOrderConfirmationRequest(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer;
+    public function sendOrderConfirmationRequest(int $idSalesOrder): EasycreditOrderConfirmationResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

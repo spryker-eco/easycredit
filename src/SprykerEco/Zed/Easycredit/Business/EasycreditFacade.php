@@ -121,7 +121,9 @@ class EasycreditFacade extends AbstractFacade implements EasycreditFacadeInterfa
      */
     public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer
     {
-        return $this->getFactory()->createEasycreditOrderIdentifierSaver()->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
+        return $this->getFactory()
+            ->createEasycreditOrderIdentifierSaver()
+            ->saveOrderIdentifier($quoteTransfer, $saveOrderTransfer);
     }
 
     /**

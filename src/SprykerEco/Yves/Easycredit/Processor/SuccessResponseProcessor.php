@@ -55,12 +55,7 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
     {
         $quoteTransfer = $this->quoteClient->getQuote();
 
-        $easycreditContractualInformationAndRedemptionPlanResponseTransfer = $this->easycreditClient->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
-        $easycreditInterestAndAdjustTotalSumResponseTransfer = $this->easycreditClient->sendInterestAndTotalSumRequest($quoteTransfer);
-
-        $quoteTransfer->getPayment()->getEasycredit()->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen());
-        $quoteTransfer->getPayment()->getEasycredit()->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText());
-        $quoteTransfer->getPayment()->getEasycredit()->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
+        $quoteTransfer = $this->addEasycreditSummaryInfo($quoteTransfer);
         $quoteTransfer = $this->addEasycreditExpense($quoteTransfer);
         $quoteTransfer = $this->calculationClient->recalculate($quoteTransfer);
 
@@ -83,6 +78,24 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function addEasycreditSummaryInfo(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        $easycreditContractualInformationAndRedemptionPlanResponseTransfer = $this->easycreditClient->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
+        $easycreditInterestAndAdjustTotalSumResponseTransfer = $this->easycreditClient->sendInterestAndTotalSumRequest($quoteTransfer);
+
+        $quoteTransfer->getPayment()->getEasycredit()
+            ->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen())
+            ->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText())
+            ->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
 
         return $quoteTransfer;
     }

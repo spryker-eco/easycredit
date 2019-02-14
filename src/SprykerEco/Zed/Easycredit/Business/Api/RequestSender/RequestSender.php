@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfe
 use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLoggerInterface;
@@ -112,22 +113,19 @@ class RequestSender implements RequestSenderInterface
     }
 
     /**
-     * @param int $fkSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
-    public function sendOrderConfirmationRequest(int $fkSalesOrder): EasycreditOrderConfirmationResponseTransfer
+    public function sendOrderConfirmationRequest(int $idSalesOrder): EasycreditOrderConfirmationResponseTransfer
     {
-        $paymentEasycreditOrderIdentifierTransfer = $this->easycreditRepository->findPaymentEasycreditOrderIdentifierByFkSalesOrderItem($fkSalesOrder);
+        $paymentEasycreditOrderIdentifierTransfer = $this->easycreditRepository->findPaymentEasycreditOrderIdentifierByFkSalesOrderItem($idSalesOrder);
 
         if ($paymentEasycreditOrderIdentifierTransfer->getConfirmed()) {
-            $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
-            $responseTransfer->setConfirmed(true);
-
-            return $responseTransfer;
+            return $this->createConfirmedEasycreditOrderConfirmationResponseTransfer();
         }
 
-        $requestTransfer = $this->mapper->mapOrderConfirmationRequest($fkSalesOrder, $paymentEasycreditOrderIdentifierTransfer);
+        $requestTransfer = $this->mapper->mapOrderConfirmationRequest($idSalesOrder, $paymentEasycreditOrderIdentifierTransfer);
         $responseTransfer = $this->adapterFactory
             ->createOrderConfirmationAdapter()
             ->sendRequest($requestTransfer);
@@ -135,8 +133,7 @@ class RequestSender implements RequestSenderInterface
         $easycreditOrderConfirmationResponseTransfer = $this->responseParser->parseOrderConfirmationResponse($responseTransfer);
 
         if ($easycreditOrderConfirmationResponseTransfer->getConfirmed()) {
-            $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
-            $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
+            $this->confirmEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
         }
 
         $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_ORDER_CONFIRMATION, $requestTransfer, $responseTransfer);
@@ -191,5 +188,27 @@ class RequestSender implements RequestSenderInterface
         $this->logger->saveApiLog(EasycreditLoggerInterface::LOG_TYPE_APPROVAL_TEXT, $requestTransfer, $responseTransfer);
 
         return $this->responseParser->parseApprovalTextResponse($responseTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+     *
+     * @return void
+     */
+    protected function confirmEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): void
+    {
+        $paymentEasycreditOrderIdentifierTransfer->setConfirmed(true);
+        $this->easycreditEntityManager->saveEasycreditOrderIdentifier($paymentEasycreditOrderIdentifierTransfer);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
+     */
+    protected function createConfirmedEasycreditOrderConfirmationResponseTransfer(): EasycreditOrderConfirmationResponseTransfer
+    {
+        $responseTransfer = new EasycreditOrderConfirmationResponseTransfer();
+        $responseTransfer->setConfirmed(true);
+
+        return $responseTransfer;
     }
 }

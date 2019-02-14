@@ -49,6 +49,9 @@ abstract class AbstractEasycreditTest extends Unit
     protected const RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'url';
     protected const RESPONSE_KEY_TILGUNGSPLAN_TEXT = 'text';
 
+    protected const TOTAL_VALUE_FOR_FILTERED_EASYCREDIT_PAYMENT_METHOD = 20000;
+    protected const TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD = 200;
+
     /**
      * @var EasycreditTester
      */
