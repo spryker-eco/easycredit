@@ -16,45 +16,45 @@ interface EasycreditPersistenceMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
-     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $paymentEasycreditApiLogEntity
      *
      * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog
      */
     public function mapPaymentEasycreditApiLogTransferToEntity(
         PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer,
-        SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+        SpyPaymentEasycreditApiLog $paymentEasycreditApiLogEntity
     ): SpyPaymentEasycreditApiLog;
 
     /**
-     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditApiLog $paymentEasycreditApiLogEntity
      * @param \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
     public function mapEntityToPaymentEasycreditApiLogTransfer(
-        SpyPaymentEasycreditApiLog $spyPaymentEasycreditApiLog,
+        SpyPaymentEasycreditApiLog $paymentEasycreditApiLogEntity,
         PaymentEasycreditApiLogTransfer $easycreditApiLogTransfer
     ): PaymentEasycreditApiLogTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
-     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $paymentEasycreditOrderIdentifierEntity
      *
      * @return \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier
      */
     public function mapEasycreditOrderIdentifierTransferToEntity(
         PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer,
-        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+        SpyPaymentEasycreditOrderIdentifier $paymentEasycreditOrderIdentifierEntity
     ): SpyPaymentEasycreditOrderIdentifier;
 
     /**
-     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier
+     * @param \Orm\Zed\Easycredit\Persistence\SpyPaymentEasycreditOrderIdentifier $paymentEasycreditOrderIdentifierEntity
      * @param \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
     public function mapEntityToSpyPaymentEasycreditOrderIdentifierTransfer(
-        SpyPaymentEasycreditOrderIdentifier $spyPaymentEasycreditOrderIdentifier,
+        SpyPaymentEasycreditOrderIdentifier $paymentEasycreditOrderIdentifierEntity,
         PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
     ): PaymentEasycreditOrderIdentifierTransfer;
 }

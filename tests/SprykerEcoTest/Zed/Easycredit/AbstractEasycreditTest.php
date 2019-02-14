@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditTransfer;
+use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -324,7 +325,12 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getEasycreditRepositoryMock(): EasycreditRepositoryInterface
     {
         $repository = $this->getMockBuilder(EasycreditRepositoryInterface::class)
+            ->setMethods([
+                'findPaymentEasycreditOrderIdentifierByFkSalesOrderItem'
+            ])
             ->getMock();
+
+        $repository->method('findPaymentEasycreditOrderIdentifierByFkSalesOrderItem')->willReturn(new PaymentEasycreditOrderIdentifierTransfer());
 
         return $repository;
     }
