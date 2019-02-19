@@ -23,7 +23,7 @@ class EasycreditHandlerPlugin extends AbstractPlugin implements StepHandlerPlugi
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @throws \SprykerEco\Zed\Easycredit\Business\Exception\EasycreditInvalidTransferException
+     * @throws \SprykerEco\Yves\Easycredit\Exception\EasycreditInvalidTransferException
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
