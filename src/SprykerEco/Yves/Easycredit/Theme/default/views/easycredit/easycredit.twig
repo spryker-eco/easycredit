@@ -22,9 +22,9 @@
             {{ form_row(field, {
                 rowAttr: {
                     class: config.name ~ '__field ' ~ fieldLayoutClass
-                }
+                },
+                label: data.legalText
             }) }}
-            <p>{{ data.legalText }}</p>
         {% endblock %}
     {% endembed %}
 {% endblock %}

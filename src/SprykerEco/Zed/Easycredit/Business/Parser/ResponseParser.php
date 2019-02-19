@@ -44,7 +44,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditInitializePaymentResponseTransfer = new EasycreditInitializePaymentResponseTransfer();
         $easycreditInitializePaymentResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditInitializePaymentResponseTransfer;
         }
 
@@ -68,7 +68,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
         }
 
@@ -91,7 +91,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditOrderConfirmationResponseTransfer = new EasycreditOrderConfirmationResponseTransfer();
         $easycreditOrderConfirmationResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditOrderConfirmationResponseTransfer;
         }
 
@@ -116,7 +116,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditInterestAndAdjustTotalSumResponseTransfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditInterestAndAdjustTotalSumResponseTransfer;
         }
 
@@ -144,7 +144,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditQueryCreditAssessmentResponseTransfer = new EasycreditQueryCreditAssessmentResponseTransfer();
         $easycreditQueryCreditAssessmentResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditQueryCreditAssessmentResponseTransfer;
         }
 
@@ -168,7 +168,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditApprovalTextResponseTransfer = new EasycreditApprovalTextResponseTransfer();
         $easycreditApprovalTextResponseTransfer->setSuccess(false);
 
-        if ($easycreditResponseTransfer->getError() === null) {
+        if ($easycreditResponseTransfer->getError() !== null) {
             return $easycreditApprovalTextResponseTransfer;
         }
 

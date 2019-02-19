@@ -55,11 +55,13 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
     {
         $quoteTransfer = $this->quoteClient->getQuote();
 
-        $quoteTransfer = $this->addEasycreditSummaryInfo($quoteTransfer);
-        $quoteTransfer = $this->addEasycreditExpense($quoteTransfer);
-        $quoteTransfer = $this->calculationClient->recalculate($quoteTransfer);
+        if (!$this->isEasycreditExpenseAdded($quoteTransfer)) {
+            $quoteTransfer = $this->addEasycreditSummaryInfo($quoteTransfer);
+            $quoteTransfer = $this->addEasycreditExpense($quoteTransfer);
+            $quoteTransfer = $this->calculationClient->recalculate($quoteTransfer);
 
-        $this->quoteClient->setQuote($quoteTransfer);
+            $this->quoteClient->setQuote($quoteTransfer);
+        }
 
         return $quoteTransfer;
     }
@@ -98,5 +100,23 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
             ->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return bool
+     */
+    protected function isEasycreditExpenseAdded(QuoteTransfer $quoteTransfer): bool
+    {
+        $expenses = $quoteTransfer->getExpenses();
+
+        foreach ($expenses as $expense) {
+            if ($expense->getType() === EasycreditConstants::EASYCREDIT_EXPENSE_TYPE) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
