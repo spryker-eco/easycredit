@@ -1,7 +1,7 @@
 {
   "name": "spryker-eco/easycredit",
   "type": "library",
-  "description": "EasyCredit module",
+  "description": "Easyсredit module",
   "license": "proprietary",
   "require": {
     "php": ">=7.1",
