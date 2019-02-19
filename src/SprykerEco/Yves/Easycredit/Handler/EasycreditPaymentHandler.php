@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Easycredit\Handler;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 
@@ -15,13 +16,12 @@ class EasycreditPaymentHandler implements EasycreditPaymentHandlerInterface
     public const PAYMENT_PROVIDER = EasycreditConfig::PROVIDER_NAME;
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function addPaymentToQuote(AbstractTransfer $quoteTransfer): AbstractTransfer
+    public function addPaymentToQuote(QuoteTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer->getPayment()
             ->setPaymentProvider(static::PAYMENT_PROVIDER)
             ->setPaymentMethod(static::PAYMENT_PROVIDER);

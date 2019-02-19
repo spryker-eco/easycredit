@@ -30,23 +30,23 @@ class EasycreditLogger implements EasycreditLoggerInterface
 
     /**
      * @param string $type
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $request
-     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $response
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
-    public function saveApiLog(string $type, EasycreditRequestTransfer $request, EasycreditResponseTransfer $response): PaymentEasycreditApiLogTransfer
+    public function saveApiLog(string $type, EasycreditRequestTransfer $easycreditRequestTransfer, EasycreditResponseTransfer $easycreditResponseTransfer): PaymentEasycreditApiLogTransfer
     {
         $paymentEasycreditApiLog = (new PaymentEasycreditApiLogTransfer())
             ->setType($type)
-            ->setRequest($request->serialize())
-            ->setResponse($response->serialize());
+            ->setRequest($easycreditRequestTransfer->serialize())
+            ->setResponse($easycreditResponseTransfer->serialize());
 
-        if ($response->getError()) {
+        if ($easycreditResponseTransfer->getError()) {
             $paymentEasycreditApiLog
-                ->setStatusCode($response->getError()->getStatusCode())
-                ->setErrorCode($response->getError()->getErrorCode())
-                ->setErrorMessage($response->getError()->getErrorMessage());
+                ->setStatusCode($easycreditResponseTransfer->getError()->getStatusCode())
+                ->setErrorCode($easycreditResponseTransfer->getError()->getErrorCode())
+                ->setErrorMessage($easycreditResponseTransfer->getError()->getErrorMessage());
         }
 
         return $this->entityManager->saveEasycreditApiLog($paymentEasycreditApiLog);

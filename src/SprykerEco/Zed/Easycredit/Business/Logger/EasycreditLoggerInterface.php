@@ -22,10 +22,10 @@ interface EasycreditLoggerInterface
 
     /**
      * @param string $type
-     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $request
-     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $response
+     * @param \Generated\Shared\Transfer\EasycreditRequestTransfer $easycreditRequestTransfer
+     * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
-    public function saveApiLog(string $type, EasycreditRequestTransfer $request, EasycreditResponseTransfer $response): PaymentEasycreditApiLogTransfer;
+    public function saveApiLog(string $type, EasycreditRequestTransfer $easycreditRequestTransfer, EasycreditResponseTransfer $easycreditResponseTransfer): PaymentEasycreditApiLogTransfer;
 }

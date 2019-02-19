@@ -32,11 +32,12 @@ class EasycreditDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    protected function addZedRequestClient(Container $container)
+    protected function addZedRequestClient(Container $container): Container
     {
         $container[static::CLIENT_ZED_REQUEST] = function (Container $container) {
             return new EasycreditToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
         };
+
         return $container;
     }
 }
