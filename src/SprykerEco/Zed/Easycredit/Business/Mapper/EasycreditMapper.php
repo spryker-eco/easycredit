@@ -212,7 +212,7 @@ class EasycreditMapper implements MapperInterface
 
         foreach ($quoteTransfer->getItems() as $item) {
             $items[] = [
-                static::KEY_MENGE => 1,
+                static::KEY_MENGE => $item->getQuantity(),
                 static::KEY_PREIS => $item->getRefundableAmount(),
                 static::KEY_PRODUKTBEZEICHNUNG => $item->getName(),
             ];
