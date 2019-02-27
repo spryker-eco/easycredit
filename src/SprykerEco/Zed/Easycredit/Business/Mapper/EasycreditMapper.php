@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Mapper;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 class EasycreditMapper implements MapperInterface
@@ -68,12 +69,20 @@ class EasycreditMapper implements MapperInterface
     protected $config;
 
     /**
+     * @var \\Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     */
+    protected $moneyPlugin;
+
+    /**
      * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
+     * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface $moneyPlugin
      */
     public function __construct(
-        EasycreditConfig $config
+        EasycreditConfig $config,
+        MoneyPluginInterface $moneyPlugin
     ) {
         $this->config = $config;
+        $this->moneyPlugin = $moneyPlugin;
     }
 
     /**
@@ -85,7 +94,7 @@ class EasycreditMapper implements MapperInterface
     {
         $payload = [
             static::KEY_SHOP_KENNUNG => $this->config->getShopIdentifier(),
-            static::KEY_BESTELL_WERT => $quoteTransfer->getTotals()->getGrandTotal() / 100,
+            static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal()),
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
                 static::KEY_ANREDE => static::SALUTATION_MAPPER[$quoteTransfer->getCustomer()->getSalutation()],

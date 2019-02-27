@@ -120,7 +120,7 @@ class ResponseParser implements ResponseParserInterface
             return $easycreditInterestAndAdjustTotalSumResponseTransfer;
         }
 
-        $anfallendeZinsen = $payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN] ?? null;
+        $anfallendeZinsen = (float)$payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN] ?? null;
         $tilgungsplanText = $payload[static::KEY_TILGUNGSPLAN_TEXT] ?? null;
 
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($anfallendeZinsen);

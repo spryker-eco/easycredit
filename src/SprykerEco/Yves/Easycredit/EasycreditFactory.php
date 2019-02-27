@@ -56,7 +56,8 @@ class EasycreditFactory extends AbstractFactory
         return new SuccessResponseProcessor(
             $this->getQuoteClient(),
             $this->getCalculationClient(),
-            $this->getClient()
+            $this->getClient(),
+            $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY)
         );
     }
 

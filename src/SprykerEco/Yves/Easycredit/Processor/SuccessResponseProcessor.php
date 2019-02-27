@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Easycredit\Processor;
 
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use SprykerEco\Client\Easycredit\EasycreditClientInterface;
 use SprykerEco\Shared\Easycredit\EasycreditConstants;
 use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToCalculationClientInterface;
@@ -34,18 +35,26 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
     protected $easycreditClient;
 
     /**
+     * @var \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     */
+    protected $moneyPlugin;
+
+    /**
      * @param \SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToCalculationClientInterface $calculationClient
      * @param \SprykerEco\Client\Easycredit\EasycreditClientInterface $easycreditClient
+     * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface $moneyPlugin
      */
     public function __construct(
         EasycreditToQuoteClientInterface $quoteClient,
         EasycreditToCalculationClientInterface $calculationClient,
-        EasycreditClientInterface $easycreditClient
+        EasycreditClientInterface $easycreditClient,
+        MoneyPluginInterface $moneyPlugin
     ) {
         $this->quoteClient = $quoteClient;
         $this->calculationClient = $calculationClient;
         $this->easycreditClient = $easycreditClient;
+        $this->moneyPlugin = $moneyPlugin;
     }
 
     /**
@@ -76,7 +85,7 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(EasycreditConstants::EASYCREDIT_EXPENSE_TYPE);
         $expenseTransfer->setUnitNetPrice(0);
-        $expenseTransfer->setUnitGrossPrice($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen() * 100);
+        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen()));
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);

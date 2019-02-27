@@ -79,7 +79,10 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createMapper(): MapperInterface
     {
-        return new EasycreditMapper($this->getConfig());
+        return new EasycreditMapper(
+            $this->getConfig(),
+            $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY)
+        );
     }
 
     /**
