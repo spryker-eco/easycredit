@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Easycredit;
 
+use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
@@ -57,7 +58,7 @@ class EasycreditFactory extends AbstractFactory
             $this->getQuoteClient(),
             $this->getCalculationClient(),
             $this->getClient(),
-            $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY)
+            $this->getMoneyPlugin()
         );
     }
 
@@ -75,5 +76,13 @@ class EasycreditFactory extends AbstractFactory
     public function getCalculationClient(): EasycreditToCalculationClientInterface
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::CLIENT_CALCULATION);
+    }
+
+    /**
+     * @return \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     */
+    public function getMoneyPlugin(): MoneyPluginInterface
+    {
+        return $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY);
     }
 }

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Business;
 
 use GuzzleHttp\ClientInterface;
+use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactory;
@@ -81,7 +82,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new EasycreditMapper(
             $this->getConfig(),
-            $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY)
+            $this->getMoneyPlugin()
         );
     }
 
@@ -118,5 +119,13 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->getEntityManager()
         );
+    }
+
+    /**
+     * @return \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     */
+    public function getMoneyPlugin(): MoneyPluginInterface
+    {
+        return $this->getProvidedDependency(EasycreditDependencyProvider::PLUGIN_MONEY);
     }
 }
