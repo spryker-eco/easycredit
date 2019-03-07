@@ -34,6 +34,9 @@ env:
     - SHOP_DIR=current
     - MODULE_NAME=easycredit
 
+before_install:
+  - phpenv config-rm xdebug.ini
+
 cache:
   directories:
     - $SHOP_DIR/current/vendor
