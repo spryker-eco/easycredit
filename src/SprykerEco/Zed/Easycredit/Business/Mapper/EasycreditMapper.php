@@ -69,7 +69,7 @@ class EasycreditMapper implements MapperInterface
     protected $config;
 
     /**
-     * @var \\Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     * @var \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
      */
     protected $moneyPlugin;
 
