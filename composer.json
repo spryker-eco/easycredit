@@ -2,7 +2,7 @@
   "name": "spryker-eco/easycredit",
   "type": "library",
   "description": "Easyсredit module",
-  "license": "proprietary",
+  "license": "MIT",
   "require": {
     "php": ">=7.1",
     "spryker/checkout-extension": "^1.0.0",
