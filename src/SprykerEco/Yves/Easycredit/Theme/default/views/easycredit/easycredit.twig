@@ -1,0 +1,30 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'form'
+} %}
+
+{% define data = {
+    form: required,
+    legalText: required
+} %}
+
+{% block body %}
+    {% embed molecule('form') with {
+        data: {
+            form: data.form,
+            legalText: data.legalText,
+            enableEnd: false
+        },
+        modifiers: ['grid-indent', 'login', 'checkout-actions']
+    } only %}
+        {% block field %}
+            {{ form_row(field, {
+                rowAttr: {
+                    class: config.name ~ '__field ' ~ fieldLayoutClass
+                },
+                label: data.legalText
+            }) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
