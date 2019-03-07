@@ -1,13 +1,27 @@
 {
   "name": "spryker-eco/easycredit",
   "type": "library",
-  "description": "EasyCredit module",
+  "description": "Easyсredit module",
   "license": "proprietary",
   "require": {
+    "php": ">=7.1",
+    "spryker/checkout-extension": "^1.0.0",
+    "spryker/guzzle": "^2.2.0",
+    "spryker/kernel": "^3.31.0",
+    "spryker/sales": "^8.17.0",
+    "spryker/step-engine": "^3.2.0",
+    "spryker/symfony": "^3.2.2",
+    "spryker/util-encoding": "^2.1.0",
+    "spryker/zed-request": "^3.7.0"
   },
   "require-dev": {
-    "spryker/code-sniffer": "*",
-    "spryker/testify": "*"
+    "spryker/oms": "^8.4.0",
+    "spryker/payment": "^4.4.1",
+    "spryker/propel": "^3.8.0"
+  },
+  "suggest": {
+    "spryker/oms": "If you want to use Oms plugins.",
+    "spryker/payment": "If you want to use Payment command plugins."
   },
   "autoload": {
     "psr-4": {

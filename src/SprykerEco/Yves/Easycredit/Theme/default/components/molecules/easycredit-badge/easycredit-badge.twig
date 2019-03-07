@@ -1,0 +1,28 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'easycredit-badge',
+    tag: 'easycredit-badge'
+} %}
+
+{% define data = {
+    title: null,
+    id: required
+} %}
+
+{% define attributes = {
+    'easycredit-options': required
+} %}
+
+{% block body %}
+    {% include molecule('script-loader') with {
+        class: config.jsName ~ '__script-loader',
+        attributes: {
+            src: 'https://ratenkauf.easycredit.de/ratenkauf/js/ratenrechner/v1/ratenrechner.js'
+        }
+    } only %}
+    <h6 class="spacing-y spacing-y--small">
+        {{ data.title }}:
+    </h6>
+    <div id="{{ data.id }}" class="{{ config.jsName }}__content"></div>
+{% endblock %}
