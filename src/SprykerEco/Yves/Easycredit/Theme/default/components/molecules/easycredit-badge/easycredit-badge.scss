@@ -18,6 +18,11 @@
       background-color: $setting-color-white;
       padding: 0.625rem;
     }
+    
+    .modal-dialog .modal-header button,
+    .ec-link {
+      cursor: pointer;
+    }
   }
 }
 
