@@ -1,0 +1,24 @@
+@mixin easycredit-easycredit-badge($name: '.easycredit-badge') {
+  #{$name} {
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10000;
+      width: 100%;
+      height: 100%;
+      padding: 3rem 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      overflow: auto;
+    }
+
+    .modal-dialog {
+      max-width: 20rem;
+      margin: 0 auto;
+      background-color: $setting-color-white;
+      padding: 0.625rem;
+    }
+  }
+}
+
+@include easycredit-easycredit-badge();
