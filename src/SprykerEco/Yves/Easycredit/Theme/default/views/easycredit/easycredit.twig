@@ -10,21 +10,10 @@
 } %}
 
 {% block body %}
-    {% embed molecule('form') with {
-        data: {
-            form: data.form,
-            legalText: data.legalText,
-            enableEnd: false
+    {{ form_row(data.form.optInCheckbox, {
+        rowAttr: {
+            class: config.name ~ '__field ' ~ fieldLayoutClass
         },
-        modifiers: ['grid-indent', 'login', 'checkout-actions']
-    } only %}
-        {% block field %}
-            {{ form_row(field, {
-                rowAttr: {
-                    class: config.name ~ '__field ' ~ fieldLayoutClass
-                },
-                label: data.legalText
-            }) }}
-        {% endblock %}
-    {% endembed %}
+        label: data.legalText
+    }) }}
 {% endblock %}
