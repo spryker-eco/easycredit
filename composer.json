@@ -1,7 +1,7 @@
 {
   "name": "spryker-eco/easycredit",
   "type": "library",
-  "description": "Easy\u0441redit module",
+  "description": "Easycredit module",
   "license": "MIT",
   "require": {
     "php": ">=7.1",
