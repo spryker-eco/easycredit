@@ -17,7 +17,7 @@ class EasycreditConfig extends AbstractBundleConfig
 
     public const PAYMENT_METHOD_AVAILABLE_COUNTRIES = ['DE'];
     public const PAYMENT_METHOD_MIN_AVAILABLE_MONEY_VALUE = 20000;
-    public const PAYMENT_METHOD_MAX_AVAILABLE_MONEY_VALUE = 500000;
+    public const PAYMENT_METHOD_MAX_AVAILABLE_MONEY_VALUE = 1000000;
 
     /**
      * @return string
