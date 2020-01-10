@@ -59,7 +59,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     {
         return $quoteTransfer->getTotals()->getGrandTotal() >= $this->config->getPaymentMethodMinAvailableMoneyValue() &&
             $quoteTransfer->getTotals()->getGrandTotal() <= $this->config->getPaymentMethodMaxAvailableMoneyValue() ||
-            in_array($quoteTransfer->getBillingAddress()->getIso2Code(), $this->config->getPaymentMethodAvailableCountries());
+            ($quoteTransfer->getBillingAddress() && in_array($quoteTransfer->getBillingAddress()->getIso2Code(), $this->config->getPaymentMethodAvailableCountries()));
     }
 
     /**
