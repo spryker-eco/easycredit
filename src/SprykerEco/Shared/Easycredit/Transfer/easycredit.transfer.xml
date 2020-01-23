@@ -8,14 +8,14 @@
     </transfer>
 
     <transfer name="EasycreditRequest">
-        <property name="payload" type="array"/>
+        <property name="payload" type="array" singular="payload"/>
         <property name="vorgangskennung" type="string"/>
         <property name="webShopKennung" type="string"/>
     </transfer>
 
     <transfer name="EasycreditResponse">
         <property name="error" type="EasycreditResponseError"/>
-        <property name="body" type="array"/>
+        <property name="body" type="array" singular="body"/>
     </transfer>
 
     <transfer name="EasycreditInitializePaymentResponse">
