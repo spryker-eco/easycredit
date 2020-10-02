@@ -58,7 +58,7 @@ env:
         - APPLICATION_STORE=DE
         - MODULE_DIR=module
         - SHOP_DIR=current
-        - MODULE_NAME=braintree
+        - MODULE_NAME=easycredit
         - POSTGRES_PORT=5433
 
 cache:

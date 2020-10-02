@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EasycreditRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
-    public const ROUTE_EASYCREDIT_SUCCESS_RESPONSE = 'easycredit/success-response';
+    public const ROUTE_NAME_EASYCREDIT_SUCCESS_RESPONSE = 'easycredit/success-response';
 
     /**
-     * Specification:
-     * - Adds Routes to the RouteCollection.
+     * {@inheritDoc}
+     * - Adds easycredit success response action to RouteCollection.
      *
      * @api
      *
@@ -29,7 +29,7 @@ class EasycreditRouteProviderPlugin extends AbstractRouteProviderPlugin
     {
         $route = $this->buildRoute('/easycredit/payment/success', 'Easycredit', 'Easycredit', 'successEasycreditResponse');
         $route = $route->setMethods([Request::METHOD_GET]);
-        $routeCollection->add(static::ROUTE_EASYCREDIT_SUCCESS_RESPONSE, $route);
+        $routeCollection->add(static::ROUTE_NAME_EASYCREDIT_SUCCESS_RESPONSE, $route);
 
         return $routeCollection;
     }
