@@ -1,4 +1,5 @@
 language: php
+
 os: linux
 dist: bionic
 
@@ -59,7 +60,7 @@ env:
         - MODULE_DIR=module
         - SHOP_DIR=current
         - MODULE_NAME=easycredit
-        - POSTGRES_PORT=5433
+        - POSTGRES_PORT=5432
 
 cache:
     directories:
@@ -71,5 +72,5 @@ before_install:
     - phpenv config-rm xdebug.ini
 
 script:
-    - git clone -b 0.3.0 https://github.com/spryker-eco/eco-ci.git ecoci
+    - git clone -b '0.3.0' --single-branch https://github.com/spryker-eco/eco-ci.git ecoci
     - ./ecoci/build/travis.sh
