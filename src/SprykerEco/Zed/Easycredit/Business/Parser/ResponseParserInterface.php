@@ -29,7 +29,9 @@ interface ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function parsePreContractualInformationAndRedemptionPlanResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+    public function parsePreContractualInformationAndRedemptionPlanResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
@@ -43,7 +45,9 @@ interface ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function parseInterestAndTotalSumResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer;
+    public function parseInterestAndTotalSumResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditInterestAndAdjustTotalSumResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer

@@ -20,6 +20,8 @@ class EasycreditConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_MAX_AVAILABLE_MONEY_VALUE = 1000000;
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPaymentPageIntegrationType(): string
@@ -28,6 +30,8 @@ class EasycreditConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getPaymentMethodAvailableCountries(): array
@@ -36,6 +40,8 @@ class EasycreditConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return int
      */
     public function getPaymentMethodMinAvailableMoneyValue(): int
@@ -44,6 +50,8 @@ class EasycreditConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return int
      */
     public function getPaymentMethodMaxAvailableMoneyValue(): int
@@ -52,6 +60,8 @@ class EasycreditConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPaymentMethod(): string
