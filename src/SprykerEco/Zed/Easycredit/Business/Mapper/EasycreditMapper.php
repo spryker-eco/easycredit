@@ -166,8 +166,10 @@ class EasycreditMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
-    public function mapOrderConfirmationRequest(int $fkSalesOrder, PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): EasycreditRequestTransfer
-    {
+    public function mapOrderConfirmationRequest(
+        int $fkSalesOrder,
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+    ): EasycreditRequestTransfer {
         $requestTransfer = new EasycreditRequestTransfer();
         $requestTransfer->setVorgangskennung($paymentEasycreditOrderIdentifierTransfer->getIdentifier());
 

@@ -20,6 +20,8 @@ class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterfac
     public const NAME = 'IsOrderConfirmed';
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
