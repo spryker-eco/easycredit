@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Easycredit\Controller;
 
-use SprykerShop\Yves\CheckoutPage\Plugin\Provider\CheckoutPageControllerProvider;
+use SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -23,6 +23,6 @@ class EasycreditController extends AbstractController
     {
         $this->getFactory()->createSuccessResponseProcessor()->process();
 
-        return $this->redirectResponseInternal(CheckoutPageControllerProvider::CHECKOUT_SUMMARY);
+        return $this->redirectResponseInternal(CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUMMARY);
     }
 }

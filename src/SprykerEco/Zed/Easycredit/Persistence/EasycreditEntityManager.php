@@ -43,8 +43,9 @@ class EasycreditEntityManager extends AbstractEntityManager implements Easycredi
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer
-    {
+    public function saveEasycreditOrderIdentifier(
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+    ): PaymentEasycreditOrderIdentifierTransfer {
         $easycreditOrderIdentifier = $this->getFactory()
             ->createEasycreditPersistenceMapper()
             ->mapEasycreditOrderIdentifierTransferToEntity($paymentEasycreditOrderIdentifierTransfer, new SpyPaymentEasycreditOrderIdentifier());

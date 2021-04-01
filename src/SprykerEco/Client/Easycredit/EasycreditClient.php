@@ -21,7 +21,7 @@ use Spryker\Client\Kernel\AbstractClient;
 class EasycreditClient extends AbstractClient implements EasycreditClientInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -35,7 +35,7 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -49,7 +49,7 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -61,7 +61,7 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -75,7 +75,7 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -83,8 +83,9 @@ class EasycreditClient extends AbstractClient implements EasycreditClientInterfa
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
         return $this->getFactory()->createZedStub()->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
     }
 }

@@ -33,7 +33,10 @@ interface MapperInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditRequestTransfer
      */
-    public function mapOrderConfirmationRequest(int $fkSalesOrder, PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): EasycreditRequestTransfer;
+    public function mapOrderConfirmationRequest(
+        int $fkSalesOrder,
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+    ): EasycreditRequestTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
