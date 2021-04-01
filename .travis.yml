@@ -27,7 +27,7 @@ services:
   - rabbitmq
 
 addons:
-  postgresql: "12"
+  postgresql: "9.4"
 
   apt:
     sources:
@@ -42,9 +42,6 @@ addons:
       - redis-server
       - rabbitmq-server
       - graphviz
-      - postgresql-12
-      - postgresql-client-12
-      - postgresql-server-dev-12
 
   hosts:
     - zed.de.spryker.test

@@ -15,14 +15,14 @@
     "spryker/zed-request": "^3.7.0"
   },
   "require-dev": {
-    "spryker/checkout": "*",
+    "spryker-shop/checkout-page": "*",
     "spryker/oms": "^8.4.0 || ^10.0.0 || ^11.0.0",
     "spryker/payment": "^4.4.1",
     "spryker/propel": "^3.8.0",
     "spryker/router": "*"
   },
   "suggest": {
-    "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout.",
+    "spryker-shop/checkout-page": "If you want to integrate with Checkout page you need to install spryker-shop/checkout-page.",
     "spryker/oms": "If you want to use Oms plugins.",
     "spryker/payment": "If you want to use Payment command plugins.",
     "spryker/router": "Use this module if you want use the RouterProviderPlugin."
