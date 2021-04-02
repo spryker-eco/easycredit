@@ -35,8 +35,11 @@ class EasycreditLogger implements EasycreditLoggerInterface
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
-    public function saveApiLog(string $type, EasycreditRequestTransfer $easycreditRequestTransfer, EasycreditResponseTransfer $easycreditResponseTransfer): PaymentEasycreditApiLogTransfer
-    {
+    public function saveApiLog(
+        string $type,
+        EasycreditRequestTransfer $easycreditRequestTransfer,
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): PaymentEasycreditApiLogTransfer {
         $paymentEasycreditApiLog = (new PaymentEasycreditApiLogTransfer())
             ->setType($type)
             ->setRequest($easycreditRequestTransfer->serialize())

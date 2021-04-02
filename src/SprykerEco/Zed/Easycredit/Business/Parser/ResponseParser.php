@@ -61,8 +61,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function parsePreContractualInformationAndRedemptionPlanResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
+    public function parsePreContractualInformationAndRedemptionPlanResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
@@ -84,8 +85,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
-    public function parseOrderConfirmationResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditOrderConfirmationResponseTransfer
-    {
+    public function parseOrderConfirmationResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditOrderConfirmationResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditOrderConfirmationResponseTransfer = new EasycreditOrderConfirmationResponseTransfer();
@@ -109,8 +111,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function parseInterestAndTotalSumResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
-    {
+    public function parseInterestAndTotalSumResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditInterestAndAdjustTotalSumResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditInterestAndAdjustTotalSumResponseTransfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
@@ -137,8 +140,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function parseQueryCreditAssessmentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditQueryCreditAssessmentResponseTransfer
-    {
+    public function parseQueryCreditAssessmentResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditQueryCreditAssessmentResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditQueryCreditAssessmentResponseTransfer = new EasycreditQueryCreditAssessmentResponseTransfer();
