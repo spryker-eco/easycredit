@@ -78,9 +78,10 @@ class EasycreditMapper implements MapperInterface
      * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface $moneyPlugin
      */
     public function __construct(
-        EasycreditConfig $config,
+        EasycreditConfig     $config,
         MoneyPluginInterface $moneyPlugin
-    ) {
+    )
+    {
         $this->config = $config;
         $this->moneyPlugin = $moneyPlugin;
     }
@@ -219,11 +220,11 @@ class EasycreditMapper implements MapperInterface
     {
         $items = [];
 
-        foreach ($quoteTransfer->getItems() as $item) {
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $items[] = [
-                static::KEY_MENGE => $item->getQuantity(),
-                static::KEY_PREIS => $item->getRefundableAmount(),
-                static::KEY_PRODUKTBEZEICHNUNG => $item->getName(),
+                static::KEY_MENGE => $itemTransfer->getQuantity(),
+                static::KEY_PREIS => $this->moneyPlugin->convertIntegerToDecimal($itemTransfer->getRefundableAmount()),
+                static::KEY_PRODUKTBEZEICHNUNG => $itemTransfer->getName(),
             ];
         }
 
