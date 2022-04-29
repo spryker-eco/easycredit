@@ -7,6 +7,9 @@
 
 namespace SprykerEcoTest\Zed\Easycredit;
 
+use ArrayObject;
+use Generated\Shared\Transfer\ItemTransfer;
+
 /**
  * @group SprykerEcoTest
  * @group Zed
@@ -25,6 +28,12 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
     {
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
+
+        $itemTransfer = new ItemTransfer();
+        $itemTransfer->setRefundableAmount(123123);
+        $test = new ArrayObject();
+        $test[] = $itemTransfer;
+        $quoteTransfer->setItems($test);
 
         $facade = $this->prepareFacade();
         $responseTransfer = $facade->sendInitializePaymentRequest($quoteTransfer);
