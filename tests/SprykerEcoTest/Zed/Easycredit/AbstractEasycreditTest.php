@@ -91,9 +91,16 @@ abstract class AbstractEasycreditTest extends Unit
         $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
         $factory->method('getConfig')->willReturn((new EasycreditBusinessFactory)->getConfig());
         $factory->method('createRequestSender')->willReturn($this->getRequestSender());
-        $factory->method('createMapper')->willReturn((new EasycreditBusinessFactory)->createMapper());
+        $factory->method('createMapper')->willReturn($this->createMapper());
 
         return $factory;
+    }
+
+    protected function createMapper(){
+        return new EasycreditMapper(
+            (new EasycreditBusinessFactory)->getConfig(),
+            (new EasycreditBusinessFactory)->getMoneyPlugin()
+        );
     }
 
     /**
@@ -183,7 +190,7 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getRequestSender(): RequestSenderInterface
     {
         return new RequestSender(
-            $this->getMapperMock(),
+            $this->createMapper(),
             $this->getAdapterFactoryMock(),
             $this->getParserMock(),
             $this->getLoggerMock(),
