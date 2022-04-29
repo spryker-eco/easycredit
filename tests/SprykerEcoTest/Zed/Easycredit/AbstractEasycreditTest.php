@@ -89,8 +89,9 @@ abstract class AbstractEasycreditTest extends Unit
             ->getMock();
 
         $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
-        $factory->method('getConfig')->willReturn($this->getConfigMock());
+        $factory->method('getConfig')->willReturn((new EasycreditBusinessFactory)->getConfig());
         $factory->method('createRequestSender')->willReturn($this->getRequestSender());
+        $factory->method('createMapper')->willReturn((new EasycreditBusinessFactory)->createMapper());
 
         return $factory;
     }
@@ -199,8 +200,7 @@ abstract class AbstractEasycreditTest extends Unit
         $mapper = $this->getMockBuilder(MapperInterface::class)
 //            ->disableOriginalConstructor()
             ->getMock();
-
-        $mapper = new EasycreditMapper(new \SprykerEco\Zed\Easycredit\EasycreditConfig(),(new EasycreditDependencyProvider)->getMoneyPlugin());
+        $mapper= (new EasycreditBusinessFactory)->createMapper();
 
         return $mapper;
     }
