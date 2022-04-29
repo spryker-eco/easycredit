@@ -21,6 +21,7 @@ use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSender;
@@ -28,9 +29,11 @@ use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSenderInterface;
 use SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
+use SprykerEco\Zed\Easycredit\Business\Mapper\EasycreditMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ResponseParserInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig as ZedEasycreditConfig;
+use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManager;
 use SprykerEco\Zed\Easycredit\Persistence\EasycreditEntityManagerInterface;
 use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
@@ -194,8 +197,10 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getMapperMock(): MapperInterface
     {
         $mapper = $this->getMockBuilder(MapperInterface::class)
-            ->disableOriginalConstructor()
+//            ->disableOriginalConstructor()
             ->getMock();
+
+        $mapper = new EasycreditMapper(new \SprykerEco\Zed\Easycredit\EasycreditConfig(),(new EasycreditDependencyProvider)->getMoneyPlugin());
 
         return $mapper;
     }
