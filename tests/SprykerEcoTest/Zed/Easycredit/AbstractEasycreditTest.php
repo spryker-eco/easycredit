@@ -7,7 +7,14 @@
 
 namespace SprykerEcoTest\Zed\Easycredit;
 
+use ArrayObject;
 use Codeception\Test\Unit;
+use Generated\Shared\DataBuilder\AddressBuilder;
+use Generated\Shared\DataBuilder\CustomerBuilder;
+use Generated\Shared\DataBuilder\ItemBuilder;
+use Generated\Shared\DataBuilder\ShipmentBuilder;
+use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
@@ -15,11 +22,13 @@ use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
@@ -158,6 +167,47 @@ abstract class AbstractEasycreditTest extends Unit
         $totalsTransfer->setGrandTotal($grandTotal);
 
         return $totalsTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ItemTransfer[]
+     */
+    protected function prepareItemTransfers(): ArrayObject
+    {
+        $itemTransfer = (new ItemBuilder())->build();
+        $itemTransfer->setRefundableAmount(12345);
+
+        return new ArrayObject([$itemTransfer]);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\CustomerTransfer
+     */
+    protected function prepareCustomerTransfer(): CustomerTransfer
+    {
+        $customerTransfer = (new CustomerBuilder())->build();
+
+        return $customerTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\AddressTransfer
+     */
+    protected function prepareAddressTransfer(): AddressTransfer
+    {
+        $addressTransfer = (new AddressBuilder())->build();
+
+        return $addressTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ShipmentTransfer
+     */
+    protected function prepareShipmentTransfer(): ShipmentTransfer
+    {
+        $shipmentTransfer = (new ShipmentBuilder())->build();
+
+        return $shipmentTransfer;
     }
 
     /**

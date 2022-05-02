@@ -46,48 +46,23 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
     /**
      * @return void
      */
-    public function testInitializePaymentRequest(): void
+    public function testInitializePaymentRequestOnConvertingAmountFromIntegerToFloatValue(): void
     {
         // Arrange
-        $quoteTransfer = $this->initializeQuoteTransfer();
+        $quoteTransfer = $this->prepareQuoteTransfer();
+        $quoteTransfer->setPayment($this->preparePaymentTransfer());
+        $quoteTransfer->setItems($this->prepareItemTransfers());
+        $quoteTransfer->setTotals($this->prepareTotalsTransfer(1500));
+        $quoteTransfer->setCustomer($this->prepareCustomerTransfer());
+        $quoteTransfer->setShippingAddress($this->prepareAddressTransfer());
+        $quoteTransfer->setBillingAddress($this->prepareAddressTransfer());
+        $quoteTransfer->setShipment($this->prepareShipmentTransfer());
 
         // Act
         $requestTransfer = $this->createMapper()->mapInitializePaymentRequest($quoteTransfer);
 
         // Assert
         $this->assertEquals($requestTransfer->getPayload()[static::REQUEST_KEY_ORDER_AMOUNT], 15.0);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function initializeQuoteTransfer(): \Generated\Shared\Transfer\QuoteTransfer
-    {
-        $quoteTransfer = $this->prepareQuoteTransfer();
-        $quoteTransfer->setPayment($this->preparePaymentTransfer());
-
-        $itemTransfer = (new ItemBuilder())->build();
-        $itemTransfer->setRefundableAmount(123123);
-        $test = new ArrayObject();
-        $test[] = $itemTransfer;
-        $quoteTransfer->setItems((new ArrayObject([$itemTransfer])));
-
-        $totalsTransfer = (new TotalsBuilder())->build();
-        $totalsTransfer->setGrandTotal(1500);
-        $quoteTransfer->setTotals($totalsTransfer);
-
-        $customerTransfer = (new CustomerBuilder())->build();
-        $quoteTransfer->setCustomer($customerTransfer);
-
-        $addressTransfer = (new AddressBuilder())->build();
-        $quoteTransfer->setShippingAddress($addressTransfer);
-        $quoteTransfer->setBillingAddress($addressTransfer);
-
-        $shipmentTransfer = (new ShipmentBuilder())->build();
-        $quoteTransfer->setShipment($shipmentTransfer);
-
-        return $quoteTransfer;
-
     }
 
     /**
