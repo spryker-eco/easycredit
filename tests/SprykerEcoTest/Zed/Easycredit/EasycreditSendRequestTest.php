@@ -8,7 +8,11 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use ArrayObject;
-use Generated\Shared\Transfer\ItemTransfer;
+use Generated\Shared\DataBuilder\AddressBuilder;
+use Generated\Shared\DataBuilder\CustomerBuilder;
+use Generated\Shared\DataBuilder\ItemBuilder;
+use Generated\Shared\DataBuilder\ShipmentBuilder;
+use Generated\Shared\DataBuilder\TotalsBuilder;
 
 /**
  * @group SprykerEcoTest
@@ -26,20 +30,64 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
      */
     public function testSendInitializePaymentRequest(): void
     {
+        // Arrange
+        $quoteTransfer = $this->prepareQuoteTransfer();
+        $quoteTransfer->setPayment($this->preparePaymentTransfer());
+        $facade = $this->prepareFacade();
+
+        // Act
+        $responseTransfer = $facade->sendInitializePaymentRequest($quoteTransfer);
+
+        // Assert
+        $this->assertEquals(static::RESPONSE_KEY_PAYMENT_IDENTIFIER, $responseTransfer->getPaymentIdentifier());
+        $this->assertTrue($responseTransfer->getSuccess());
+    }
+
+    /**
+     * @return void
+     */
+    public function testInitializePaymentRequest(): void
+    {
+        // Arrange
+        $quoteTransfer = $this->initializeQuoteTransfer();
+
+        // Act
+        $requestTransfer = $this->createMapper()->mapInitializePaymentRequest($quoteTransfer);
+
+        // Assert
+        $this->assertEquals($requestTransfer->getPayload()[static::REQUEST_KEY_ORDER_AMOUNT], 15.0);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function initializeQuoteTransfer(): \Generated\Shared\Transfer\QuoteTransfer
+    {
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
 
-        $itemTransfer = new ItemTransfer();
+        $itemTransfer = (new ItemBuilder())->build();
         $itemTransfer->setRefundableAmount(123123);
         $test = new ArrayObject();
         $test[] = $itemTransfer;
-        $quoteTransfer->setItems($test);
+        $quoteTransfer->setItems((new ArrayObject([$itemTransfer])));
 
-        $facade = $this->prepareFacade();
-        $responseTransfer = $facade->sendInitializePaymentRequest($quoteTransfer);
+        $totalsTransfer = (new TotalsBuilder())->build();
+        $totalsTransfer->setGrandTotal(1500);
+        $quoteTransfer->setTotals($totalsTransfer);
 
-        $this->assertEquals(static::RESPONSE_KEY_PAYMENT_IDENTIFIER, $responseTransfer->getPaymentIdentifier());
-        $this->assertTrue($responseTransfer->getSuccess());
+        $customerTransfer = (new CustomerBuilder())->build();
+        $quoteTransfer->setCustomer($customerTransfer);
+
+        $addressTransfer = (new AddressBuilder())->build();
+        $quoteTransfer->setShippingAddress($addressTransfer);
+        $quoteTransfer->setBillingAddress($addressTransfer);
+
+        $shipmentTransfer = (new ShipmentBuilder())->build();
+        $quoteTransfer->setShipment($shipmentTransfer);
+
+        return $quoteTransfer;
+
     }
 
     /**

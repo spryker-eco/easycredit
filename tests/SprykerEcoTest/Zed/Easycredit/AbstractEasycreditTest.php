@@ -46,6 +46,8 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
  */
 abstract class AbstractEasycreditTest extends Unit
 {
+
+    protected const REQUEST_KEY_ORDER_AMOUNT = 'bestellwert';
     protected const RESPONSE_KEY_PAYMENT_IDENTIFIER = 'payment_identifier';
     protected const RESPONSE_KEY_STATUS = 'status';
     protected const RESPONSE_KEY_TEXT = 'text';
@@ -89,14 +91,17 @@ abstract class AbstractEasycreditTest extends Unit
             ->getMock();
 
         $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
-        $factory->method('getConfig')->willReturn((new EasycreditBusinessFactory)->getConfig());
+        $factory->method('getConfig')->willReturn($this->getConfigMock());
         $factory->method('createRequestSender')->willReturn($this->getRequestSender());
-        $factory->method('createMapper')->willReturn($this->createMapper());
+        $factory->method('createMapper')->willReturn($this->getMapperMock());
 
         return $factory;
     }
 
-    protected function createMapper(){
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\Mapper\EasycreditMapper
+     */
+    protected function createMapper(): EasycreditMapper{
         return new EasycreditMapper(
             (new EasycreditBusinessFactory)->getConfig(),
             (new EasycreditBusinessFactory)->getMoneyPlugin()
@@ -190,7 +195,7 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getRequestSender(): RequestSenderInterface
     {
         return new RequestSender(
-            $this->createMapper(),
+            $this->getMapperMock(),
             $this->getAdapterFactoryMock(),
             $this->getParserMock(),
             $this->getLoggerMock(),
@@ -205,10 +210,8 @@ abstract class AbstractEasycreditTest extends Unit
     protected function getMapperMock(): MapperInterface
     {
         $mapper = $this->getMockBuilder(MapperInterface::class)
-//            ->disableOriginalConstructor()
+            ->disableOriginalConstructor()
             ->getMock();
-        $mapper= (new EasycreditBusinessFactory)->createMapper();
-
         return $mapper;
     }
 
