@@ -1,0 +1,51 @@
+[
+    {
+        "fileName": "src/SprykerEco/Client/Easycredit/Dependency/Client/EasycreditToZedRequestClientBridge.php",
+        "description": "Bridges: Type should be defined for param `url` in method `SprykerEco\\Client\\Easycredit\\Dependency\\Client\\EasycreditToZedRequestClientBridge::call()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `jsonValue` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::decodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `assoc` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::decodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `depth` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::decodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `options` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::decodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `options` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::encodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/SprykerEco/Service/Easycredit/Dependency/Service/EasycreditToUtilEncodingServiceBridge.php",
+        "description": "Bridges: Type should be defined for param `depth` in method `SprykerEco\\Service\\Easycredit\\Dependency\\Service\\EasycreditToUtilEncodingServiceBridge::encodeJson()`.",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    }
+]
