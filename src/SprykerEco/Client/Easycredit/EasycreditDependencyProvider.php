@@ -13,6 +13,9 @@ use SprykerEco\Client\Easycredit\Dependency\Client\EasycreditToZedRequestClientB
 
 class EasycreditDependencyProvider extends AbstractDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 
     /**

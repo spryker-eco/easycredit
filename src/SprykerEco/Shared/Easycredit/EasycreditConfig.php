@@ -11,12 +11,34 @@ use Spryker\Shared\Kernel\AbstractBundleConfig;
 
 class EasycreditConfig extends AbstractBundleConfig
 {
+    /**
+     * @var string
+     */
     public const PROVIDER_NAME = 'Easycredit';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'easycredit';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_PAGE_INTEGRATION_TYPE = 'PAYMENT_PAGE';
 
+    /**
+     * @var array
+     */
     public const PAYMENT_METHOD_AVAILABLE_COUNTRIES = ['DE'];
+
+    /**
+     * @var int
+     */
     public const PAYMENT_METHOD_MIN_AVAILABLE_MONEY_VALUE = 20000;
+
+    /**
+     * @var int
+     */
     public const PAYMENT_METHOD_MAX_AVAILABLE_MONEY_VALUE = 1000000;
 
     /**

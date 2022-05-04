@@ -14,4 +14,4 @@ composer require spryker-eco/easycredit
 
 ## Documentation
 
-[Spryker Documentation](https://docs.spryker.com/industry_partners/payment/payment-partners.htm)
+[Spryker Documentation](https://docs.spryker.com)

@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class QueryCreditAssessmentAdapter extends AbstractAdapter
 {
+    /**
+     * @var string
+     */
     protected const URL_CREDIT_ASSESSMENTS_IDENTIFIER = 'entscheidung';
 
     /**
@@ -26,7 +29,7 @@ class QueryCreditAssessmentAdapter extends AbstractAdapter
             $this->config->getApiUrl(),
             static::REQUEST_TYPE_PROCESS,
             $easycreditRequestTransfer->getVorgangskennung(),
-            static::URL_CREDIT_ASSESSMENTS_IDENTIFIER
+            static::URL_CREDIT_ASSESSMENTS_IDENTIFIER,
         );
     }
 

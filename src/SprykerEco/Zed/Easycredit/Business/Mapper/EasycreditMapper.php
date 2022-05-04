@@ -15,47 +15,169 @@ use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 class EasycreditMapper implements MapperInterface
 {
+    /**
+     * @var string
+     */
     public const KEY_PERSONEN_DATEN = 'personendaten';
+
+    /**
+     * @var string
+     */
     public const KEY_RECHNUNGS_ADRESSE = 'rechnungsadresse';
+
+    /**
+     * @var string
+     */
     public const KEY_WEITERE_KAEUFER_ANGABEN = 'weitereKaeuferangaben';
+
+    /**
+     * @var string
+     */
     public const KEY_RUECK_SPRUNG_ADRESSEN = 'ruecksprungadressen';
+
+    /**
+     * @var string
+     */
     public const KEY_LIEFER_ADRESSE = 'lieferadresse';
+
+    /**
+     * @var string
+     */
     public const KEY_KONTAKT = 'kontakt';
+
+    /**
+     * @var string
+     */
     public const KEY_RISIKORELEVANTE_ANGABEN = 'risikorelevanteAngaben';
+
+    /**
+     * @var string
+     */
     public const KEY_WARENKORBINFOS = 'warenkorbinfos';
 
+    /**
+     * @var string
+     */
     public const KEY_SHOP_KENNUNG = 'shopKennung';
+
+    /**
+     * @var string
+     */
     public const KEY_BESTELL_WERT = 'bestellwert';
+
+    /**
+     * @var string
+     */
     public const KEY_INTEGRATIONS_ART = 'integrationsart';
 
+    /**
+     * @var string
+     */
     public const KEY_ANREDE = 'anrede';
+
+    /**
+     * @var string
+     */
     public const KEY_VORNAME = 'vorname';
+
+    /**
+     * @var string
+     */
     public const KEY_NACHNAME = 'nachname';
+
+    /**
+     * @var string
+     */
     public const KEY_GEBURTS_DATUM = 'geburtsdatum';
 
+    /**
+     * @var string
+     */
     public const KEY_STRASSE_HAUS_NR = 'strasseHausNr';
+
+    /**
+     * @var string
+     */
     public const KEY_PLZ = 'plz';
+
+    /**
+     * @var string
+     */
     public const KEY_ORT = 'ort';
+
+    /**
+     * @var string
+     */
     public const KEY_LAND = 'land';
 
+    /**
+     * @var string
+     */
     public const KEY_TELEFON_NUMMER = 'telefonnummer';
+
+    /**
+     * @var string
+     */
     public const KEY_TITEL = 'titel';
+
+    /**
+     * @var string
+     */
     public const KEY_GEBURTSNAME = 'geburtsname';
+
+    /**
+     * @var string
+     */
     public const KEY_GEBURTSORT = 'geburtsort';
 
+    /**
+     * @var string
+     */
     public const KEY_EMAIL = 'email';
 
+    /**
+     * @var string
+     */
     public const KEY_URL_ERFOLG = 'urlErfolg';
+
+    /**
+     * @var string
+     */
     public const KEY_URL_ABBRUCH = 'urlAbbruch';
+
+    /**
+     * @var string
+     */
     public const KEY_URL_ABLEHNUNG = 'urlAblehnung';
 
+    /**
+     * @var string
+     */
     public const KEY_BESTELLUNG_ERFOLGT_UEBER_LOGIN = 'bestellungErfolgtUeberLogin';
+
+    /**
+     * @var string
+     */
     public const KEY_LOGISTIK_DIENSTLEISTER = 'logistikDienstleister';
 
+    /**
+     * @var string
+     */
     public const KEY_MENGE = 'menge';
+
+    /**
+     * @var string
+     */
     public const KEY_PREIS = 'preis';
+
+    /**
+     * @var string
+     */
     public const KEY_PRODUKTBEZEICHNUNG = 'produktbezeichnung';
 
+    /**
+     * @var array
+     */
     protected const SALUTATION_MAPPER = [
         'Mr' => 'HERR',
         'Mrs' => 'FRAU',

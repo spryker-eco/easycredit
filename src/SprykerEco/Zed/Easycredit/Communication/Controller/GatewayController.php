@@ -17,6 +17,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface getRepository()
  */
 class GatewayController extends AbstractGatewayController
 {

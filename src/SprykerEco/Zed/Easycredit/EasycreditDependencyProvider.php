@@ -12,9 +12,19 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Money\Communication\Plugin\MoneyPlugin;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceBridge;
 
+/**
+ * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
+ */
 class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+
+    /**
+     * @var string
+     */
     public const PLUGIN_MONEY = 'PLUGIN_MONEY';
 
     /**

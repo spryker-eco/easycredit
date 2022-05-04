@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EasycreditRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
+    /**
+     * @var string
+     */
     protected const ROUTE_NAME_EASYCREDIT_SUCCESS_RESPONSE = 'easycredit/success-response';
 
     /**

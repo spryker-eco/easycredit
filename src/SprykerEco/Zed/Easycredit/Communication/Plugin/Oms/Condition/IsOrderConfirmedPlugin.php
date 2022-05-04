@@ -17,6 +17,9 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  */
 class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterface
 {
+    /**
+     * @var string
+     */
     public const NAME = 'IsOrderConfirmed';
 
     /**

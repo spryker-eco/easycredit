@@ -17,19 +17,74 @@ use Generated\Shared\Transfer\EasycreditResponseTransfer;
 
 class ResponseParser implements ResponseParserInterface
 {
+    /**
+     * @var string
+     */
     protected const KEY_PAYMENT_IDENTIFIER = 'tbVorgangskennung';
+
+    /**
+     * @var string
+     */
     protected const KEY_ALLGEMEINE_VORGANGSDATEN = 'allgemeineVorgangsdaten';
+
+    /**
+     * @var string
+     */
     protected const KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'urlVorvertraglicheInformationen';
+
+    /**
+     * @var string
+     */
     protected const KEY_TILGUNGSPLAN_TEXT = 'tilgungsplanText';
+
+    /**
+     * @var string
+     */
     protected const KEY_WS_MESSAGES = 'wsMessages';
+
+    /**
+     * @var string
+     */
     protected const KEY_MESSAGES = 'messages';
+
+    /**
+     * @var string
+     */
     protected const KEY_KEY = 'key';
+
+    /**
+     * @var string
+     */
     protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
+
+    /**
+     * @var string
+     */
     protected const KEY_RATENPLAN = 'ratenplan';
+
+    /**
+     * @var string
+     */
     protected const KEY_ZINSEN = 'zinsen';
+
+    /**
+     * @var string
+     */
     protected const KEY_ANFALLENDE_ZINSEN = 'anfallendeZinsen';
+
+    /**
+     * @var string
+     */
     protected const KEY_ENTSCHEIDUNG = 'entscheidung';
+
+    /**
+     * @var string
+     */
     protected const KEY_ENTSCHEIDUNG_SERGEBNIS = 'entscheidungsergebnis';
+
+    /**
+     * @var string
+     */
     protected const KEY_TEXT_IDENTIFIER = 'zustimmungDatenuebertragungPaymentPage';
 
     /**

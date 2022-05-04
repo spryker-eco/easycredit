@@ -82,7 +82,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new EasycreditMapper(
             $this->getConfig(),
-            $this->getMoneyPlugin()
+            $this->getMoneyPlugin(),
         );
     }
 
@@ -94,7 +94,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
         return new AdapterFactory(
             $this->createEasycreditClient(),
             $this->getUtilEncodingService(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -117,7 +117,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
             $this->createResponseParser(),
             $this->createEasycreditLogger(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 

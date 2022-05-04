@@ -15,9 +15,19 @@ use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientBridge;
 
 class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+
+    /**
+     * @var string
+     */
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
 
+    /**
+     * @var string
+     */
     public const PLUGIN_MONEY = 'PLUGIN_MONEY';
 
     /**

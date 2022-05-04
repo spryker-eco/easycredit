@@ -17,6 +17,9 @@ use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientInterfac
 
 class SuccessResponseProcessor implements SuccessResponseProcessorInterface
 {
+    /**
+     * @var string
+     */
     public const EXPENSE_TYPE_EASYCREDIT = 'Easycredit';
 
     /**
