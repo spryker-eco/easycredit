@@ -37,7 +37,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \GuzzleHttp\ClientInterface
      */
-    public function createEasycreditClient(): ClientInterface
+    public function getEasycreditClient(): ClientInterface
     {
         return $this->getProvidedDependency(EasycreditDependencyProvider::GUZZLE_CLIENT);
     }
@@ -91,7 +91,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createAdapterFactory(): AdapterFactoryInterface
     {
         return new AdapterFactory(
-            $this->createEasycreditClient(),
+            $this->getEasycreditClient(),
             $this->getUtilEncodingService(),
             $this->getConfig(),
         );

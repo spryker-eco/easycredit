@@ -42,6 +42,7 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = $this->addUtilEncodingService($container);
         $container = $this->addPluginMoney($container);
+        $container = $this->addGuzzleClient($container);
 
         return $container;
     }
@@ -74,7 +75,13 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    protected function addGuzzleClient(Container $container): Container{
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addGuzzleClient(Container $container): Container
+    {
         $container->set(static::GUZZLE_CLIENT, function () {
             return new Client();
         });

@@ -59,7 +59,7 @@ if (!is_dir($configTargetDirectory)) {
 }
 
 copy($configSourceDirectory . 'config_default.php', $configTargetDirectory . 'config_default.php');
-copy($configSourceDirectory . 'config_store.php', $configTargetDirectory . 'config_store.php');
+copy($configSourceDirectory . 'default_store.php', $configTargetDirectory . 'default_store.php');
 copy($configSourceDirectory . 'stores.php', $configTargetDirectory . 'stores.php');
 
 $config = \Spryker\Shared\Config\Config::getInstance();
