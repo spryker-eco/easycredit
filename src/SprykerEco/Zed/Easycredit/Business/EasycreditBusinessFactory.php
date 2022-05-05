@@ -13,7 +13,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactory;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSender;
 use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSenderInterface;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
@@ -40,7 +39,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
      */
     public function createEasycreditClient(): ClientInterface
     {
-        return new EasycreditClient();
+        return $this->getProvidedDependency(EasycreditDependencyProvider::GUZZLE_CLIENT);
     }
 
     /**

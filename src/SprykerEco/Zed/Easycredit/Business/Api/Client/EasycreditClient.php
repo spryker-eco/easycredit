@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Client;
 
 use GuzzleHttp\Client;
 
-class EasycreditClient extends Client
+//class EasycreditClient extends Client
+class EasycreditClient
 {
 }

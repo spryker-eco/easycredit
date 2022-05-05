@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Client\Easycredit\Dependency\Client;
 
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface EasycreditToZedRequestClientInterface
@@ -14,9 +15,9 @@ interface EasycreditToZedRequestClientInterface
     /**
      * @param string $url
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $object
-     * @param array|int|null $requestOptions Deprecated: Do not use "int" anymore, please use an array for requestOptions.
+     * @param array|null $requestOptions Deprecated: Do not use "int" anymore, please use an array for requestOptions.
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function call($url, TransferInterface $object, $requestOptions = null): TransferInterface;
+    public function call(string $url, TransferInterface $object, ?array $requestOptions = null): AbstractTransfer;
 }

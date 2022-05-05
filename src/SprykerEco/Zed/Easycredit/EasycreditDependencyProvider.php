@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Easycredit;
 
+use GuzzleHttp\Client;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Money\Communication\Plugin\MoneyPlugin;
@@ -26,6 +27,11 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const PLUGIN_MONEY = 'PLUGIN_MONEY';
+
+    /**
+     * @var string
+     */
+    public const GUZZLE_CLIENT = 'GUZZLE_CLIENT';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -63,6 +69,14 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::PLUGIN_MONEY, function () {
             return new MoneyPlugin();
+        });
+
+        return $container;
+    }
+
+    protected function addGuzzleClient(Container $container): Container{
+        $container->set(static::GUZZLE_CLIENT, function () {
+            return new Client();
         });
 
         return $container;
