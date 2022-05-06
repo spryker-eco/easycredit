@@ -31,8 +31,8 @@ class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterfac
      *
      * @return bool
      */
-    public function check(SpySalesOrderItem $orderItem)
+    public function check(SpySalesOrderItem $orderItem): bool
     {
-        return $this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmed();
+        return $this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmed() ?? false;
     }
 }

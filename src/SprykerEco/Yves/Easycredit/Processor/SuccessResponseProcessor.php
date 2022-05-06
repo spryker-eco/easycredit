@@ -88,7 +88,7 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(EasycreditConstants::EASYCREDIT_EXPENSE_TYPE);
         $expenseTransfer->setUnitNetPrice(0);
-        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen()));
+        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen() ?? 0.0));
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);

@@ -217,7 +217,7 @@ class EasycreditMapper implements MapperInterface
     {
         $payload = [
             static::KEY_SHOP_KENNUNG => $this->config->getShopIdentifier(),
-            static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal()),
+            static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal() ?? 0),
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
                 static::KEY_ANREDE => static::SALUTATION_MAPPER[$quoteTransfer->getCustomer()->getSalutation()],

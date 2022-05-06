@@ -69,6 +69,6 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isPaymentMethodEasycredit(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return strpos($paymentMethodTransfer->getMethodName(), $this->config->getPaymentMethod()) !== false;
+        return strpos($paymentMethodTransfer->getMethodName() ?? '', $this->config->getPaymentMethod()) !== false;
     }
 }
