@@ -21,6 +21,7 @@
 *.exe binary
 
 # Remove files for archives generated using `git archive`
+psalm-report.json export-ignore
 architecture-baseline.json export-ignore
 dependency.json export-ignore
 .coveralls.yml export-ignore
