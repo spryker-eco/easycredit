@@ -4,13 +4,13 @@
     <table name="spy_payment_easycredit_api_log">
         <column name="id_payment_easycredit_api_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
 
-        <column name="type" required="true" type="VARCHAR"/>
+        <column name="type" required="true" size="255" type="VARCHAR"/>
         <column name="request" required="true" type="LONGVARCHAR"/>
         <column name="response" required="true" type="LONGVARCHAR"/>
         <column name="status_code" required="false" type="SMALLINT" />
-        <column name="error_code" required="false" type="VARCHAR" />
+        <column name="error_code" required="false" size="45" type="VARCHAR" />
         <column name="error_message" required="false" type="LONGVARCHAR" />
-        <column name="error_type" required="false" type="VARCHAR" />
+        <column name="error_type" required="false" size="255" type="VARCHAR" />
 
         <behavior name="timestampable"/>
 
@@ -20,7 +20,7 @@
     <table name="spy_payment_easycredit_order_identifier">
         <column name="id_payment_easycredit_order_identifier" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_sales_order" type="INTEGER" required="true"/>
-        <column name="identifier" type="VARCHAR" required="true" />
+        <column name="identifier" size="255" type="VARCHAR" required="true" />
         <column name="confirmed" type="BOOLEAN" required="true" />
 
         <foreign-key name="spy_payment_easycredit_order_identifier-fk_sales_order" foreignTable="spy_sales_order" phpName="Order" refPhpName="EasycreditIdentifier">
