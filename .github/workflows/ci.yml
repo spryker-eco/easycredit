@@ -14,7 +14,7 @@ env:
     DATABASE_ALLOW_EMPTY_PASSWORD: false
     DATABASE_CHARACTER_SET: utf8
     DATABASE_COLLATE: utf8_general_ci
-    DATABASE_DSN: mysql
+    DATABASE_DSN: mariadb
 
 on:
     pull_request:
@@ -62,7 +62,7 @@ jobs:
                     MYSQL_ALLOW_EMPTY_PASSWORD: false
                     MYSQL_ROOT_PASSWORD: secret
                     MYSQL_DATABASE: eu-docker
-                    MYSQL_DNS: mysql
+                    MYSQL_DNS: mariadb
                 ports:
                     - 3306:3306
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
