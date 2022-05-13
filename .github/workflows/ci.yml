@@ -14,6 +14,7 @@ env:
     DATABASE_ALLOW_EMPTY_PASSWORD: false
     DATABASE_CHARACTER_SET: utf8
     DATABASE_COLLATE: utf8_general_ci
+    DATABASE_DSN: mysql
 
 on:
     pull_request:
@@ -40,6 +41,7 @@ jobs:
                   mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
                   mysql user: ${{ env.DATABASE_USERNAME }}
                   mysql password: ${{ env.DATABASE_PASSWORD }}
+                  mysql dsn: ${{ env.DATABASE_DSN }}
 
     ci:
         name: Easycredit (PHP ${{ matrix.php-versions }})
@@ -60,6 +62,7 @@ jobs:
                     MYSQL_ALLOW_EMPTY_PASSWORD: false
                     MYSQL_ROOT_PASSWORD: secret
                     MYSQL_DATABASE: eu-docker
+                    MYSQL_DNS: mysql
                 ports:
                     - 3306:3306
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
