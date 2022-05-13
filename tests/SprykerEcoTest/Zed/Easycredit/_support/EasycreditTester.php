@@ -1,8 +1,17 @@
 <?php
+
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEcoTest\Zed\Easycredit;
+
+use Codeception\Actor;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,8 +24,8 @@ namespace SprykerEcoTest\Zed\Easycredit;
  * @method void pause()
  *
  * @SuppressWarnings(PHPMD)
-*/
-class EasycreditTester extends \Codeception\Actor
+ */
+class EasycreditTester extends Actor
 {
     use _generated\EasycreditTesterActions;
 
