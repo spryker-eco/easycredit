@@ -14,8 +14,12 @@ $config[KernelConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
 $config[KernelConstants::CORE_NAMESPACES] = [
+    'SprykerShop',
+    'SprykerEco',
     'Spryker',
+    'SprykerSdk',
 ];
+
 $config[PropelConstants::ZED_DB_ENGINE]
     = strtolower(getenv('SPRYKER_DB_ENGINE') ?: '') ?: PropelConfig::DB_ENGINE_MYSQL;
 $config[PropelConstants::ZED_DB_HOST] = getenv('SPRYKER_DB_HOST');
