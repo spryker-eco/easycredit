@@ -20,22 +20,15 @@
         "spryker/zed-request": "^3.7.0"
     },
     "require-dev": {
-        "codeception/module-asserts": "^1.3.0",
         "phpstan/phpstan": "^1.2.0",
-        "spryker/state-machine": "*",
-        "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
-        "spryker/container": "*",
-        "spryker/customer": "*",
-        "spryker/error-handler": "*",
-        "spryker/event": "*",
-        "spryker/log": "*",
-        "spryker/monolog": "*",
+        "spryker/oms": "^11.17.0",
+        "spryker/payment": "^5.7.0",
         "spryker/propel": "*",
-        "spryker/queue": "*",
+        "spryker/propel-orm": "^1.15.1",
+        "spryker/router": "^1.14.0",
         "spryker/silex": "*",
-        "spryker/testify": "^3.43.0",
-        "spryker/zed-navigation": "^1.0.0"
+        "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker/oms": "If you want to use Oms plugins.",
