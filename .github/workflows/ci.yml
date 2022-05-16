@@ -14,7 +14,6 @@ env:
     DATABASE_ALLOW_EMPTY_PASSWORD: false
     DATABASE_CHARACTER_SET: utf8
     DATABASE_COLLATE: utf8_general_ci
-    DATABASE_DSN: mariadb
 
 on:
     pull_request:
