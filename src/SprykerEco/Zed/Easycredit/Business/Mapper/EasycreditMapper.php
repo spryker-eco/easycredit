@@ -338,7 +338,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<array-key,mixed>
      */
     protected function prepareOrderItems(QuoteTransfer $quoteTransfer): array
     {

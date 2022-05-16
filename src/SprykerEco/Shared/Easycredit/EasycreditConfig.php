@@ -27,7 +27,7 @@ class EasycreditConfig extends AbstractBundleConfig
     public const PAYMENT_PAGE_INTEGRATION_TYPE = 'PAYMENT_PAGE';
 
     /**
-     * @var array
+     * @var array<string>
      */
     public const PAYMENT_METHOD_AVAILABLE_COUNTRIES = ['DE'];
 
@@ -54,7 +54,7 @@ class EasycreditConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
     public function getPaymentMethodAvailableCountries(): array
     {
