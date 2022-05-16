@@ -351,6 +351,7 @@ class EasycreditMapper implements MapperInterface
             ];
         }
 
+
         return $items;
     }
 }
