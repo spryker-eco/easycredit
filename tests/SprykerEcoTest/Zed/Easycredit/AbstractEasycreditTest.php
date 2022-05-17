@@ -22,6 +22,7 @@ use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
@@ -206,7 +207,7 @@ abstract class AbstractEasycreditTest extends Unit
      */
     protected function prepareItemTransfers(): ArrayObject
     {
-        $itemTransfer = (new ItemBuilder())->build();
+        $itemTransfer = new ItemTransfer();
         $itemTransfer->setRefundableAmount(12345);
 
         return new ArrayObject([$itemTransfer]);
@@ -217,7 +218,7 @@ abstract class AbstractEasycreditTest extends Unit
      */
     protected function prepareCustomerTransfer(): CustomerTransfer
     {
-        $customerTransfer = (new CustomerBuilder())->build();
+        $customerTransfer = new CustomerTransfer();
 
         return $customerTransfer;
     }
@@ -227,7 +228,7 @@ abstract class AbstractEasycreditTest extends Unit
      */
     protected function prepareAddressTransfer(): AddressTransfer
     {
-        $addressTransfer = (new AddressBuilder())->build();
+        $addressTransfer = new AddressTransfer();
 
         return $addressTransfer;
     }
@@ -237,7 +238,7 @@ abstract class AbstractEasycreditTest extends Unit
      */
     protected function prepareShipmentTransfer(): ShipmentTransfer
     {
-        $shipmentTransfer = (new ShipmentBuilder())->build();
+        $shipmentTransfer = new ShipmentTransfer();
 
         return $shipmentTransfer;
     }
