@@ -28,7 +28,6 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
-                - \SprykerEcoTest\Zed\Easycredit\Module\FunctionalModule
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                       coreNamespaces:
                           - Spryker
