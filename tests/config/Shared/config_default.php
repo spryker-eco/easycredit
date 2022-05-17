@@ -23,3 +23,4 @@ $config[PropelConstants::ZED_DB_PORT] = getenv('DATABASE_PORT') ?: '3306';
 $config[PropelConstants::ZED_DB_USERNAME] = getenv('DATABASE_USERNAME') ?: 'root';
 $config[PropelConstants::ZED_DB_PASSWORD] = getenv('DATABASE_PASSWORD') ?: 'secret';
 $config[PropelConstants::ZED_DB_DATABASE] = getenv('DATABASE_NAME') ?: 'eu-docker';
+$config['ERROR_LEVEL'] = 0;
