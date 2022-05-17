@@ -79,7 +79,7 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
     public function testSendOrderConfirmationRequest(): void
     {
         $quoteTransfer = $this->prepareQuoteTransfer();
-        $idSalesOrder = $this->tester->createOrder($quoteTransfer, '');
+        $idSalesOrder = $this->tester->createOrder($quoteTransfer, 'Easycredit01');
 
         $facade = $this->prepareFacade();
         $responseTransfer = $facade->sendOrderConfirmationRequest($idSalesOrder);

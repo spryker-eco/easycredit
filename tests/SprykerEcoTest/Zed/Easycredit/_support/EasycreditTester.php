@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use Codeception\Actor;
+use Generated\Shared\Transfer\QuoteTransfer;
 
 /**
  * Inherited Methods
@@ -29,7 +30,5 @@ class EasycreditTester extends Actor
 {
     use _generated\EasycreditTesterActions;
 
-    /**
-     * Define custom actions here
-     */
+
 }
