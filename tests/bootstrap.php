@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('APPLICATION')) {
-    define('APPLICATION', 'ModuleName');
+    define('APPLICATION', 'Easycredit');
 }
 
 if (!defined('APPLICATION_ROOT_DIR')) {
