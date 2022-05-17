@@ -38,7 +38,6 @@ suites:
                           - SprykerSdkTest
                           - SprykerMiddleware
                           - SprykerMiddlewareTest
-                - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Shared\Sales\Helper\SalesHelper
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
                       isolated: true
