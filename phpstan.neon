@@ -4,10 +4,7 @@ parameters:
         - src
     bootstrapFiles:
         - tests/bootstrap.php
-    checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
-    ignoreErrors:
-        - '#.+Generated\\Shared\\Transfer.+#'
     excludePaths:
         - src/SprykerEco/Zed/Easycredit/Persistence/Propel
         - src/SprykerEco/Yves/Easycredit/Form/Constraint
