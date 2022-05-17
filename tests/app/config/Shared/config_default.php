@@ -34,7 +34,7 @@ $config[KernelConstants::CORE_NAMESPACES] = [
 // ----------------------------------------------------------------------------
 
 $config[PropelConstants::ZED_DB_ENGINE] = PropelConfig::DB_ENGINE_MYSQL;
-$config[PropelConstants::ZED_DB_HOST] = '127.0.0.1';
+$config[PropelConstants::ZED_DB_HOST] = 'localhost';
 $config[PropelConstants::ZED_DB_PORT] = '3306';
 $config[PropelConstants::ZED_DB_USERNAME] = 'root'; //getenv('SPRYKER_DB_USERNAME');
 $config[PropelConstants::ZED_DB_PASSWORD] = 'secret'; //getenv('SPRYKER_DB_PASSWORD');
