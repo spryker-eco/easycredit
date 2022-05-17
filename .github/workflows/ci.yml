@@ -38,6 +38,8 @@ jobs:
                   mariadb version: ${{ env.DATABASE_VERSION }}
                   mysql database: ${{ env.DATABASE_NAME }}
                   mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                  mysql user: ${{ env.DATABASE_USERNAME }}
+                  mysql password: ${{ env.DATABASE_PASSWORD }}
 
     ci:
         name: Easycredit (PHP ${{ matrix.php-versions }})
