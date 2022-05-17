@@ -1,4 +1,4 @@
-namespace: SprykerEcoTest\Zed\ModuleName
+namespace: SprykerEcoTest\Zed\Easycredit
 
 paths:
     tests: .
@@ -15,7 +15,7 @@ coverage:
 suites:
     Zed:
         path: .
-        class_name: ModuleNameTester
+        class_name: EasycreditTester
         modules:
             enabled:
                 - Asserts
