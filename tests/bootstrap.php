@@ -38,7 +38,6 @@ spl_autoload_register(function ($className) {
     }
 
     $classNameParts = explode('\\', $className);
-
     $fileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
     $filePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $fileName;
 
