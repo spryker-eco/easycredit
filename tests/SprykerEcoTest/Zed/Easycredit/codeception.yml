@@ -48,3 +48,4 @@ suites:
                       isolated: true
                       schemaSourceDirectoryList:
                           - src/*/Zed/*/Persistence/Propel/Schema
+                          - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema
