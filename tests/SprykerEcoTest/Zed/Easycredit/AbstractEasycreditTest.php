@@ -9,10 +9,6 @@ namespace SprykerEcoTest\Zed\Easycredit;
 
 use ArrayObject;
 use Codeception\Test\Unit;
-use Generated\Shared\DataBuilder\AddressBuilder;
-use Generated\Shared\DataBuilder\CustomerBuilder;
-use Generated\Shared\DataBuilder\ItemBuilder;
-use Generated\Shared\DataBuilder\ShipmentBuilder;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
