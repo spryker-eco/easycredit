@@ -38,8 +38,6 @@ jobs:
                   mariadb version: ${{ env.DATABASE_VERSION }}
                   mysql database: ${{ env.DATABASE_NAME }}
                   mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
-                  mysql user: ${{ env.DATABASE_USERNAME }}
-                  mysql password: ${{ env.DATABASE_PASSWORD }}
 
     ci:
         name: Easycredit (PHP ${{ matrix.php-versions }})
@@ -60,8 +58,6 @@ jobs:
                     MYSQL_ALLOW_EMPTY_PASSWORD: false
                     MYSQL_ROOT_PASSWORD: ${{ env.DATABASE_ROOT_PASSWORD }}
                     MYSQL_DATABASE: ${{ env.DATABASE_NAME }}
-                    MYSQL_USERNAME: root
-                    MYSQL_PASSWORD: secret
                 ports:
                     - 3306:3306
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
