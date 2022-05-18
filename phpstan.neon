@@ -8,4 +8,3 @@ parameters:
     excludePaths:
         - src/SprykerEco/Zed/Easycredit/Persistence/Propel
         - src/SprykerEco/Yves/Easycredit/Form/Constraint
-        - tests/*

@@ -29,7 +29,7 @@ class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
 //        $idSalesOrder = $this->tester->createOrder($quoteTransfer, 'Easycredit01');
 //        $idSalesOrder = random_int(0, 9999999);
 
-        $idSalesOrder = 0;
+        $idSalesOrder = 1;
         $saveOrderTransfer = new SaveOrderTransfer();
         $saveOrderTransfer->setIdSalesOrder($idSalesOrder);
 

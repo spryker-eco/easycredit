@@ -47,6 +47,7 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
         $quoteTransfer->setItems($this->prepareItemTransfers());
         $quoteTransfer->setTotals($this->prepareTotalsTransfer(1500));
         $quoteTransfer->setCustomer($this->prepareCustomerTransfer());
+        $quoteTransfer->getCustomer()->setSalutation('Mr');
         $quoteTransfer->setShippingAddress($this->prepareAddressTransfer());
         $quoteTransfer->setBillingAddress($this->prepareAddressTransfer());
         $quoteTransfer->setShipment($this->prepareShipmentTransfer());
