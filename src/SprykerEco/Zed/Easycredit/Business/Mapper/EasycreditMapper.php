@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Easycredit\Business\Mapper;
 
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
+use Generated\Shared\Transfer\EasycreditTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
@@ -214,33 +215,39 @@ class EasycreditMapper implements MapperInterface
      */
     public function mapInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
+        $shippingAddressTransfer = $quoteTransfer->getShippingAddress();
+        $billingAddressTransfer = $quoteTransfer->getBillingAddress();
+        $customerTransfer = $quoteTransfer->getCustomer();
+        $totalsTransfer = $quoteTransfer->getTotals();
+        $shipmentTransfer = $quoteTransfer->getShipment();
+
         $payload = [
             static::KEY_SHOP_KENNUNG => $this->config->getShopIdentifier(),
-            static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal() ?? 0),
+            static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($totalsTransfer ? ($totalsTransfer->getGrandTotal() ?? 0) : 0),
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
-                static::KEY_ANREDE => static::SALUTATION_MAPPER[$quoteTransfer->getCustomer()->getSalutation()],
-                static::KEY_VORNAME => $quoteTransfer->getShippingAddress()->getFirstName(),
-                static::KEY_NACHNAME => $quoteTransfer->getShippingAddress()->getLastName(),
+                static::KEY_ANREDE => static::SALUTATION_MAPPER[$customerTransfer ? $customerTransfer->getSalutation() : null],
+                static::KEY_VORNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getFirstName() : null,
+                static::KEY_NACHNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getLastName() : null,
                 static::KEY_GEBURTS_DATUM => '',
             ],
             static::KEY_RECHNUNGS_ADRESSE => [
-                static::KEY_STRASSE_HAUS_NR => $quoteTransfer->getBillingAddress()->getAddress1() . $quoteTransfer->getBillingAddress()->getAddress2(),
-                static::KEY_PLZ => $quoteTransfer->getBillingAddress()->getZipCode(),
-                static::KEY_ORT => $quoteTransfer->getBillingAddress()->getCity(),
-                static::KEY_LAND => $quoteTransfer->getBillingAddress()->getIso2Code(),
+                static::KEY_STRASSE_HAUS_NR => ($billingAddressTransfer ? $billingAddressTransfer->getAddress1() . $billingAddressTransfer->getAddress2() : null),
+                static::KEY_PLZ => $billingAddressTransfer ? $billingAddressTransfer->getZipCode() : null,
+                static::KEY_ORT => $billingAddressTransfer ? $billingAddressTransfer->getCity() : null,
+                static::KEY_LAND => $billingAddressTransfer ? $billingAddressTransfer->getIso2Code() : null,
             ],
             static::KEY_LIEFER_ADRESSE => [
-                static::KEY_VORNAME => $quoteTransfer->getShippingAddress()->getFirstName(),
-                static::KEY_NACHNAME => $quoteTransfer->getShippingAddress()->getLastName(),
-                static::KEY_STRASSE_HAUS_NR => $quoteTransfer->getShippingAddress()->getAddress1() . $quoteTransfer->getShippingAddress()->getAddress2(),
-                static::KEY_PLZ => $quoteTransfer->getShippingAddress()->getZipCode(),
-                static::KEY_ORT => $quoteTransfer->getShippingAddress()->getCity(),
-                static::KEY_LAND => $quoteTransfer->getShippingAddress()->getIso2Code(),
+                static::KEY_VORNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getFirstName() : null,
+                static::KEY_NACHNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getLastName() : null,
+                static::KEY_STRASSE_HAUS_NR => ($shippingAddressTransfer ? $shippingAddressTransfer->getAddress1() . $shippingAddressTransfer->getAddress2() : null),
+                static::KEY_PLZ => $shippingAddressTransfer ? $shippingAddressTransfer->getZipCode() : null,
+                static::KEY_ORT => $shippingAddressTransfer ? $shippingAddressTransfer->getCity() : null,
+                static::KEY_LAND => $shippingAddressTransfer ? $shippingAddressTransfer->getIso2Code() : null,
             ],
             static::KEY_WEITERE_KAEUFER_ANGABEN => [
-                static::KEY_TELEFON_NUMMER => $quoteTransfer->getCustomer()->getPhone(),
-                static::KEY_GEBURTSNAME => $quoteTransfer->getCustomer()->getFirstName(),
+                static::KEY_TELEFON_NUMMER => $customerTransfer ? $customerTransfer->getPhone() : null,
+                static::KEY_GEBURTSNAME => $customerTransfer ? $customerTransfer->getFirstName() : null,
             ],
             static::KEY_RUECK_SPRUNG_ADRESSEN => [
                 static::KEY_URL_ERFOLG => $this->config->getSuccessUrl(),
@@ -248,11 +255,11 @@ class EasycreditMapper implements MapperInterface
                 static::KEY_URL_ABLEHNUNG => $this->config->getDeniedUrl(),
             ],
             static::KEY_KONTAKT => [
-                static::KEY_EMAIL => $quoteTransfer->getCustomer()->getEmail(),
+                static::KEY_EMAIL => $customerTransfer ? $customerTransfer->getEmail() : null,
             ],
             static::KEY_RISIKORELEVANTE_ANGABEN => [
                 static::KEY_BESTELLUNG_ERFOLGT_UEBER_LOGIN => false,
-                static::KEY_LOGISTIK_DIENSTLEISTER => $quoteTransfer->getShipment()->getShipmentSelection(),
+                static::KEY_LOGISTIK_DIENSTLEISTER => $shipmentTransfer ? $shipmentTransfer->getShipmentSelection() : null,
             ],
         ];
 
@@ -276,7 +283,8 @@ class EasycreditMapper implements MapperInterface
     public function mapPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
+        $requestTransfer->setVorgangskennung($easycreditTransfer ? $easycreditTransfer->getVorgangskennung() : null);
 
         return $requestTransfer;
     }
@@ -305,9 +313,22 @@ class EasycreditMapper implements MapperInterface
     public function mapInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
-        $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
+        $requestTransfer->setVorgangskennung($easycreditTransfer ? $easycreditTransfer->getVorgangskennung() : null);
 
         return $requestTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditTransfer|null
+     */
+    protected function getEasycreditTransfer(QuoteTransfer $quoteTransfer): ?EasycreditTransfer
+    {
+        $paymentTransfer = $quoteTransfer->getPayment();
+
+        return $paymentTransfer ? $paymentTransfer->getEasycredit() : null;
     }
 
     /**
@@ -318,9 +339,10 @@ class EasycreditMapper implements MapperInterface
     public function mapQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditRequestTransfer
     {
         $requestTransfer = new EasycreditRequestTransfer();
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
 
-        if ($quoteTransfer->getPayment() && $quoteTransfer->getPayment()->getEasycredit()) {
-            $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        if ($quoteTransfer->getPayment() && $easycreditTransfer) {
+            $requestTransfer->setVorgangskennung($easycreditTransfer->getVorgangskennung());
         }
 
         return $requestTransfer;

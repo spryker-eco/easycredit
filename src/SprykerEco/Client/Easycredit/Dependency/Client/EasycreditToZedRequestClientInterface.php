@@ -16,7 +16,7 @@ interface EasycreditToZedRequestClientInterface
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $object
      * @param array|null $requestOptions Deprecated: Do not use "int" anymore, please use an array for requestOptions.
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return mixed
      */
-    public function call(string $url, TransferInterface $object, ?array $requestOptions = null): TransferInterface;
+    public function call(string $url, TransferInterface $object, ?array $requestOptions = null);
 }

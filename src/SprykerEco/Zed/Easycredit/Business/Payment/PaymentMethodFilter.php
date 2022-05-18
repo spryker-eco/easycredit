@@ -57,9 +57,13 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isAvailable(QuoteTransfer $quoteTransfer): bool
     {
-        return $quoteTransfer->getTotals()->getGrandTotal() >= $this->config->getPaymentMethodMinAvailableMoneyValue() &&
-            $quoteTransfer->getTotals()->getGrandTotal() <= $this->config->getPaymentMethodMaxAvailableMoneyValue() ||
-            ($quoteTransfer->getBillingAddress() && in_array($quoteTransfer->getBillingAddress()->getIso2Code(), $this->config->getPaymentMethodAvailableCountries()));
+        $totalsTransfer = $quoteTransfer->getTotals();
+        $grandTotal = $totalsTransfer ? $totalsTransfer->getGrandTotal() : null;
+        $billingAddressTransfer = $quoteTransfer->getBillingAddress();
+
+        return $grandTotal >= $this->config->getPaymentMethodMinAvailableMoneyValue() &&
+            $grandTotal <= $this->config->getPaymentMethodMaxAvailableMoneyValue() ||
+            ($billingAddressTransfer && in_array($billingAddressTransfer->getIso2Code(), $this->config->getPaymentMethodAvailableCountries()));
     }
 
     /**
