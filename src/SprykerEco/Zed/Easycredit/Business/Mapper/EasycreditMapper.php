@@ -177,7 +177,7 @@ class EasycreditMapper implements MapperInterface
     public const KEY_PRODUKTBEZEICHNUNG = 'produktbezeichnung';
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected const SALUTATION_MAPPER = [
         'Mr' => 'HERR',
@@ -267,9 +267,10 @@ class EasycreditMapper implements MapperInterface
 
         $requestTransfer = new EasycreditRequestTransfer();
         $requestTransfer->setPayload($payload);
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
 
-        if ($quoteTransfer->getPayment() && $quoteTransfer->getPayment()->getEasycredit()) {
-            $requestTransfer->setVorgangskennung($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        if ($easycreditTransfer) {
+            $requestTransfer->setVorgangskennung($easycreditTransfer->getVorgangskennung());
         }
 
         return $requestTransfer;
@@ -341,11 +342,11 @@ class EasycreditMapper implements MapperInterface
         $requestTransfer = new EasycreditRequestTransfer();
         $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
 
-        if ($quoteTransfer->getPayment() && $easycreditTransfer) {
-            $requestTransfer->setVorgangskennung($easycreditTransfer->getVorgangskennung());
+        if (!$easycreditTransfer) {
+            return $requestTransfer;
         }
 
-        return $requestTransfer;
+        return $requestTransfer->setVorgangskennung($easycreditTransfer->getVorgangskennung());
     }
 
     /**
