@@ -23,8 +23,6 @@ class EasycreditController extends AbstractController
     {
         $this->getFactory()->createSuccessResponseProcessor()->process();
 
-        $test = 2;
-
         return $this->redirectResponseInternal(CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUMMARY);
     }
 }

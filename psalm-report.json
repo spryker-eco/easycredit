@@ -15,6 +15,18 @@
         },
         {
             "severity": "info",
+            "line_from": 35,
+            "line_to": 35,
+            "type": "PossiblyNullReference",
+            "message": "Cannot call method getText on possibly null value",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Form/DataProvider/EasycreditDataProvider.php",
+            "snippet": "            EasycreditSubForm::VARS_KEY_LEGAL_TEXT => $quoteTransfer->getEasycreditLegalText() ? $quoteTransfer->getEasycreditLegalText()->getText() : null,",
+            "selected_text": "getText",
+            "error_level": 3,
+            "shortcode": 83
+        },
+        {
+            "severity": "info",
             "line_from": 21,
             "line_to": 21,
             "type": "LessSpecificImplementedReturnType",

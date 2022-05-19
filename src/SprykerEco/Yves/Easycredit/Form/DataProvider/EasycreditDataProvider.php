@@ -31,14 +31,8 @@ class EasycreditDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
-        $easycreditLegalText = null;
-        $easycreditLegalTextTransfer = $quoteTransfer->getEasycreditLegalText();
-        if ($easycreditLegalTextTransfer) {
-            $easycreditLegalText = $easycreditLegalTextTransfer->getText();
-        }
-
         return [
-            EasycreditSubForm::VARS_KEY_LEGAL_TEXT => $easycreditLegalText,
+            EasycreditSubForm::VARS_KEY_LEGAL_TEXT => $quoteTransfer->getEasycreditLegalText() ? $quoteTransfer->getEasycreditLegalText()->getText() : null,
         ];
     }
 }
