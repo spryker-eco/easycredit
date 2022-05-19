@@ -45,11 +45,12 @@ class EasycreditLogger implements EasycreditLoggerInterface
             ->setRequest($easycreditRequestTransfer->serialize())
             ->setResponse($easycreditResponseTransfer->serialize());
 
-        if ($easycreditResponseTransfer->getError()) {
+        $easycreditResponseErrorTransfer = $easycreditResponseTransfer->getError();
+        if ($easycreditResponseErrorTransfer) {
             $paymentEasycreditApiLog
-                ->setStatusCode($easycreditResponseTransfer->getError()->getStatusCode())
-                ->setErrorCode($easycreditResponseTransfer->getError()->getErrorCode())
-                ->setErrorMessage($easycreditResponseTransfer->getError()->getErrorMessage());
+                ->setStatusCode($easycreditResponseErrorTransfer->getStatusCode())
+                ->setErrorCode($easycreditResponseErrorTransfer->getErrorCode())
+                ->setErrorMessage($easycreditResponseErrorTransfer->getErrorMessage());
         }
 
         return $this->entityManager->saveEasycreditApiLog($paymentEasycreditApiLog);

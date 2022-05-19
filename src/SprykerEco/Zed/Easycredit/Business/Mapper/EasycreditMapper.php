@@ -226,13 +226,13 @@ class EasycreditMapper implements MapperInterface
             static::KEY_BESTELL_WERT => $this->moneyPlugin->convertIntegerToDecimal($totalsTransfer ? ($totalsTransfer->getGrandTotal() ?? 0) : 0),
             static::KEY_INTEGRATIONS_ART => $this->config->getPaymentPageIntegrationType(),
             static::KEY_PERSONEN_DATEN => [
-                static::KEY_ANREDE => static::SALUTATION_MAPPER[$customerTransfer ? $customerTransfer->getSalutation() : null],
+                static::KEY_ANREDE => static::SALUTATION_MAPPER[$customerTransfer ? $customerTransfer->getSalutation() ?: 'Mrs' : 'Mrs'],
                 static::KEY_VORNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getFirstName() : null,
                 static::KEY_NACHNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getLastName() : null,
                 static::KEY_GEBURTS_DATUM => '',
             ],
             static::KEY_RECHNUNGS_ADRESSE => [
-                static::KEY_STRASSE_HAUS_NR => ($billingAddressTransfer ? $billingAddressTransfer->getAddress1() . $billingAddressTransfer->getAddress2() : null),
+                static::KEY_STRASSE_HAUS_NR => ($billingAddressTransfer ? (($billingAddressTransfer->getAddress1() ?? '') . ($billingAddressTransfer->getAddress2() ?? '')) : null),
                 static::KEY_PLZ => $billingAddressTransfer ? $billingAddressTransfer->getZipCode() : null,
                 static::KEY_ORT => $billingAddressTransfer ? $billingAddressTransfer->getCity() : null,
                 static::KEY_LAND => $billingAddressTransfer ? $billingAddressTransfer->getIso2Code() : null,
@@ -240,7 +240,7 @@ class EasycreditMapper implements MapperInterface
             static::KEY_LIEFER_ADRESSE => [
                 static::KEY_VORNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getFirstName() : null,
                 static::KEY_NACHNAME => $shippingAddressTransfer ? $shippingAddressTransfer->getLastName() : null,
-                static::KEY_STRASSE_HAUS_NR => ($shippingAddressTransfer ? $shippingAddressTransfer->getAddress1() . $shippingAddressTransfer->getAddress2() : null),
+                static::KEY_STRASSE_HAUS_NR => ($shippingAddressTransfer ? (($shippingAddressTransfer->getAddress1() ?? '') . ($shippingAddressTransfer->getAddress2() ?? '')) : null),
                 static::KEY_PLZ => $shippingAddressTransfer ? $shippingAddressTransfer->getZipCode() : null,
                 static::KEY_ORT => $shippingAddressTransfer ? $shippingAddressTransfer->getCity() : null,
                 static::KEY_LAND => $shippingAddressTransfer ? $shippingAddressTransfer->getIso2Code() : null,

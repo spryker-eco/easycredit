@@ -28,7 +28,7 @@ class QueryCreditAssessmentAdapter extends AbstractAdapter
             '%s/%s/%s/%s',
             $this->config->getApiUrl(),
             static::REQUEST_TYPE_PROCESS,
-            $easycreditRequestTransfer->getVorgangskennung(),
+            $easycreditRequestTransfer->getVorgangskennung() ?? '',
             static::URL_CREDIT_ASSESSMENTS_IDENTIFIER,
         );
     }

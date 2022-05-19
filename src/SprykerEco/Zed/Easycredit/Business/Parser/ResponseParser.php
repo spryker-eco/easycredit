@@ -184,7 +184,7 @@ class ResponseParser implements ResponseParserInterface
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($anfallendeZinsen);
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setTilgungsplanText($tilgungsplanText);
 
-        $isSuccess = $anfallendeZinsen !== null && $tilgungsplanText !== null;
+        $isSuccess = $tilgungsplanText !== null;
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess($isSuccess);
 
         return $easycreditInterestAndAdjustTotalSumResponseTransfer;
