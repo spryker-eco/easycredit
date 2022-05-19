@@ -25,6 +25,7 @@
         <property name="salutation" type="string"/>
         <property name="phone" type="string"/>
         <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
         <property name="email" type="string"/>
     </transfer>
 
@@ -36,6 +37,8 @@
         <property name="zipCode" type="string"/>
         <property name="city" type="string"/>
         <property name="iso2Code" type="string"/>
+        <property name="company" type="string"/>
+        <property name="state" type="string"/>
     </transfer>
 
     <transfer name="Shipment">
@@ -46,6 +49,9 @@
     </transfer>
 
     <transfer name="Item">
+        <property name="sku" type="string"/>
+        <property name="unitGrossPrice" type="int"/>
+        <property name="sumGrossPrice" type="int"/>
         <property name="shipmentSelection" type="string"/>
         <property name="quantity" type="int"/>
         <property name="refundableAmount" type="int"/>
@@ -109,6 +115,7 @@
     </transfer>
 
     <transfer name="Quote">
+        <property name="name" type="string"/>
         <property name="easycreditLegalText" type="EasycreditLegalText"/>
         <property name="payment" type="Payment" deprecated="Use payments property instead."/>
         <property name="expenses" type="Expense[]" singular="expense"/>
