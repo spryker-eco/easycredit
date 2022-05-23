@@ -20,6 +20,7 @@
         "spryker/zed-request": "^3.7.0"
     },
     "require-dev": {
+        "codeception/module-asserts": "^2.0",
         "phpstan/phpstan": "^1.2.0",
         "spryker/application": "^3.28.0",
         "spryker/code-sniffer": "*",
