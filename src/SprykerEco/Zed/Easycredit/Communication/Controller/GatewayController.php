@@ -17,6 +17,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\Business\EasycreditFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface getRepository()
  */
 class GatewayController extends AbstractGatewayController
 {
@@ -71,8 +72,9 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequestAction(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
+    public function sendPreContractualInformationAndRedemptionPlanRequestAction(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
         return $this
             ->getFacade()
             ->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);

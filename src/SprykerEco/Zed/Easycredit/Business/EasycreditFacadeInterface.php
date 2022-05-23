@@ -88,7 +88,9 @@ interface EasycreditFacadeInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
      * Specification:
@@ -114,5 +116,8 @@ interface EasycreditFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): PaymentEasycreditOrderIdentifierTransfer;
+    public function saveEasycreditOrderIdentifier(
+        QuoteTransfer $quoteTransfer,
+        SaveOrderTransfer $saveOrderTransfer
+    ): PaymentEasycreditOrderIdentifierTransfer;
 }

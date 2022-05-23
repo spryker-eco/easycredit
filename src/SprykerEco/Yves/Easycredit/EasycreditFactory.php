@@ -58,7 +58,7 @@ class EasycreditFactory extends AbstractFactory
             $this->getQuoteClient(),
             $this->getCalculationClient(),
             $this->getClient(),
-            $this->getMoneyPlugin()
+            $this->getMoneyPlugin(),
         );
     }
 

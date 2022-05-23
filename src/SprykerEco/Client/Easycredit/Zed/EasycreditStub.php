@@ -73,8 +73,9 @@ class EasycreditStub implements EasycreditStubInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
         return $this->zedRequestClient->call('/easycredit/gateway/send-pre-contractual-information-and-redemption-plan-request', $quoteTransfer);
     }
 }

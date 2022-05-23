@@ -29,7 +29,9 @@ interface RequestSenderInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
      * @param int $idSalesOrder

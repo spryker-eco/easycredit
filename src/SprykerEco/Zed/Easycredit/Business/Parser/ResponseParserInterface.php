@@ -22,40 +22,52 @@ interface ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function parseInitializePaymentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInitializePaymentResponseTransfer;
+    public function parseInitializePaymentResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditInitializePaymentResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function parsePreContractualInformationAndRedemptionPlanResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+    public function parsePreContractualInformationAndRedemptionPlanResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
-    public function parseOrderConfirmationResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditOrderConfirmationResponseTransfer;
+    public function parseOrderConfirmationResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditOrderConfirmationResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function parseInterestAndTotalSumResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer;
+    public function parseInterestAndTotalSumResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditInterestAndAdjustTotalSumResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function parseQueryCreditAssessmentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditQueryCreditAssessmentResponseTransfer;
+    public function parseQueryCreditAssessmentResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditQueryCreditAssessmentResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\EasycreditResponseTransfer $easycreditResponseTransfer
      *
      * @return \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer
      */
-    public function parseApprovalTextResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditApprovalTextResponseTransfer;
+    public function parseApprovalTextResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditApprovalTextResponseTransfer;
 }

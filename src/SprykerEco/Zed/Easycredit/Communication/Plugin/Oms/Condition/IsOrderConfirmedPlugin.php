@@ -17,17 +17,22 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  */
 class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterface
 {
+    /**
+     * @var string
+     */
     public const NAME = 'IsOrderConfirmed';
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
      * @return bool
      */
-    public function check(SpySalesOrderItem $orderItem)
+    public function check(SpySalesOrderItem $orderItem): bool
     {
-        return $this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmed();
+        return $this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmed() ?? false;
     }
 }

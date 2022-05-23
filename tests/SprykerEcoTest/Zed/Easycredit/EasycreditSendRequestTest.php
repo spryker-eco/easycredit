@@ -23,14 +23,40 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
      */
     public function testSendInitializePaymentRequest(): void
     {
+        // Arrange
         $quoteTransfer = $this->prepareQuoteTransfer();
         $quoteTransfer->setPayment($this->preparePaymentTransfer());
-
         $facade = $this->prepareFacade();
+
+        // Act
         $responseTransfer = $facade->sendInitializePaymentRequest($quoteTransfer);
 
+        // Assert
         $this->assertEquals(static::RESPONSE_KEY_PAYMENT_IDENTIFIER, $responseTransfer->getPaymentIdentifier());
         $this->assertTrue($responseTransfer->getSuccess());
+    }
+
+    /**
+     * @return void
+     */
+    public function testInitializePaymentRequestOnConvertingAmountFromIntegerToFloatValue(): void
+    {
+        // Arrange
+        $quoteTransfer = $this->prepareQuoteTransfer();
+        $quoteTransfer->setPayment($this->preparePaymentTransfer());
+        $quoteTransfer->setItems($this->prepareItemTransfers());
+        $quoteTransfer->setTotals($this->prepareTotalsTransfer(1500));
+        $quoteTransfer->setCustomer($this->prepareCustomerTransfer());
+        $quoteTransfer->getCustomer()->setSalutation('Mr');
+        $quoteTransfer->setShippingAddress($this->prepareAddressTransfer());
+        $quoteTransfer->setBillingAddress($this->prepareAddressTransfer());
+        $quoteTransfer->setShipment($this->prepareShipmentTransfer());
+
+        // Act
+        $requestTransfer = $this->createMapper()->mapInitializePaymentRequest($quoteTransfer);
+
+        // Assert
+        $this->assertEquals($requestTransfer->getPayload()[static::REQUEST_KEY_ORDER_AMOUNT], 15.0);
     }
 
     /**
@@ -53,8 +79,10 @@ class EasycreditSendRequestTest extends AbstractEasycreditTest
      */
     public function testSendOrderConfirmationRequest(): void
     {
-        $idSalesOrder = $this->tester->createOrder();
+        $quoteTransfer = $this->prepareQuoteTransfer();
+//        $idSalesOrder = $this->tester->createOrder($quoteTransfer, 'Easycredit01');
 
+        $idSalesOrder = random_int(0, 9999999);
         $facade = $this->prepareFacade();
         $responseTransfer = $facade->sendOrderConfirmationRequest($idSalesOrder);
 

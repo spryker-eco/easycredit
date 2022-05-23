@@ -7,7 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Easycredit;
 
+use ArrayObject;
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
@@ -15,11 +18,13 @@ use Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Easycredit\EasycreditConfig;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
@@ -28,6 +33,7 @@ use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSenderInterface;
 use SprykerEco\Zed\Easycredit\Business\EasycreditBusinessFactory;
 use SprykerEco\Zed\Easycredit\Business\EasycreditFacade;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
+use SprykerEco\Zed\Easycredit\Business\Mapper\EasycreditMapper;
 use SprykerEco\Zed\Easycredit\Business\Mapper\MapperInterface;
 use SprykerEco\Zed\Easycredit\Business\Parser\ResponseParserInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig as ZedEasycreditConfig;
@@ -43,14 +49,50 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
  */
 abstract class AbstractEasycreditTest extends Unit
 {
+    /**
+     * @var string
+     */
+
+    protected const REQUEST_KEY_ORDER_AMOUNT = 'bestellwert';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_PAYMENT_IDENTIFIER = 'payment_identifier';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_STATUS = 'status';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_TEXT = 'text';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_ANFALLENDE_ZINSEN = '123.45';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'url';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_TILGUNGSPLAN_TEXT = 'text';
 
+    /**
+     * @var int
+     */
     protected const TOTAL_VALUE_FOR_FILTERED_EASYCREDIT_PAYMENT_METHOD = 20000;
+
+    /**
+     * @var int
+     */
     protected const TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD = 200;
 
     /**
@@ -88,8 +130,20 @@ abstract class AbstractEasycreditTest extends Unit
         $factory->method('getEntityManager')->willReturn(new EasycreditEntityManager());
         $factory->method('getConfig')->willReturn($this->getConfigMock());
         $factory->method('createRequestSender')->willReturn($this->getRequestSender());
+        $factory->method('createMapper')->willReturn($this->getMapperMock());
 
         return $factory;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Easycredit\Business\Mapper\EasycreditMapper
+     */
+    protected function createMapper(): EasycreditMapper
+    {
+        return new EasycreditMapper(
+            (new EasycreditBusinessFactory())->getConfig(),
+            (new EasycreditBusinessFactory())->getMoneyPlugin(),
+        );
     }
 
     /**
@@ -125,7 +179,7 @@ abstract class AbstractEasycreditTest extends Unit
         $paymentTransfer->setPaymentSelection(EasycreditConfig::PAYMENT_METHOD);
         $paymentTransfer->setEasycredit(
             (new EasycreditTransfer())
-                ->setVorgangskennung('vorgangskennung')
+                ->setVorgangskennung('vorgangskennung'),
         );
 
         return $paymentTransfer;
@@ -142,6 +196,47 @@ abstract class AbstractEasycreditTest extends Unit
         $totalsTransfer->setGrandTotal($grandTotal);
 
         return $totalsTransfer;
+    }
+
+    /**
+     * @return \ArrayObject<\Generated\Shared\Transfer\ItemTransfer>
+     */
+    protected function prepareItemTransfers(): ArrayObject
+    {
+        $itemTransfer = new ItemTransfer();
+        $itemTransfer->setRefundableAmount(12345);
+
+        return new ArrayObject([$itemTransfer]);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\CustomerTransfer
+     */
+    protected function prepareCustomerTransfer(): CustomerTransfer
+    {
+        $customerTransfer = new CustomerTransfer();
+
+        return $customerTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\AddressTransfer
+     */
+    protected function prepareAddressTransfer(): AddressTransfer
+    {
+        $addressTransfer = new AddressTransfer();
+
+        return $addressTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ShipmentTransfer
+     */
+    protected function prepareShipmentTransfer(): ShipmentTransfer
+    {
+        $shipmentTransfer = new ShipmentTransfer();
+
+        return $shipmentTransfer;
     }
 
     /**
@@ -184,7 +279,7 @@ abstract class AbstractEasycreditTest extends Unit
             $this->getParserMock(),
             $this->getLoggerMock(),
             $this->getEasycreditRepositoryMock(),
-            $this->getEasycreditEntityManagerMock()
+            $this->getEasycreditEntityManagerMock(),
         );
     }
 

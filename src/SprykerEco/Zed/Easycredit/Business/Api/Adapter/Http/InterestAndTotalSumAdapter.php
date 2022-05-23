@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class InterestAndTotalSumAdapter extends AbstractAdapter
 {
+    /**
+     * @var string
+     */
     protected const URL_DISPLAY_INTEREST_IDENTIFIER = 'finanzierung';
 
     /**
@@ -25,8 +28,8 @@ class InterestAndTotalSumAdapter extends AbstractAdapter
             '%s/%s/%s/%s',
             $this->config->getApiUrl(),
             static::REQUEST_TYPE_PROCESS,
-            $easycreditRequestTransfer->getVorgangskennung(),
-            static::URL_DISPLAY_INTEREST_IDENTIFIER
+            $easycreditRequestTransfer->getVorgangskennung() ?? '',
+            static::URL_DISPLAY_INTEREST_IDENTIFIER,
         );
     }
 

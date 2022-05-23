@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Easycredit\Processor;
 
+use Generated\Shared\Transfer\EasycreditTransfer;
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
@@ -17,6 +18,9 @@ use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientInterfac
 
 class SuccessResponseProcessor implements SuccessResponseProcessorInterface
 {
+    /**
+     * @var string
+     */
     public const EXPENSE_TYPE_EASYCREDIT = 'Easycredit';
 
     /**
@@ -82,10 +86,12 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
      */
     protected function addEasycreditExpense(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
+
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(EasycreditConstants::EASYCREDIT_EXPENSE_TYPE);
         $expenseTransfer->setUnitNetPrice(0);
-        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen()));
+        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($easycreditTransfer ? ($easycreditTransfer->getAnfallendeZinsen() ?? 0) : 0.0));
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);
@@ -103,12 +109,27 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $easycreditContractualInformationAndRedemptionPlanResponseTransfer = $this->easycreditClient->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
         $easycreditInterestAndAdjustTotalSumResponseTransfer = $this->easycreditClient->sendInterestAndTotalSumRequest($quoteTransfer);
 
-        $quoteTransfer->getPayment()->getEasycredit()
-            ->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen())
-            ->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText())
-            ->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
+        $easycreditTransfer = $this->getEasycreditTransfer($quoteTransfer);
+        if ($easycreditTransfer) {
+            $easycreditTransfer
+                ->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen())
+                ->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText())
+                ->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());
+        }
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\EasycreditTransfer|null
+     */
+    protected function getEasycreditTransfer(QuoteTransfer $quoteTransfer): ?EasycreditTransfer
+    {
+        $paymentTransfer = $quoteTransfer->getPayment();
+
+        return $paymentTransfer ? $paymentTransfer->getEasycredit() : null;
     }
 
     /**
