@@ -4,7 +4,7 @@
     "description": "Easycredit module",
     "license": "MIT",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "spryker/checkout-extension": "^1.0.0",
         "spryker/guzzle": "^2.2.0",
         "spryker/kernel": "^3.31.0",
