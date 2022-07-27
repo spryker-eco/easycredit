@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OrderConfirmationAdapter extends AbstractAdapter
 {
+    /**
+     * @var string
+     */
     protected const URL_ORDER_COMPLETION_IDENTIFIER = 'bestaetigen';
 
     /**
@@ -26,7 +29,7 @@ class OrderConfirmationAdapter extends AbstractAdapter
             $this->config->getApiUrl(),
             static::REQUEST_TYPE_PROCESS,
             $easycreditRequestTransfer->getVorgangskennung(),
-            static::URL_ORDER_COMPLETION_IDENTIFIER
+            static::URL_ORDER_COMPLETION_IDENTIFIER,
         );
     }
 

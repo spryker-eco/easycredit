@@ -39,11 +39,11 @@ class EasycreditOrderIdentifierSaver implements EasycreditOrderIdentifierSaverIn
     {
         $paymentEasycreditOrderIdentifierTransfer = new PaymentEasycreditOrderIdentifierTransfer();
 
-        if ($quoteTransfer->getPayment()->getPaymentSelection() !== EasycreditConfig::PAYMENT_METHOD) {
+        if ($quoteTransfer->getPaymentOrFail()->getPaymentSelection() !== EasycreditConfig::PAYMENT_METHOD) {
             return $paymentEasycreditOrderIdentifierTransfer;
         }
 
-        $paymentEasycreditOrderIdentifierTransfer->setIdentifier($quoteTransfer->getPayment()->getEasycredit()->getVorgangskennung());
+        $paymentEasycreditOrderIdentifierTransfer->setIdentifier($quoteTransfer->getPaymentOrFail()->getEasycreditOrFail()->getVorgangskennung());
         $paymentEasycreditOrderIdentifierTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
         $paymentEasycreditOrderIdentifierTransfer->setConfirmed(false);
 
