@@ -19,7 +19,9 @@
         "spryker/payment": "^4.4.1",
         "spryker/propel": "^3.8.0",
         "phpstan/phpstan": "^1.2.0",
-        "spryker/code-sniffer": "*"
+        "spryker/code-sniffer": "*",
+        "spryker/transfer": "^3.32.0",
+        "codeception/module-asserts": "^2.0"
     },
     "suggest": {
         "spryker/oms": "If you want to use Oms plugins.",
