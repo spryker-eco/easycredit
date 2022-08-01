@@ -19,6 +19,8 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 class EasycreditOrderIdentifierSaverTest extends AbstractEasycreditTest
 {
     /**
+     * @skip
+     *
      * @return void
      */
     public function testSaveEasycreditOrderIdentifierForEasycredit(): void
