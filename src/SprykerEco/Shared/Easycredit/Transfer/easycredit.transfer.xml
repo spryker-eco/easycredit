@@ -5,6 +5,32 @@
 
     <transfer name="Payment">
         <property name="easycredit" type="Easycredit"/>
+        <property name="paymentSelection" type="string"/>
+        <property name="paymentProvider" type="string"/>
+        <property name="paymentMethod" type="string"/>
+    </transfer>
+
+    <transfer name="Expense">
+        <property name="type" type="string"/>
+        <property name="unitNetPrice" type="int"/>
+        <property name="unitGrossPrice" type="int"/>
+        <property name="quantity" type="int"/>
+    </transfer>
+
+    <transfer name="Totals">
+        <property name="grandTotal" type="int"/>
+    </transfer>
+
+    <transfer name="PaymentMethods">
+        <property name="methods" type="PaymentMethod[]" singular="method"/>
+    </transfer>
+
+    <transfer name="PaymentMethod">
+        <property name="methodName" type="string"/>
+    </transfer>
+
+    <transfer name="SaveOrder">
+        <property name="idSalesOrder" type="int"/>
     </transfer>
 
     <transfer name="EasycreditRequest">
