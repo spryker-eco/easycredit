@@ -87,9 +87,6 @@ jobs:
             - name: Run codeception tests
               run: composer test
 
-            - name: Run propel install
-              run: console propel:install
-
             - name: Run PHPStan
               run: composer stan
 
