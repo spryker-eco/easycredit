@@ -103,6 +103,7 @@
     </transfer>
 
     <transfer name="Expense">
+        <property name="idSalesExpense" type="int"/>
     </transfer>
 
     <transfer name="Customer">
