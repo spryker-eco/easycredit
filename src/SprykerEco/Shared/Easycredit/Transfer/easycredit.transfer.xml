@@ -102,10 +102,6 @@
         <property name="expenses" type="Expense[]" singular="expense"/>
     </transfer>
 
-    <transfer name="Expense">
-        <property name="idSalesExpense" type="int"/>
-    </transfer>
-
     <transfer name="Customer">
         <property name="salutation" type="string"/>
         <property name="firstName" type="string"/>

@@ -5,8 +5,8 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "spryker-shop/checkout-page": "^3.21",
-        "spryker-shop/shop-application": "^1.13",
+        "spryker-shop/checkout-page": "^3.21.0",
+        "spryker-shop/shop-application": "^1.13.0",
         "spryker/calculation": "^4.12.0",
         "spryker/checkout-extension": "^1.0.0",
         "spryker/guzzle": "^2.2.0",
