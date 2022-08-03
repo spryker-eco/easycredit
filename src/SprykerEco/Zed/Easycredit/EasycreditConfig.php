@@ -98,7 +98,7 @@ class EasycreditConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<array-key, string>
      */
     public function getPaymentMethodAvailableCountries(): array
     {

@@ -125,7 +125,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     /**
      * @param string $method
      * @param string $url
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
@@ -148,7 +148,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getHeaders(): array
     {

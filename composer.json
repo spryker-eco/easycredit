@@ -5,28 +5,37 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
+        "spryker-shop/checkout-page": "^3.21",
+        "spryker-shop/shop-application": "^1.13",
+        "spryker/calculation": "^4.12",
         "spryker/checkout-extension": "^1.0.0",
         "spryker/guzzle": "^2.2.0",
         "spryker/kernel": "^3.31.0",
+        "spryker/money": "^2.10",
+        "spryker/quote": "^2.16",
         "spryker/sales": "^8.17.0 || ^10.0.0 || ^11.0.0",
         "spryker/step-engine": "^3.2.0",
         "spryker/symfony": "^3.2.2",
+        "spryker/transfer": "^3.32.0",
         "spryker/util-encoding": "^2.1.0",
-        "spryker/zed-request": "^3.7.0",
-        "spryker/transfer": "^3.32.0"
+        "spryker/zed-request": "^3.7.0"
     },
     "require-dev": {
+        "codeception/module-asserts": "^2.0",
+        "phpstan/phpstan": "^1.2.0",
+        "spryker/code-sniffer": "*",
         "spryker/oms": "^8.4.0 || ^10.0.0 || ^11.0.0",
         "spryker/payment": "^4.4.1",
         "spryker/propel": "^3.8.0",
-        "phpstan/phpstan": "^1.2.0",
-        "spryker/code-sniffer": "*",
-        "codeception/module-asserts": "^2.0",
+        "spryker/router": "*",
+        "spryker/silex": "^2.2",
         "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker/oms": "If you want to use Oms plugins.",
-        "spryker/payment": "If you want to use Payment command plugins."
+        "spryker/payment": "If you want to use Payment command plugins.",
+        "spryker/router": "If you want to use Router plugins.",
+        "spryker/silex": "If you want to use Silex plugins."
     },
     "autoload": {
         "psr-4": {

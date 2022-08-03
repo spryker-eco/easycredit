@@ -176,7 +176,7 @@ class EasycreditMapper implements MapperInterface
     public const KEY_PRODUKTBEZEICHNUNG = 'produktbezeichnung';
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected const SALUTATION_MAPPER = [
         'Mr' => 'HERR',
@@ -337,7 +337,7 @@ class EasycreditMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<array-key, array<string, mixed>>
      */
     protected function prepareOrderItems(QuoteTransfer $quoteTransfer): array
     {

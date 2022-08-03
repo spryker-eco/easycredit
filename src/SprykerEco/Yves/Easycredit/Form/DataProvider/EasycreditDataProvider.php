@@ -27,7 +27,7 @@ class EasycreditDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, string|null>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
