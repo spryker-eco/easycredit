@@ -44,3 +44,4 @@ suites:
             schemaSourceDirectoryList:
               - src/*/Zed/*/Persistence/Propel/Schema
               - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema
+        - \SprykerTest\Shared\Sales\Helper\SalesHelper
