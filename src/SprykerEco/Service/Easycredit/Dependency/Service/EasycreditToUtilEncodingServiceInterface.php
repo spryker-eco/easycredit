@@ -20,7 +20,7 @@ interface EasycreditToUtilEncodingServiceInterface
     public function decodeJson($jsonValue, $assoc = false, $depth = null, $options = null);
 
     /**
-     * @param array<mixed> $value
+     * @param array<string, mixed> $value
      * @param int|null $options
      * @param int|null $depth
      *

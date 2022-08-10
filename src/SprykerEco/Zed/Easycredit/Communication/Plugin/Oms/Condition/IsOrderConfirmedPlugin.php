@@ -33,6 +33,6 @@ class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterfac
      */
     public function check(SpySalesOrderItem $orderItem)
     {
-        return $this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmedOrFail();
+        return (bool)$this->getFacade()->sendOrderConfirmationRequest($orderItem->getFkSalesOrder())->getConfirmed();
     }
 }
