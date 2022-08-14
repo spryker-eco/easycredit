@@ -14,7 +14,10 @@ use Orm\Zed\Sales\Persistence\Map\SpySalesOrderAddressTableMap;
 use Orm\Zed\Sales\Persistence\Map\SpySalesOrderTableMap;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
+use Orm\Zed\Sales\Persistence\SpySalesOrderAddressQuery;
+use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderTotals;
+use Orm\Zed\Sales\Persistence\SpySalesOrderTotalsQuery;
 
 /**
  * Inherited Methods
@@ -46,6 +49,12 @@ class EasycreditTester extends Actor
         $this->addOrderDetails($salesOrderEntity);
         $this->addAddresses($salesOrderEntity);
         $salesOrderEntity->save();
+
+        $this->addCleanup(function () use ($salesOrderEntity): void {
+            SpySalesOrderQuery::create()
+                ->filterByIdSalesOrder($salesOrderEntity->getIdSalesOrder())
+                ->delete();
+        });
 
         $this->addOrderTotals($salesOrderEntity);
 
@@ -102,6 +111,12 @@ class EasycreditTester extends Actor
         $countryEntity = $countryQuery->findOneOrCreate();
         $countryEntity->save();
 
+        $this->addCleanup(function () use ($countryEntity): void {
+            SpyCountryQuery::create()
+                ->filterByIdCountry($countryEntity->getIdCountry())
+                ->delete();
+        });
+
         return $countryEntity;
     }
 
@@ -124,6 +139,12 @@ class EasycreditTester extends Actor
         $billingAddressEntity->setZipCode('12345');
         $billingAddressEntity->save();
 
+        $this->addCleanup(function () use ($billingAddressEntity): void {
+            SpySalesOrderAddressQuery::create()
+                ->filterByIdSalesOrderAddress($billingAddressEntity->getIdSalesOrderAddress())
+                ->delete();
+        });
+
         return $billingAddressEntity;
     }
 
@@ -143,5 +164,11 @@ class EasycreditTester extends Actor
         $salesOrderTotals->setGrandTotal(100);
 
         $salesOrderTotals->save();
+
+        $this->addCleanup(function () use ($salesOrderTotals): void {
+            SpySalesOrderTotalsQuery::create()
+                ->filterByIdSalesOrderTotals($salesOrderTotals->getIdSalesOrderTotals())
+                ->delete();
+        });
     }
 }
