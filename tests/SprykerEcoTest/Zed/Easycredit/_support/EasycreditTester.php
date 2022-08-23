@@ -8,16 +8,6 @@
 namespace SprykerEcoTest\Zed\Easycredit;
 
 use Codeception\Actor;
-use Orm\Zed\Country\Persistence\SpyCountry;
-use Orm\Zed\Country\Persistence\SpyCountryQuery;
-use Orm\Zed\Sales\Persistence\Map\SpySalesOrderAddressTableMap;
-use Orm\Zed\Sales\Persistence\Map\SpySalesOrderTableMap;
-use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
-use Orm\Zed\Sales\Persistence\SpySalesOrderAddressQuery;
-use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
-use Orm\Zed\Sales\Persistence\SpySalesOrderTotals;
-use Orm\Zed\Sales\Persistence\SpySalesOrderTotalsQuery;
 
 /**
  * Inherited Methods
