@@ -7,11 +7,11 @@
 
 namespace SprykerEco\Zed\Easycredit;
 
-use GuzzleHttp\Client;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Money\Communication\Plugin\MoneyPlugin;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceBridge;
+use SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientAdapter;
 
 /**
  * @method \SprykerEco\Zed\Easycredit\EasycreditConfig getConfig()
@@ -31,7 +31,7 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
-    public const GUZZLE_CLIENT = 'GUZZLE_CLIENT';
+    public const CLIENT_HTTP = 'CLIENT_HTTP';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -42,7 +42,7 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = $this->addUtilEncodingService($container);
         $container = $this->addPluginMoney($container);
-        $container = $this->addGuzzleClient($container);
+        $container = $this->addHttpClient($container);
 
         return $container;
     }
@@ -80,10 +80,10 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addGuzzleClient(Container $container): Container
+    protected function addHttpClient(Container $container): Container
     {
-        $container->set(static::GUZZLE_CLIENT, function () {
-            return new Client();
+        $container->set(static::CLIENT_HTTP, function () {
+            return new EasycreditToHttpClientAdapter();
         });
 
         return $container;

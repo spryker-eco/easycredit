@@ -23,6 +23,11 @@ interface EasycreditFacadeInterface
     /**
      * Specification:
      * - Send a request to Easycredit for payment initialization.
+     * - Requires `QuoteTransfer.totals` parameter.
+     * - Requires `QuoteTransfer.customer` parameter.
+     * - Requires `QuoteTransfer.shippingAddress` parameter.
+     * - Requires `QuoteTransfer.billingAddress` parameter.
+     * - Requires `QuoteTransfer.shipment` parameter.
      *
      * @api
      *
@@ -69,6 +74,7 @@ interface EasycreditFacadeInterface
     /**
      * Specification:
      * - Send a request to Easycredit for getting Easycredit interest for the order.
+     * - Requires `QuoteTransfer.payment.easycredit` parameter.
      *
      * @api
      *
@@ -81,6 +87,7 @@ interface EasycreditFacadeInterface
     /**
      * Specification:
      * - Send a request to Easycredit for getting pre-contractual link and redemption plan text for order.
+     * - Requires `QuoteTransfer.payment.easycredit` parameter.
      *
      * @api
      *
@@ -95,6 +102,7 @@ interface EasycreditFacadeInterface
     /**
      * Specification:
      * - Filter array object of payments by set of plugins.
+     * - Requires `QuoteTransfer.totals` parameter.
      *
      * @api
      *
@@ -108,6 +116,7 @@ interface EasycreditFacadeInterface
     /**
      * Specification:
      * - Save order identifier for new order. It can be used in CheckoutDoSaveOrderInterface plugins.
+     * - Requires `QuoteTransfer.payment.easycredit` parameter.
      *
      * @api
      *

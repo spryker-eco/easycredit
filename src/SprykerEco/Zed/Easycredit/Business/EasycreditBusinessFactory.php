@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
-use GuzzleHttp\ClientInterface;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
@@ -25,6 +24,7 @@ use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaver;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaverInterface;
+use SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
@@ -35,11 +35,11 @@ use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \GuzzleHttp\ClientInterface
+     * @return \SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface
      */
-    public function getGuzzleClient(): ClientInterface
+    public function getHttpClient(): EasycreditToHttpClientInterface
     {
-        return $this->getProvidedDependency(EasycreditDependencyProvider::GUZZLE_CLIENT);
+        return $this->getProvidedDependency(EasycreditDependencyProvider::CLIENT_HTTP);
     }
 
     /**
@@ -91,7 +91,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createAdapterFactory(): AdapterFactoryInterface
     {
         return new AdapterFactory(
-            $this->getGuzzleClient(),
+            $this->getHttpClient(),
             $this->getUtilEncodingService(),
             $this->getConfig(),
         );

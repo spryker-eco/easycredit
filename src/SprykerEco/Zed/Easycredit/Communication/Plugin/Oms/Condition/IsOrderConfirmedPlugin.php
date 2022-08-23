@@ -24,6 +24,7 @@ class IsOrderConfirmedPlugin extends AbstractPlugin implements ConditionInterfac
 
     /**
      * {@inheritDoc}
+     * - Sends a request to Easycredit for order confirmation.
      *
      * @api
      *
