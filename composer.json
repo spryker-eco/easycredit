@@ -29,7 +29,7 @@
         "spryker/oms": "^8.4.0 || ^10.0.0 || ^11.0.0",
         "spryker/payment": "^4.4.1 || ^5.0.0",
         "spryker/propel": "^3.34.0",
-        "spryker/propel-orm": "^1.17",
+        "spryker/propel-orm": "^1.17.0",
         "spryker/router": "*",
         "spryker/shipment": "^6.0.0 || ^7.0.0 || ^8.0.0",
         "spryker/silex": "^2.2.0",
