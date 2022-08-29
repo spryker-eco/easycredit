@@ -1,4 +1,5 @@
 # Easycredit Module
+[![CI](https://github.com/spryker-eco/easycredit/actions/workflows/ci.yml/badge.svg)](https://github.com/spryker-eco/easycredit/actions/workflows/ci.yml)
 [![Build Status](https://travis-ci.org/spryker-eco/easycredit.svg?branch=master)](https://travis-ci.org/spryker-eco/easycredit)
 [![License](https://img.shields.io/github/license/spryker-eco/easycredit.svg?b=master)](https://github.com/spryker-eco/easycredit)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spryker-eco/easycredit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/easycredit/?branch=master)
