@@ -58,31 +58,31 @@
 
     <transfer name="EasycreditInitializePaymentResponse">
         <property name="paymentIdentifier" type="string"/>
-        <property name="success" type="boolean"/>
+        <property name="success" type="bool"/>
         <property name="error" type="EasycreditResponseError"/>
     </transfer>
 
     <transfer name="EasycreditQueryCreditAssessmentResponse">
         <property name="status" type="string"/>
-        <property name="success" type="boolean"/>
+        <property name="success" type="bool"/>
         <property name="error" type="EasycreditResponseError"/>
     </transfer>
 
     <transfer name="EasycreditOrderConfirmationResponse">
-        <property name="confirmed" type="boolean"/>
-        <property name="success" type="boolean"/>
+        <property name="confirmed" type="bool"/>
+        <property name="success" type="bool"/>
         <property name="error" type="EasycreditResponseError"/>
     </transfer>
 
     <transfer name="EasycreditApprovalTextResponse">
         <property name="text" type="string"/>
-        <property name="success" type="boolean"/>
+        <property name="success" type="bool"/>
         <property name="error" type="EasycreditResponseError"/>
     </transfer>
 
     <transfer name="Easycredit">
         <property name="vorgangskennung" type="string"/>
-        <property name="optInCheckbox" type="boolean"/>
+        <property name="optInCheckbox" type="bool"/>
         <property name="tilgungsplanText" type="string"/>
         <property name="urlVorvertraglicheInformationen" type="string"/>
         <property name="anfallendeZinsen" type="float"/>
@@ -150,12 +150,12 @@
 
     <transfer name="EasycreditPreContractualInformationAndRedemptionPlanResponse">
         <property name="urlVorvertraglicheInformationen" type="string"/>
-        <property name="success" type="boolean"/>
+        <property name="success" type="bool"/>
     </transfer>
 
     <transfer name="EasycreditInterestAndAdjustTotalSumResponse">
         <property name="anfallendeZinsen" type="float"/>
         <property name="tilgungsplanText" type="string"/>
-        <property name="success" type="boolean"/>
+        <property name="success" type="bool"/>
     </transfer>
 </transfers>
