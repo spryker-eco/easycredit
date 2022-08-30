@@ -7,13 +7,11 @@
 
 namespace SprykerEco\Zed\Easycredit\Business;
 
-use GuzzleHttp\ClientInterface;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactory;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http\Factory\AdapterFactoryInterface;
-use SprykerEco\Zed\Easycredit\Business\Api\Client\EasycreditClient;
 use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSender;
 use SprykerEco\Zed\Easycredit\Business\Api\RequestSender\RequestSenderInterface;
 use SprykerEco\Zed\Easycredit\Business\Logger\EasycreditLogger;
@@ -26,6 +24,7 @@ use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Easycredit\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaver;
 use SprykerEco\Zed\Easycredit\Business\Saver\EasycreditOrderIdentifierSaverInterface;
+use SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface;
 use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 
 /**
@@ -36,11 +35,11 @@ use SprykerEco\Zed\Easycredit\EasycreditDependencyProvider;
 class EasycreditBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \GuzzleHttp\ClientInterface
+     * @return \SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface
      */
-    public function createEasycreditClient(): ClientInterface
+    public function getHttpClient(): EasycreditToHttpClientInterface
     {
-        return new EasycreditClient();
+        return $this->getProvidedDependency(EasycreditDependencyProvider::CLIENT_HTTP);
     }
 
     /**
@@ -82,7 +81,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     {
         return new EasycreditMapper(
             $this->getConfig(),
-            $this->getMoneyPlugin()
+            $this->getMoneyPlugin(),
         );
     }
 
@@ -92,9 +91,9 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
     public function createAdapterFactory(): AdapterFactoryInterface
     {
         return new AdapterFactory(
-            $this->createEasycreditClient(),
+            $this->getHttpClient(),
             $this->getUtilEncodingService(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -117,7 +116,7 @@ class EasycreditBusinessFactory extends AbstractBusinessFactory
             $this->createResponseParser(),
             $this->createEasycreditLogger(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 

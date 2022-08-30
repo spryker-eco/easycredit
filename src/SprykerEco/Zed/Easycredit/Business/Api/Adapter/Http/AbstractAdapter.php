@@ -10,29 +10,62 @@ namespace SprykerEco\Zed\Easycredit\Business\Api\Adapter\Http;
 use Generated\Shared\Transfer\EasycreditRequestTransfer;
 use Generated\Shared\Transfer\EasycreditResponseErrorTransfer;
 use Generated\Shared\Transfer\EasycreditResponseTransfer;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Easycredit\Business\Api\Adapter\EasycreditAdapterInterface;
+use SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface;
 use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 abstract class AbstractAdapter implements EasycreditAdapterInterface
 {
+    /**
+     * @var string
+     */
     protected const API_KEY_EVENT = 'event';
+
+    /**
+     * @var string
+     */
     protected const API_KEY_PAYLOAD = 'payload';
+
+    /**
+     * @var string
+     */
     protected const API_KEY_TRANSACTION_ID = 'transactionId';
 
+    /**
+     * @var string
+     */
     protected const HEADER_TBK_RK_SHOP = 'tbk-rk-shop';
+
+    /**
+     * @var string
+     */
     protected const HEADER_TBK_RK_TOKEN = 'tbk-rk-token';
+
+    /**
+     * @var string
+     */
     protected const HEADER_CONTENT_TYPE = 'Content-Type';
+
+    /**
+     * @var string
+     */
     protected const CONTENT_TYPE_JSON = 'application/json';
 
+    /**
+     * @var string
+     */
     protected const REQUEST_TYPE_TEXT = 'texte';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_TYPE_PROCESS = 'vorgang';
 
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var \SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface
      */
     protected $httpClient;
 
@@ -59,16 +92,16 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     abstract protected function getMethod(): string;
 
     /**
-     * @param \GuzzleHttp\ClientInterface $client
+     * @param \SprykerEco\Zed\Easycredit\Dependency\External\EasycreditToHttpClientInterface $httpClient
      * @param \SprykerEco\Service\Easycredit\Dependency\Service\EasycreditToUtilEncodingServiceInterface $utilEncodingService
      * @param \SprykerEco\Zed\Easycredit\EasycreditConfig $config
      */
     public function __construct(
-        ClientInterface $client,
+        EasycreditToHttpClientInterface $httpClient,
         EasycreditToUtilEncodingServiceInterface $utilEncodingService,
         EasycreditConfig $config
     ) {
-        $this->httpClient = $client;
+        $this->httpClient = $httpClient;
         $this->utilEncodingService = $utilEncodingService;
         $this->config = $config;
     }
@@ -82,6 +115,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     {
         $url = $this->getUrl($easycreditRequestTransfer);
         $method = $this->getMethod();
+        $options = [];
         $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($easycreditRequestTransfer->getPayload());
         $options[RequestOptions::HEADERS] = $this->getHeaders();
 
@@ -91,7 +125,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     /**
      * @param string $method
      * @param string $url
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Generated\Shared\Transfer\EasycreditResponseTransfer
      */
@@ -104,7 +138,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
             $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody(), true));
         } catch (RequestException $requestException) {
             $errorTransfer = new EasycreditResponseErrorTransfer();
-            $errorTransfer->setErrorCode($requestException->getCode());
+            $errorTransfer->setErrorCode((string)$requestException->getCode());
             $errorTransfer->setErrorMessage($requestException->getMessage());
 
             $responseTransfer->setError($errorTransfer);
@@ -114,7 +148,7 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getHeaders(): array
     {

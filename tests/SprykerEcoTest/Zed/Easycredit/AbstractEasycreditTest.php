@@ -43,14 +43,44 @@ use SprykerEco\Zed\Easycredit\Persistence\EasycreditRepositoryInterface;
  */
 abstract class AbstractEasycreditTest extends Unit
 {
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_PAYMENT_IDENTIFIER = 'payment_identifier';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_STATUS = 'status';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_TEXT = 'text';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_ANFALLENDE_ZINSEN = '123.45';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'url';
+
+    /**
+     * @var string
+     */
     protected const RESPONSE_KEY_TILGUNGSPLAN_TEXT = 'text';
 
+    /**
+     * @var int
+     */
     protected const TOTAL_VALUE_FOR_FILTERED_EASYCREDIT_PAYMENT_METHOD = 20000;
+
+    /**
+     * @var int
+     */
     protected const TOTAL_VALUE_FOR_NOT_FILTERED_EASYCREDIT_PAYMENT_METHOD = 200;
 
     /**
@@ -125,7 +155,7 @@ abstract class AbstractEasycreditTest extends Unit
         $paymentTransfer->setPaymentSelection(EasycreditConfig::PAYMENT_METHOD);
         $paymentTransfer->setEasycredit(
             (new EasycreditTransfer())
-                ->setVorgangskennung('vorgangskennung')
+                ->setVorgangskennung('vorgangskennung'),
         );
 
         return $paymentTransfer;
@@ -184,7 +214,7 @@ abstract class AbstractEasycreditTest extends Unit
             $this->getParserMock(),
             $this->getLoggerMock(),
             $this->getEasycreditRepositoryMock(),
-            $this->getEasycreditEntityManagerMock()
+            $this->getEasycreditEntityManagerMock(),
         );
     }
 

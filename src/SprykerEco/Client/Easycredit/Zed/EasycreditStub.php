@@ -37,7 +37,11 @@ class EasycreditStub implements EasycreditStubInterface
      */
     public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer
     {
-        return $this->zedRequestClient->call('/easycredit/gateway/send-initialize-payment-request', $quoteTransfer);
+        /** @var \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer $easycreditInitializePaymentResponseTransfer */
+        $easycreditInitializePaymentResponseTransfer = $this->zedRequestClient
+            ->call('/easycredit/gateway/send-initialize-payment-request', $quoteTransfer);
+
+        return $easycreditInitializePaymentResponseTransfer;
     }
 
     /**
@@ -47,7 +51,11 @@ class EasycreditStub implements EasycreditStubInterface
      */
     public function sendQueryCreditAssessmentRequest(QuoteTransfer $quoteTransfer): EasycreditQueryCreditAssessmentResponseTransfer
     {
-        return $this->zedRequestClient->call('/easycredit/gateway/send-query-credit-assessment-request', $quoteTransfer);
+        /** @var \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer $easycreditQueryCreditAssessmentResponseTransfer */
+        $easycreditQueryCreditAssessmentResponseTransfer = $this->zedRequestClient
+            ->call('/easycredit/gateway/send-query-credit-assessment-request', $quoteTransfer);
+
+        return $easycreditQueryCreditAssessmentResponseTransfer;
     }
 
     /**
@@ -55,7 +63,11 @@ class EasycreditStub implements EasycreditStubInterface
      */
     public function sendApprovalTextRequest(): EasycreditApprovalTextResponseTransfer
     {
-        return $this->zedRequestClient->call('/easycredit/gateway/send-approval-text-request', new QuoteTransfer());
+        /** @var \Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer $easycreditApprovalTextResponseTransfer */
+        $easycreditApprovalTextResponseTransfer = $this->zedRequestClient
+            ->call('/easycredit/gateway/send-approval-text-request', new QuoteTransfer());
+
+        return $easycreditApprovalTextResponseTransfer;
     }
 
     /**
@@ -65,7 +77,11 @@ class EasycreditStub implements EasycreditStubInterface
      */
     public function sendInterestAndTotalSumRequest(QuoteTransfer $quoteTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
     {
-        return $this->zedRequestClient->call('/easycredit/gateway/send-interest-and-total-sum-request', $quoteTransfer);
+        /** @var \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer $easycreditInterestAndAdjustTotalSumResponseTransfer */
+        $easycreditInterestAndAdjustTotalSumResponseTransfer = $this->zedRequestClient
+            ->call('/easycredit/gateway/send-interest-and-total-sum-request', $quoteTransfer);
+
+        return $easycreditInterestAndAdjustTotalSumResponseTransfer;
     }
 
     /**
@@ -73,8 +89,13 @@ class EasycreditStub implements EasycreditStubInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
-        return $this->zedRequestClient->call('/easycredit/gateway/send-pre-contractual-information-and-redemption-plan-request', $quoteTransfer);
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
+        /** @var \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer */
+        $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = $this->zedRequestClient
+            ->call('/easycredit/gateway/send-pre-contractual-information-and-redemption-plan-request', $quoteTransfer);
+
+        return $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
     }
 }

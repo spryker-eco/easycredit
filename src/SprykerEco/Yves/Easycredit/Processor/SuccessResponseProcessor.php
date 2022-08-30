@@ -17,6 +17,9 @@ use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientInterfac
 
 class SuccessResponseProcessor implements SuccessResponseProcessorInterface
 {
+    /**
+     * @var string
+     */
     public const EXPENSE_TYPE_EASYCREDIT = 'Easycredit';
 
     /**
@@ -85,7 +88,7 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $expenseTransfer = new ExpenseTransfer();
         $expenseTransfer->setType(EasycreditConstants::EASYCREDIT_EXPENSE_TYPE);
         $expenseTransfer->setUnitNetPrice(0);
-        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger($quoteTransfer->getPayment()->getEasycredit()->getAnfallendeZinsen()));
+        $expenseTransfer->setUnitGrossPrice($this->moneyPlugin->convertDecimalToInteger((float)$quoteTransfer->getPaymentOrFail()->getEasycreditOrFail()->getAnfallendeZinsen()));
         $expenseTransfer->setQuantity(1);
 
         $quoteTransfer->addExpense($expenseTransfer);
@@ -103,7 +106,7 @@ class SuccessResponseProcessor implements SuccessResponseProcessorInterface
         $easycreditContractualInformationAndRedemptionPlanResponseTransfer = $this->easycreditClient->sendPreContractualInformationAndRedemptionPlanRequest($quoteTransfer);
         $easycreditInterestAndAdjustTotalSumResponseTransfer = $this->easycreditClient->sendInterestAndTotalSumRequest($quoteTransfer);
 
-        $quoteTransfer->getPayment()->getEasycredit()
+        $quoteTransfer->getPaymentOrFail()->getEasycreditOrFail()
             ->setUrlVorvertraglicheInformationen($easycreditContractualInformationAndRedemptionPlanResponseTransfer->getUrlVorvertraglicheInformationen())
             ->setTilgungsplanText($easycreditInterestAndAdjustTotalSumResponseTransfer->getTilgungsplanText())
             ->setAnfallendeZinsen($easycreditInterestAndAdjustTotalSumResponseTransfer->getAnfallendeZinsen());

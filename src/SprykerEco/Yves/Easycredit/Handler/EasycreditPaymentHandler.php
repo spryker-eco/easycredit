@@ -22,7 +22,7 @@ class EasycreditPaymentHandler implements EasycreditPaymentHandlerInterface
      */
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer): AbstractTransfer
     {
-        $quoteTransfer->getPayment()
+        $quoteTransfer->getPaymentOrFail()
             ->setPaymentProvider(static::PAYMENT_PROVIDER)
             ->setPaymentMethod(static::PAYMENT_PROVIDER);
 

@@ -22,7 +22,7 @@ class InitializePaymentAdapter extends AbstractAdapter
         return sprintf(
             '%s/%s/',
             $this->config->getApiUrl(),
-            static::REQUEST_TYPE_PROCESS
+            static::REQUEST_TYPE_PROCESS,
         );
     }
 

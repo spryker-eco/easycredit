@@ -19,7 +19,7 @@ use Spryker\Zed\Payment\Dependency\Plugin\Payment\PaymentMethodFilterPluginInter
 class EasycreditPaymentMethodFilterPlugin extends AbstractPlugin implements PaymentMethodFilterPluginInterface
 {
     /**
-     * Specification:
+     * {@inheritDoc}
      * - Returns filtered by set of plugins array object of payments.
      *
      * @api
