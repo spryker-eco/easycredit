@@ -59,5 +59,12 @@ interface EasycreditConstants
      *
      * @var string
      */
+    public const REDIRECT_URL = 'EASYCREDIT:REDIRECT_URL';
+
+    /**
+     * @api
+     *
+     * @var string
+     */
     public const EASYCREDIT_EXPENSE_TYPE = 'EASYCREDIT:EASYCREDIT_EXPENSE_TYPE';
 }
