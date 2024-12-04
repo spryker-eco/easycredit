@@ -10,8 +10,14 @@ namespace SprykerEco\Yves\Easycredit\Plugin\Provider;
 use Silex\Application;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
+/**
+ * @deprecated Use {@link \SprykerEco\Yves\Easycredit\Plugin\Router\EasycreditRouteProviderPlugin} instead.
+ */
 class EasycreditControllerProvider extends AbstractYvesControllerProvider
 {
+    /**
+     * @var string
+     */
     public const ROUTE_EASYCREDIT_SUCCESS_RESPONSE = 'easycredit/success-response';
 
     /**
@@ -21,7 +27,7 @@ class EasycreditControllerProvider extends AbstractYvesControllerProvider
      */
     protected function defineControllers(Application $app)
     {
-        $this->createController('/easycredit/payment/success', self::ROUTE_EASYCREDIT_SUCCESS_RESPONSE, 'Easycredit', 'Easycredit', 'successEasycreditResponse')
+        $this->createController('/easycredit/payment/success', static::ROUTE_EASYCREDIT_SUCCESS_RESPONSE, 'Easycredit', 'Easycredit', 'successEasycreditResponse')
             ->method('GET');
 
         return $this;

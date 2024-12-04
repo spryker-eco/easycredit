@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Easycredit\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 interface EasycreditPaymentHandlerInterface
 {
@@ -17,5 +16,5 @@ interface EasycreditPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer): AbstractTransfer;
+    public function addPaymentToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

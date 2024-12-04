@@ -19,16 +19,49 @@ use SprykerEco\Zed\Easycredit\EasycreditConfig;
 
 abstract class AbstractAdapter implements EasycreditAdapterInterface
 {
+    /**
+     * @var string
+     */
     protected const API_KEY_EVENT = 'event';
+
+    /**
+     * @var string
+     */
     protected const API_KEY_PAYLOAD = 'payload';
+
+    /**
+     * @var string
+     */
     protected const API_KEY_TRANSACTION_ID = 'transactionId';
 
+    /**
+     * @var string
+     */
     protected const HEADER_TBK_RK_SHOP = 'tbk-rk-shop';
+
+    /**
+     * @var string
+     */
     protected const HEADER_TBK_RK_TOKEN = 'tbk-rk-token';
+
+    /**
+     * @var string
+     */
     protected const HEADER_CONTENT_TYPE = 'Content-Type';
+
+    /**
+     * @var string
+     */
     protected const CONTENT_TYPE_JSON = 'application/json';
 
+    /**
+     * @var string
+     */
     protected const REQUEST_TYPE_TEXT = 'texte';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_TYPE_PROCESS = 'vorgang';
 
     /**
@@ -82,6 +115,8 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
     {
         $url = $this->getUrl($easycreditRequestTransfer);
         $method = $this->getMethod();
+
+        $options = [];
         $options[RequestOptions::BODY] = $this->utilEncodingService->encodeJson($easycreditRequestTransfer->getPayload());
         $options[RequestOptions::HEADERS] = $this->getHeaders();
 
@@ -103,9 +138,9 @@ abstract class AbstractAdapter implements EasycreditAdapterInterface
             $response = $this->httpClient->request($method, $url, $options);
             $responseTransfer->setBody($this->utilEncodingService->decodeJson($response->getBody(), true));
         } catch (RequestException $requestException) {
-            $errorTransfer = new EasycreditResponseErrorTransfer();
-            $errorTransfer->setErrorCode($requestException->getCode());
-            $errorTransfer->setErrorMessage($requestException->getMessage());
+            $errorTransfer = (new EasycreditResponseErrorTransfer())
+                ->setErrorCode((int)$requestException->getCode())
+                ->setErrorMessage($requestException->getMessage());
 
             $responseTransfer->setError($errorTransfer);
         }

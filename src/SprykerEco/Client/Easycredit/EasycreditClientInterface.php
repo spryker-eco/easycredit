@@ -8,7 +8,6 @@
 namespace SprykerEco\Client\Easycredit;
 
 use Generated\Shared\Transfer\EasycreditApprovalTextResponseTransfer;
-use Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer;
 use Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer;
 use Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 use Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer;
@@ -26,7 +25,7 @@ interface EasycreditClientInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInitializePaymentResponseTransfer
      */
-    public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer): EasycreditInitializePaymentResponseTransfer;
+    public function sendInitializePaymentRequest(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -72,5 +71,7 @@ interface EasycreditClientInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function sendPreContractualInformationAndRedemptionPlanRequest(QuoteTransfer $quoteTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
+    public function sendPreContractualInformationAndRedemptionPlanRequest(
+        QuoteTransfer $quoteTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer;
 }

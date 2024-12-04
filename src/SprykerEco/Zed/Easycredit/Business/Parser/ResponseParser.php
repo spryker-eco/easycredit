@@ -17,19 +17,74 @@ use Generated\Shared\Transfer\EasycreditResponseTransfer;
 
 class ResponseParser implements ResponseParserInterface
 {
+    /**
+     * @var string
+     */
     protected const KEY_PAYMENT_IDENTIFIER = 'tbVorgangskennung';
+
+    /**
+     * @var string
+     */
     protected const KEY_ALLGEMEINE_VORGANGSDATEN = 'allgemeineVorgangsdaten';
+
+    /**
+     * @var string
+     */
     protected const KEY_URL_VORVERTRAGLICHE_INFORMATIONEN = 'urlVorvertraglicheInformationen';
+
+    /**
+     * @var string
+     */
     protected const KEY_TILGUNGSPLAN_TEXT = 'tilgungsplanText';
+
+    /**
+     * @var string
+     */
     protected const KEY_WS_MESSAGES = 'wsMessages';
+
+    /**
+     * @var string
+     */
     protected const KEY_MESSAGES = 'messages';
+
+    /**
+     * @var string
+     */
     protected const KEY_KEY = 'key';
+
+    /**
+     * @var string
+     */
     protected const VALUE_SUCCESS_CONFIRMATION = 'BestellungBestaetigenServiceActivity.Infos.ERFOLGREICH';
+
+    /**
+     * @var string
+     */
     protected const KEY_RATENPLAN = 'ratenplan';
+
+    /**
+     * @var string
+     */
     protected const KEY_ZINSEN = 'zinsen';
+
+    /**
+     * @var string
+     */
     protected const KEY_ANFALLENDE_ZINSEN = 'anfallendeZinsen';
+
+    /**
+     * @var string
+     */
     protected const KEY_ENTSCHEIDUNG = 'entscheidung';
+
+    /**
+     * @var string
+     */
     protected const KEY_ENTSCHEIDUNG_SERGEBNIS = 'entscheidungsergebnis';
+
+    /**
+     * @var string
+     */
     protected const KEY_TEXT_IDENTIFIER = 'zustimmungDatenuebertragungPaymentPage';
 
     /**
@@ -61,8 +116,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
      */
-    public function parsePreContractualInformationAndRedemptionPlanResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer
-    {
+    public function parsePreContractualInformationAndRedemptionPlanResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditPreContractualInformationAndRedemptionPlanResponseTransfer = new EasycreditPreContractualInformationAndRedemptionPlanResponseTransfer();
@@ -84,8 +140,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditOrderConfirmationResponseTransfer
      */
-    public function parseOrderConfirmationResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditOrderConfirmationResponseTransfer
-    {
+    public function parseOrderConfirmationResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditOrderConfirmationResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditOrderConfirmationResponseTransfer = new EasycreditOrderConfirmationResponseTransfer();
@@ -109,8 +166,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditInterestAndAdjustTotalSumResponseTransfer
      */
-    public function parseInterestAndTotalSumResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditInterestAndAdjustTotalSumResponseTransfer
-    {
+    public function parseInterestAndTotalSumResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditInterestAndAdjustTotalSumResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditInterestAndAdjustTotalSumResponseTransfer = new EasycreditInterestAndAdjustTotalSumResponseTransfer();
@@ -120,13 +178,13 @@ class ResponseParser implements ResponseParserInterface
             return $easycreditInterestAndAdjustTotalSumResponseTransfer;
         }
 
-        $anfallendeZinsen = (float)$payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN] ?? null;
+        $anfallendeZinsen = (float)($payload[static::KEY_RATENPLAN][static::KEY_ZINSEN][static::KEY_ANFALLENDE_ZINSEN] ?? null);
         $tilgungsplanText = $payload[static::KEY_TILGUNGSPLAN_TEXT] ?? null;
 
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setAnfallendeZinsen($anfallendeZinsen);
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setTilgungsplanText($tilgungsplanText);
 
-        $isSuccess = $anfallendeZinsen !== null && $tilgungsplanText !== null;
+        $isSuccess = $tilgungsplanText !== null;
         $easycreditInterestAndAdjustTotalSumResponseTransfer->setSuccess($isSuccess);
 
         return $easycreditInterestAndAdjustTotalSumResponseTransfer;
@@ -137,8 +195,9 @@ class ResponseParser implements ResponseParserInterface
      *
      * @return \Generated\Shared\Transfer\EasycreditQueryCreditAssessmentResponseTransfer
      */
-    public function parseQueryCreditAssessmentResponse(EasycreditResponseTransfer $easycreditResponseTransfer): EasycreditQueryCreditAssessmentResponseTransfer
-    {
+    public function parseQueryCreditAssessmentResponse(
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): EasycreditQueryCreditAssessmentResponseTransfer {
         $payload = $easycreditResponseTransfer->getBody();
 
         $easycreditQueryCreditAssessmentResponseTransfer = new EasycreditQueryCreditAssessmentResponseTransfer();

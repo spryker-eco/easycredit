@@ -1,0 +1,12 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    bootstrapFiles:
+        - tests/bootstrap.php
+    checkMissingIterableValueType: false
+    excludePaths:
+        - src/SprykerEco/Zed/Easycredit/Persistence/Propel
+        - src/SprykerEco/Yves/Easycredit/Form/Constraint
+    ignoreErrors:
+        - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'

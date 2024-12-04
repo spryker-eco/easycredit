@@ -1,0 +1,138 @@
+{
+    "error": [],
+    "warning": [],
+    "deprecation": [
+        {
+            "severity": "info",
+            "line_from": 24,
+            "line_to": 24,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getPayment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Handler/EasycreditPaymentHandler.php",
+            "snippet": "        $paymentTransfer = $quoteTransfer->getPayment();",
+            "selected_text": "getPayment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 34,
+            "line_to": 34,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::setPayment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Handler/EasycreditPaymentHandler.php",
+            "snippet": "        return $quoteTransfer->setPayment($paymentTransfer);",
+            "selected_text": "setPayment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 16,
+            "line_to": 16,
+            "type": "DeprecatedInterface",
+            "message": "Spryker\\Yves\\Application\\Plugin\\Provider\\ControllerProviderInterface is marked deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Plugin/Provider/EasycreditControllerProvider.php",
+            "snippet": "class EasycreditControllerProvider extends AbstractYvesControllerProvider",
+            "selected_text": "EasycreditControllerProvider",
+            "error_level": 2,
+            "shortcode": 152
+        },
+        {
+            "severity": "info",
+            "line_from": 16,
+            "line_to": 16,
+            "type": "DeprecatedClass",
+            "message": "SprykerShop\\Yves\\ShopApplication\\Plugin\\Provider\\AbstractYvesControllerProvider is marked deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Plugin/Provider/EasycreditControllerProvider.php",
+            "snippet": "class EasycreditControllerProvider extends AbstractYvesControllerProvider",
+            "selected_text": "AbstractYvesControllerProvider",
+            "error_level": 2,
+            "shortcode": 98
+        },
+        {
+            "severity": "info",
+            "line_from": 130,
+            "line_to": 130,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getPayment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Yves/Easycredit/Processor/SuccessResponseProcessor.php",
+            "snippet": "        $paymentTransfer = $quoteTransfer->getPayment();",
+            "selected_text": "getPayment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 218,
+            "line_to": 218,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getShippingAddress has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Business/Mapper/EasycreditMapper.php",
+            "snippet": "        $shippingAddressTransfer = $quoteTransfer->getShippingAddress();",
+            "selected_text": "getShippingAddress",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 222,
+            "line_to": 222,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getShipment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Business/Mapper/EasycreditMapper.php",
+            "snippet": "        $shipmentTransfer = $quoteTransfer->getShipment();",
+            "selected_text": "getShipment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 330,
+            "line_to": 330,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getPayment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Business/Mapper/EasycreditMapper.php",
+            "snippet": "        $paymentTransfer = $quoteTransfer->getPayment();",
+            "selected_text": "getPayment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 76,
+            "line_to": 76,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\PaymentMethodTransfer::getMethodName has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Business/Payment/PaymentMethodFilter.php",
+            "snippet": "        return strpos($paymentMethodTransfer->getMethodName() ?? '', $this->config->getPaymentMethod()) !== false;",
+            "selected_text": "getMethodName",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 41,
+            "line_to": 41,
+            "type": "DeprecatedMethod",
+            "message": "The method Generated\\Shared\\Transfer\\QuoteTransfer::getPayment has been marked as deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Business/Saver/EasycreditOrderIdentifierSaver.php",
+            "snippet": "        $paymentTransfer = $quoteTransfer->getPayment();",
+            "selected_text": "getPayment",
+            "error_level": 2,
+            "shortcode": 1
+        },
+        {
+            "severity": "info",
+            "line_from": 19,
+            "line_to": 19,
+            "type": "DeprecatedInterface",
+            "message": "Spryker\\Zed\\Payment\\Dependency\\Plugin\\Payment\\PaymentMethodFilterPluginInterface is marked deprecated",
+            "file_name": "vendor/spryker-eco/easycredit/src/SprykerEco/Zed/Easycredit/Communication/Plugin/Payment/EasycreditPaymentMethodFilterPlugin.php",
+            "snippet": "class EasycreditPaymentMethodFilterPlugin extends AbstractPlugin implements PaymentMethodFilterPluginInterface",
+            "selected_text": "EasycreditPaymentMethodFilterPlugin",
+            "error_level": 2,
+            "shortcode": 152
+        }
+    ]
+}
