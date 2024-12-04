@@ -24,5 +24,7 @@ interface EasycreditEntityManagerInterface
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditOrderIdentifierTransfer
      */
-    public function saveEasycreditOrderIdentifier(PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer): PaymentEasycreditOrderIdentifierTransfer;
+    public function saveEasycreditOrderIdentifier(
+        PaymentEasycreditOrderIdentifierTransfer $paymentEasycreditOrderIdentifierTransfer
+    ): PaymentEasycreditOrderIdentifierTransfer;
 }

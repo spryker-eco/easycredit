@@ -27,5 +27,9 @@ interface EasycreditLoggerInterface
      *
      * @return \Generated\Shared\Transfer\PaymentEasycreditApiLogTransfer
      */
-    public function saveApiLog(string $type, EasycreditRequestTransfer $easycreditRequestTransfer, EasycreditResponseTransfer $easycreditResponseTransfer): PaymentEasycreditApiLogTransfer;
+    public function saveApiLog(
+        string $type,
+        EasycreditRequestTransfer $easycreditRequestTransfer,
+        EasycreditResponseTransfer $easycreditResponseTransfer
+    ): PaymentEasycreditApiLogTransfer;
 }

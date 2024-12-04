@@ -10,6 +10,9 @@ namespace SprykerEco\Yves\Easycredit\Plugin\Provider;
 use Silex\Application;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
+/**
+ * @deprecated Use {@link \SprykerEco\Yves\Easycredit\Plugin\Router\EasycreditRouteProviderPlugin} instead.
+ */
 class EasycreditControllerProvider extends AbstractYvesControllerProvider
 {
     public const ROUTE_EASYCREDIT_SUCCESS_RESPONSE = 'easycredit/success-response';
