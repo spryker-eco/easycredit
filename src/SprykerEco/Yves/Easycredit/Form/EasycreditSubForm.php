@@ -23,7 +23,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
+    /**
+     * @var string
+     */
     public const VARS_KEY_LEGAL_TEXT = 'legalText';
+
+    /**
+     * @var string
+     */
     protected const FIELD_OPT_IN_CHECKBOX = 'optInCheckbox';
 
     /**
@@ -45,7 +52,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
     /**
      * @param \Symfony\Component\Form\FormView $view
      * @param \Symfony\Component\Form\FormInterface $form
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -80,7 +87,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -91,7 +98,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return $this
      */
@@ -106,7 +113,7 @@ class EasycreditSubForm extends AbstractSubFormType implements SubFormInterface,
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;

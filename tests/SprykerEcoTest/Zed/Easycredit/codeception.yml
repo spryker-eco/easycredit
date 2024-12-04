@@ -19,6 +19,32 @@ suites:
     modules:
       enabled:
         - Asserts
-        - \PyzTest\Shared\Testify\Helper\Environment
+        - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+        - \SprykerTest\Shared\Testify\Helper\Environment:
+        - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+        - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+        - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+        - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+        - \SprykerTest\Shared\Testify\Helper\DependencyHelper
         - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+        - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+            coreNamespaces:
+              - Spryker
+              - SprykerTest
+              - SprykerEco
+              - SprykerEcoTest
+        - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
+            isolated: true
+            schemaDirectories:
+              - src/*/Shared/*/Transfer/
+              - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
+        - \SprykerTest\Shared\Propel\Helper\PropelHelper:
+            isolated: true
+            schemaSourceDirectoryList:
+              - src/*/Zed/*/Persistence/Propel/Schema
+              - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema
         - \SprykerTest\Shared\Sales\Helper\SalesHelper
+        - \SprykerTest\Shared\Shipment\Helper\ShipmentMethodDataHelper
+        - \SprykerTest\Shared\Shipment\Helper\ShipmentCarrierDataHelper
+        - \SprykerTest\Shared\Currency\Helper\CurrencyDataHelper
+        - \SprykerTest\Shared\Store\Helper\StoreDataHelper

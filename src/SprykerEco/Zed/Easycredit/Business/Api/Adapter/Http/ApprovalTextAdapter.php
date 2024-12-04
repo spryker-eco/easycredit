@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApprovalTextAdapter extends AbstractAdapter
 {
+    /**
+     * @var string
+     */
     protected const URL_APPROVAL_TEXT_IDENTIFIER = 'zustimmung';
 
     /**
@@ -26,7 +29,7 @@ class ApprovalTextAdapter extends AbstractAdapter
             $this->config->getApiUrl(),
             static::REQUEST_TYPE_TEXT,
             static::URL_APPROVAL_TEXT_IDENTIFIER,
-            $this->config->getShopIdentifier()
+            $this->config->getShopIdentifier(),
         );
     }
 

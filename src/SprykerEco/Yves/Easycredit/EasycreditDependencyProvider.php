@@ -15,9 +15,19 @@ use SprykerEco\Yves\Easycredit\Dependency\Client\EasycreditToQuoteClientBridge;
 
 class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+
+    /**
+     * @var string
+     */
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
 
+    /**
+     * @var string
+     */
     public const PLUGIN_MONEY = 'PLUGIN_MONEY';
 
     /**
@@ -41,9 +51,9 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addClientCalculation(Container $container): Container
     {
-        $container[static::CLIENT_CALCULATION] = function (Container $container) {
+        $container->set(static::CLIENT_CALCULATION, function (Container $container) {
             return new EasycreditToCalculationClientBridge($container->getLocator()->calculation()->client());
-        };
+        });
 
         return $container;
     }
@@ -55,9 +65,9 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addClientQuote(Container $container): Container
     {
-        $container[static::CLIENT_QUOTE] = function (Container $container) {
+        $container->set(static::CLIENT_QUOTE, function (Container $container) {
             return new EasycreditToQuoteClientBridge($container->getLocator()->quote()->client());
-        };
+        });
 
         return $container;
     }
@@ -69,9 +79,9 @@ class EasycreditDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPluginMoney(Container $container): Container
     {
-        $container[static::PLUGIN_MONEY] = function () {
+        $container->set(static::PLUGIN_MONEY, function () {
             return new MoneyPlugin();
-        };
+        });
 
         return $container;
     }
